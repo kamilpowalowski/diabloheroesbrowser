@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Diablo III Browser</string>
 	<string name="battletag_textview_text">enter full BattleTag (tag#0000)</string>
-	<string name="battletag_find_button_text">Show player</string>
+	<string name="battletag_find_button_text">SHOW PLAYER</string>
 	<string name="battletag_wrong">BattleTag is wrong</string>
 	<string name="internt_connection_error">Internet connection is needed for showing profile</string>
 </resources>

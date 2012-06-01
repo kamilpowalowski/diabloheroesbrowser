@@ -8,22 +8,34 @@
         android:id="@+id/battletag_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/textview_red"
+        android:ems="10"
         android:hint="@string/battletag_textview_text"
         android:singleLine="true"
-        android:ems="10" >
+        android:textColor="@android:color/white"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="5dp">
 
         <requestFocus />
     </AutoCompleteTextView>
 
     <Button
         android:id="@+id/battletag_find_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
         android:layout_height="wrap_content"
-        android:text="@string/battletag_find_button_text" />
-
+        android:background="@drawable/btn_red_selector"
+        android:text="@string/battletag_find_button_text"
+        android:textColor="@android:color/white"
+        android:textSize="12dp"
+        android:layout_marginRight="10dp"
+/>
+
     <ListView
         android:id="@+id/battletags_listview"
         android:layout_width="match_parent"
-        android:layout_height="352dp" />
+        android:layout_height="match_parent"
+        android:background="@drawable/listview_background" />
 
 </LinearLayout>
