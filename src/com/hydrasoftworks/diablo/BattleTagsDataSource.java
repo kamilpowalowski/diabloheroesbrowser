@@ -92,7 +92,7 @@ public class BattleTagsDataSource {
 		return tag;
 	}
 
-	public List<BattleTag> getAllComments() {
+	public List<BattleTag> getAllBattleTag() {
 		List<BattleTag> tags = new ArrayList<BattleTag>();
 
 		Cursor cursor = database.query(BattleTag.TABLE_NAME,

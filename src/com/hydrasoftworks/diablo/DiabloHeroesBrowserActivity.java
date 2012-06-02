@@ -48,7 +48,7 @@ public class DiabloHeroesBrowserActivity extends Activity {
 
 		setContentView(R.layout.main);
 
-		List<BattleTag> tags = dataSource.getAllComments();
+		List<BattleTag> tags = dataSource.getAllBattleTag();
 		BattleTag[] elements = tags.toArray(new BattleTag[tags.size()]);
 		ArrayAdapter<BattleTag> adapter = new ArrayAdapter<BattleTag>(this,
 				android.R.layout.simple_dropdown_item_1line, elements);
@@ -185,10 +185,11 @@ public class DiabloHeroesBrowserActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					dataSource.deleteBattleTag(getItem(position));
-					List<BattleTag> tags = dataSource.getAllComments();
+					List<BattleTag> tags = dataSource.getAllBattleTag();
 					BattleTag[] elements = tags.toArray(new BattleTag[tags.size()]);
 					listView.setAdapter(new BattleTagAdapter(v.getContext(),
 							R.layout.battletag_one_result_details_row, elements));
+					
 				}
 			});
 
