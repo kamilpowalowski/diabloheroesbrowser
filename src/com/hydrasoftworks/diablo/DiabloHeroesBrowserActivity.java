@@ -11,11 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -34,9 +31,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
-import com.hydrasoftworks.diablo.model.exceptions.CareerProfileParsingException;
 
 public class DiabloHeroesBrowserActivity extends FragmentActivity {
 	@SuppressWarnings("unused")
@@ -142,7 +141,7 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 			// TODO: Uncomment this //return sb.toString();
 
 			return getTextFromInputStream(getResources().openRawResource(
-					R.raw.career_profile));
+					R.raw.career_profile_v2));
 		}
 
 		@Override
@@ -153,13 +152,12 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 
 		@Override
 		protected void onPostExecute(String result) {
-			try {
-				CareerProfile.parseCareerProfile(result);
+
+				Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
+				
+				CareerProfile cp = gson.fromJson(result, CareerProfile.class);
 				Toast.makeText(getBaseContext(), "dzia³a", Toast.LENGTH_SHORT)
 						.show();
-			} catch (CareerProfileParsingException e) {
-				// TODO: show message about error
-			}
 
 			super.onPostExecute(result);
 		}
