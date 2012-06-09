@@ -12,15 +12,21 @@ import java.net.URL;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -32,11 +38,11 @@ import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.exceptions.CareerProfileParsingException;
 
-public class DiabloHeroesBrowserActivity extends Activity {
+public class DiabloHeroesBrowserActivity extends FragmentActivity {
 	@SuppressWarnings("unused")
 	private static final String TAG = DiabloHeroesBrowserActivity.class
 			.getSimpleName();
-	
+
 	private BattleTagsDataSource dataSource;
 	private ListView listView;
 
@@ -81,11 +87,10 @@ public class DiabloHeroesBrowserActivity extends Activity {
 								new CareerProfileDataDownload().execute(tag);
 							}
 						} else {
-							Toast.makeText(
-									ctx,
-									ctx.getResources().getString(
-											R.string.battletag_wrong),
-									Toast.LENGTH_SHORT).show();
+							DialogFragment newFragment = InfoDialogFragment
+									.newInstance(R.string.battletag_not_found);
+							newFragment.show(getSupportFragmentManager(),
+									"dialog");
 						}
 
 					}
@@ -186,10 +191,11 @@ public class DiabloHeroesBrowserActivity extends Activity {
 				public void onClick(View v) {
 					dataSource.deleteBattleTag(getItem(position));
 					List<BattleTag> tags = dataSource.getAllBattleTag();
-					BattleTag[] elements = tags.toArray(new BattleTag[tags.size()]);
+					BattleTag[] elements = tags.toArray(new BattleTag[tags
+							.size()]);
 					listView.setAdapter(new BattleTagAdapter(v.getContext(),
 							R.layout.battletag_one_result_details_row, elements));
-					
+
 				}
 			});
 
@@ -219,5 +225,41 @@ public class DiabloHeroesBrowserActivity extends Activity {
 			}
 		}
 		return writer.toString();
+	}
+
+	public static class InfoDialogFragment extends DialogFragment {
+
+		public static InfoDialogFragment newInstance(int title) {
+			InfoDialogFragment frag = new InfoDialogFragment();
+			Bundle args = new Bundle();
+			args.putInt("title", title);
+			frag.setArguments(args);
+			return frag;
+		}
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			int title = getArguments().getInt("title");
+
+			Context mContext = getActivity();
+			final Dialog dialog = new Dialog(mContext);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialog.setContentView(R.layout.custom_diablo_dialog);
+			
+			
+			((TextView) dialog.findViewById(R.id.text)).setText(title);
+			Button button = (Button) dialog.findViewById(R.id.button);
+			button.setText(R.string.alert_dialog_ok);
+			button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+					
+				}
+			});
+
+			return dialog;
+		}
 	}
 }

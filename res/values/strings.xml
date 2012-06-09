@@ -5,4 +5,6 @@
 	<string name="battletag_find_button_text">SHOW PLAYER</string>
 	<string name="battletag_wrong">BattleTag is wrong</string>
 	<string name="internt_connection_error">Internet connection is needed for showing profile</string>
+	<string name="alert_dialog_ok">OK</string>
+	<string name="battletag_not_found">Can\'t downoload BattleTag data.</string>
 </resources>
