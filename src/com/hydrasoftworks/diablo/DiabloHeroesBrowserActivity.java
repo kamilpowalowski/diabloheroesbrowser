@@ -13,6 +13,7 @@ import java.util.List;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -29,7 +30,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -38,7 +38,6 @@ import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 
 public class DiabloHeroesBrowserActivity extends FragmentActivity {
-	@SuppressWarnings("unused")
 	private static final String TAG = DiabloHeroesBrowserActivity.class
 			.getSimpleName();
 
@@ -51,7 +50,7 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 		dataSource = new BattleTagsDataSource(this);
 		dataSource.open();
 
-		setContentView(R.layout.main);
+		setContentView(R.layout.diablo_heroes_browser_activity);
 
 		List<BattleTag> tags = dataSource.getAllBattleTag();
 		BattleTag[] elements = tags.toArray(new BattleTag[tags.size()]);
@@ -144,24 +143,19 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 					.openRawResource(R.raw.career_profile_v2));
 			Gson gson = new GsonBuilder().setFieldNamingPolicy(
 					FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
-
-			return gson.fromJson(result, CareerProfile.class);
-		}
-
-		@Override
-		protected void onProgressUpdate(Integer... values) {
-			// TODO Auto-generated method stub
-			super.onProgressUpdate(values);
+			CareerProfile profil = gson.fromJson(result, CareerProfile.class);
+			profil.addToElements(params[0]);
+			return profil;
 		}
 
 		@Override
 		protected void onPostExecute(CareerProfile result) {
-
-
-			Toast.makeText(getBaseContext(), "dzia³a", Toast.LENGTH_SHORT)
-					.show();
-
 			super.onPostExecute(result);
+			Intent intent = new Intent(getApplicationContext(),
+					CareerProfileFragmentActivity.class);
+			intent.putExtra(BattleTag.BATTLETAG, result.getBattleTag()
+					.getBattleTag());
+			startActivity(intent);
 		}
 
 	}
