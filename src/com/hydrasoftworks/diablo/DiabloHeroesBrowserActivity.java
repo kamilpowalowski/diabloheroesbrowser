@@ -55,14 +55,14 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 
 		List<BattleTag> tags = dataSource.getAllBattleTag();
 		BattleTag[] elements = tags.toArray(new BattleTag[tags.size()]);
-		ArrayAdapter<BattleTag> adapter = new ArrayAdapter<BattleTag>(this,
-				android.R.layout.simple_dropdown_item_1line, elements);
 		final AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.battletag_textview);
-		textView.setAdapter(adapter);
+		textView.setAdapter(new ArrayAdapter<BattleTag>(this,
+				android.R.layout.simple_dropdown_item_1line, elements));
 
 		listView = (ListView) findViewById(R.id.battletags_listview);
-		listView.setAdapter(new BattleTagAdapter(this,
-				R.layout.battletag_one_result_details_row, elements));
+		final BattleTagAdapter adapter = new BattleTagAdapter(this,
+				R.layout.battletag_one_result_details_row, elements);
+		listView.setAdapter(adapter);
 
 		((Button) findViewById(R.id.battletag_find_button))
 				.setOnClickListener(new OnClickListener() {
@@ -70,21 +70,10 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 					@Override
 					public void onClick(View v) {
 						String tagText = textView.getText().toString();
-						Context ctx = v.getContext();
-
 						if (tagText.matches("[^ $&#!%\t]{3,12}#[0-9]{4}")) {
 							BattleTag tag = dataSource
 									.createOrGetBattleTag(tagText);
-							if (!testConnection()) {
-								Toast.makeText(
-										ctx,
-										ctx.getResources()
-												.getString(
-														R.string.internt_connection_error),
-										Toast.LENGTH_SHORT).show();
-							} else {
-								new CareerProfileDataDownload().execute(tag);
-							}
+							downloadBattleTagData(tag);
 						} else {
 							DialogFragment newFragment = InfoDialogFragment
 									.newInstance(R.string.battletag_not_found);
@@ -108,7 +97,18 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 		super.onPause();
 	}
 
-	public boolean testConnection() {
+	private void downloadBattleTagData(BattleTag tag) {
+		if (!testConnection()) {
+			DialogFragment newFragment = InfoDialogFragment
+					.newInstance(R.string.internt_connection_error);
+			newFragment.show(getSupportFragmentManager(), "dialog");
+		} else {
+			new CareerProfileDataDownload().execute(tag);
+		}
+
+	}
+
+	private boolean testConnection() {
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo info = connMgr.getActiveNetworkInfo();
 
@@ -116,10 +116,10 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 	}
 
 	class CareerProfileDataDownload extends
-			AsyncTask<BattleTag, Integer, String> {
+			AsyncTask<BattleTag, Integer, CareerProfile> {
 
 		@Override
-		protected String doInBackground(BattleTag... params) {
+		protected CareerProfile doInBackground(BattleTag... params) {
 			StringBuilder sb = new StringBuilder();
 			try {
 				URL url = CareerProfile.createUrl(params[0]);
@@ -138,10 +138,14 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 				e.printStackTrace();
 				Log.e(TAG, e.getLocalizedMessage());
 			}
-			// TODO: Uncomment this //return sb.toString();
 
-			return getTextFromInputStream(getResources().openRawResource(
-					R.raw.career_profile_v2));
+			// TODO: Uncomment this //String result = sb.toString();
+			String result = getTextFromInputStream(getResources()
+					.openRawResource(R.raw.career_profile_v2));
+			Gson gson = new GsonBuilder().setFieldNamingPolicy(
+					FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
+
+			return gson.fromJson(result, CareerProfile.class);
 		}
 
 		@Override
@@ -151,13 +155,11 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(CareerProfile result) {
 
-				Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
-				
-				CareerProfile cp = gson.fromJson(result, CareerProfile.class);
-				Toast.makeText(getBaseContext(), "dzia³a", Toast.LENGTH_SHORT)
-						.show();
+
+			Toast.makeText(getBaseContext(), "dzia³a", Toast.LENGTH_SHORT)
+					.show();
 
 			super.onPostExecute(result);
 		}
@@ -178,16 +180,25 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 			View row = getLayoutInflater().inflate(
 					R.layout.battletag_one_result_details_row, parent, false);
 
+			final BattleTag bt = getItem(position);
 			TextView textView = (TextView) row
 					.findViewById(R.id.battletag_text);
-			textView.setText(getItem(position).getBattleTag());
+			textView.setText(bt.getBattleTag());
 			Button deleteButton = (Button) row
 					.findViewById(R.id.delete_entry_button);
+			textView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					downloadBattleTagData(bt);
+
+				}
+			});
 
 			deleteButton.setOnClickListener(new Button.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					dataSource.deleteBattleTag(getItem(position));
+					dataSource.deleteBattleTag(bt);
 					List<BattleTag> tags = dataSource.getAllBattleTag();
 					BattleTag[] elements = tags.toArray(new BattleTag[tags
 							.size()]);
@@ -243,17 +254,16 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 			final Dialog dialog = new Dialog(mContext);
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog.setContentView(R.layout.custom_diablo_dialog);
-			
-			
+
 			((TextView) dialog.findViewById(R.id.text)).setText(title);
 			Button button = (Button) dialog.findViewById(R.id.button);
 			button.setText(R.string.alert_dialog_ok);
 			button.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					dialog.dismiss();
-					
+
 				}
 			});
 

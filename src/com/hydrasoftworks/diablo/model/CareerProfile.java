@@ -4,6 +4,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CareerProfile {
 	private static final String CAREER_PROFILE_URL = "http://eu.battle.net/api/d3/account/";
 
@@ -11,9 +13,12 @@ public class CareerProfile {
 	private int lastUpdated;
 	private List<Artisan> artisans;
 	private List<Artisan> hardcoreArtisans;
+	private List<Hero> heroes;
+	private List<Hero> fallenHeroes;
 	private Kills kills;
 	private TimePlayed timePlayed;
-	
+	private List<Progression> progression;
+
 	public static URL createUrl(BattleTag tag) throws MalformedURLException {
 		return new URL(CAREER_PROFILE_URL
 				+ tag.getBattleTag().replace("#", "-"));
@@ -22,8 +27,8 @@ public class CareerProfile {
 	public static class Kills {
 		private int monsters;
 		private int elites;
-		private int hardcoreMonsters; // FIXME: hardcoreMonsters has diferent
-										// codding
+		@SerializedName("hardcoreMonsters")
+		private int hardcoreMonsters;
 	}
 
 	public static class TimePlayed {
@@ -32,6 +37,11 @@ public class CareerProfile {
 		private double monk;
 		private double witchDoctor;
 		private double wizard;
+	}
+
+	public static class Progression {
+		private int act;
+		private String difficulty;
 	}
 
 }
