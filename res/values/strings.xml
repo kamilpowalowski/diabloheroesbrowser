@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Diablo III Browser</string>
-	<string name="battletag_textview_text">enter full BattleTag (tag#0000)</string>
-	<string name="battletag_find_button_text">SHOW PLAYER</string>
-	<string name="battletag_wrong">BattleTag is wrong</string>
-	<string name="internt_connection_error">Internet connection is needed for showing profile</string>
-	<string name="alert_dialog_ok">OK</string>
-	<string name="battletag_not_found">Can\'t downoload BattleTag data.</string>
+    <string name="battletag_textview_text">enter full BattleTag (tag#0000)</string>
+    <string name="battletag_find_button_text">SHOW PLAYER</string>
+    <string name="battletag_wrong">BattleTag is wrong</string>
+    <string name="internt_connection_error">Internet connection is needed for showing profile</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="battletag_not_found">Can\'t downoload BattleTag data.</string>
+    <string name="first_tab">Career</string>
+    <string name="second_tab">Heroes</string>
+    <string name="third_tab">Fallen heroes</string>
+
 </resources>

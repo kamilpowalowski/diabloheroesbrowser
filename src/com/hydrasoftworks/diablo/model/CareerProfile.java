@@ -11,6 +11,7 @@ import com.google.gson.annotations.SerializedName;
 public class CareerProfile {
 	private static final String CAREER_PROFILE_URL = "http://eu.battle.net/api/d3/account/";
 	private static HashMap<String, CareerProfile> elements = new HashMap<String, CareerProfile>();
+	private static CareerProfile activeElement;
 
 	private BattleTag battleTag;
 	private int lastHeroPlayed;
@@ -29,15 +30,23 @@ public class CareerProfile {
 	}
 
 	public static CareerProfile getElement(String tag) {
-		return CareerProfile.elements.get(tag);
+		CareerProfile.activeElement = CareerProfile.elements.get(tag);
+		return CareerProfile.activeElement;
 	}
-	
+
+	public static CareerProfile getActiveElement() {
+		return CareerProfile.activeElement;
+	}
+
+	public static boolean hasElement(String tag) {
+		return CareerProfile.elements.containsKey(tag);
+	}
 
 	public void addToElements(BattleTag battleTag) {
 		this.battleTag = battleTag;
 		CareerProfile.elements.put(battleTag.getBattleTag(), this);
 	}
-	
+
 	public static class Kills {
 		private int monsters;
 		private int elites;
@@ -53,13 +62,54 @@ public class CareerProfile {
 		private double wizard;
 	}
 
-	public static class Progression {
+	public static class Progression implements Comparable<Progression> {
+		public static final String[] LEVELS = { Progression.NORMAL,
+				Progression.NIGHTMARE, Progression.HELL, Progression.INFERNO };
+		public static final String NORMAL = "normal";
+		public static final String NIGHTMARE = "nightmare";
+		public static final String HELL = "hell";
+		public static final String INFERNO = "inferno";
 		private int act;
 		private String difficulty;
+
+		/**
+		 * @return the act
+		 */
+		public int getAct() {
+			return act;
+		}
+
+		/**
+		 * @return the difficulty
+		 */
+		public String getDifficulty() {
+			return difficulty;
+		}
+
+		@Override
+		public int compareTo(Progression another) {
+
+			int thisValue = act;
+			int anotherValue = another.act;
+			for (int i = 0; i < Progression.LEVELS.length; i++) {
+				if (difficulty.equals(Progression.LEVELS[i]))
+					thisValue += 10 * i;
+				if (another.difficulty.equals(Progression.LEVELS[i]))
+					anotherValue += 10 * i;
+			}
+			return new Integer(thisValue).compareTo(new Integer(anotherValue));
+		}
 	}
 
 	public BattleTag getBattleTag() {
 		return battleTag;
+	}
+
+	/**
+	 * @return the progression
+	 */
+	public List<Progression> getProgression() {
+		return progression;
 	}
 
 }

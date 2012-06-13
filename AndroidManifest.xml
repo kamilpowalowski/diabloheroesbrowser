@@ -8,7 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -17,16 +17,18 @@
         android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
             android:name=".DiabloHeroesBrowserActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sherlock" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
-            android:name=".CareerProfileFragmentActivity">
-            
+        <activity
+            android:name=".CareerProfileFragmentActivity"
+            android:theme="@style/Theme.Sherlock" >
         </activity>
     </application>
 

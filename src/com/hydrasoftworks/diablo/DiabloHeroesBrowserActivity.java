@@ -19,7 +19,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,13 +30,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 
-public class DiabloHeroesBrowserActivity extends FragmentActivity {
+public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 	private static final String TAG = DiabloHeroesBrowserActivity.class
 			.getSimpleName();
 
@@ -119,9 +119,14 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 
 		@Override
 		protected CareerProfile doInBackground(BattleTag... params) {
+			BattleTag tag = params[0];
+			if(CareerProfile.hasElement(tag.getBattleTag())) {
+				return CareerProfile.getElement(tag.getBattleTag());
+			}
+			
 			StringBuilder sb = new StringBuilder();
 			try {
-				URL url = CareerProfile.createUrl(params[0]);
+				URL url = CareerProfile.createUrl(tag);
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						url.openStream()));
 				String inputLine;
@@ -144,7 +149,7 @@ public class DiabloHeroesBrowserActivity extends FragmentActivity {
 			Gson gson = new GsonBuilder().setFieldNamingPolicy(
 					FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
 			CareerProfile profil = gson.fromJson(result, CareerProfile.class);
-			profil.addToElements(params[0]);
+			profil.addToElements(tag);
 			return profil;
 		}
 
