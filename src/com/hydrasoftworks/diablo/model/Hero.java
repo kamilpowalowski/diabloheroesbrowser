@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Hero {
+public class Hero implements Comparable<Hero> {
 	private static final String HERO_PROFILE_URL = "http://eu.battle.net/api/d3/hero/";
 	public static final String CLASS_BARBARIAN = "barbarian";
 	public static final String CLASS_DEMON_HUNTER = "demon-hunter";
@@ -55,6 +55,42 @@ public class Hero {
 		private String location;
 		private String killer;
 		private int time;
+	}
+
+	/**
+	 * @return the heroClass
+	 */
+	public String getHeroClass() {
+		return heroClass;
+	}
+
+	/**
+	 * @return the gender
+	 */
+	public int getGender() {
+		return gender;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the level
+	 */
+	public int getLevel() {
+		return level;
+	}
+
+	@Override
+	public int compareTo(Hero another) {
+		if (getLevel() != another.getLevel())
+			return new Integer(getLevel()).compareTo(new Integer(another
+					.getLevel()));
+		return new Integer(lastUpdated).compareTo(new Integer(lastUpdated));
 	}
 
 }

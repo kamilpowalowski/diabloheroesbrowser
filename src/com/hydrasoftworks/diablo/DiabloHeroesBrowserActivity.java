@@ -120,32 +120,24 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		@Override
 		protected CareerProfile doInBackground(BattleTag... params) {
 			BattleTag tag = params[0];
-			if(CareerProfile.hasElement(tag.getBattleTag())) {
+			if (CareerProfile.hasElement(tag.getBattleTag())) {
 				return CareerProfile.getElement(tag.getBattleTag());
 			}
-			
-			StringBuilder sb = new StringBuilder();
-			try {
-				URL url = CareerProfile.createUrl(tag);
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						url.openStream()));
-				String inputLine;
-
-				while ((inputLine = in.readLine()) != null)
-					sb.append(inputLine);
-
-				in.close();
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				Log.e(TAG, e.getLocalizedMessage());
-			} catch (IOException e) {
-				e.printStackTrace();
-				Log.e(TAG, e.getLocalizedMessage());
-			}
-
-			// TODO: Uncomment this //String result = sb.toString();
+			/*
+			 * TODO: Uncomment this StringBuilder sb = new StringBuilder(); try
+			 * { URL url = CareerProfile.createUrl(tag); BufferedReader in = new
+			 * BufferedReader(new InputStreamReader( url.openStream())); String
+			 * inputLine;
+			 * 
+			 * while ((inputLine = in.readLine()) != null) sb.append(inputLine);
+			 * 
+			 * in.close(); } catch (MalformedURLException e) {
+			 * e.printStackTrace(); Log.e(TAG, e.getLocalizedMessage()); } catch
+			 * (IOException e) { e.printStackTrace(); Log.e(TAG,
+			 * e.getLocalizedMessage()); } //String result = sb.toString();
+			 */
 			String result = getTextFromInputStream(getResources()
-					.openRawResource(R.raw.career_profile_v2));
+					.openRawResource(R.raw.career_profile_v2)); //TODO: remove this
 			Gson gson = new GsonBuilder().setFieldNamingPolicy(
 					FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
 			CareerProfile profil = gson.fromJson(result, CareerProfile.class);
@@ -175,9 +167,14 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		@Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
-
-			View row = getLayoutInflater().inflate(
-					R.layout.battletag_one_result_details_row, parent, false);
+			View row;
+			if (convertView == null) {
+				row = getLayoutInflater().inflate(
+						R.layout.battletag_one_result_details_row, parent,
+						false);
+			} else {
+				row = convertView;
+			}
 
 			final BattleTag bt = getItem(position);
 			TextView textView = (TextView) row

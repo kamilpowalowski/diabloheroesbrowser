@@ -8,7 +8,7 @@
         android:id="@+id/battletag_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#D96500"
+        android:textColor="@color/orange"
         android:textSize="20dp"
         android:paddingTop="5dp"
         android:paddingLeft="5dp"

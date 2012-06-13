@@ -29,8 +29,10 @@ public class CareerFragment extends SherlockFragment {
 				progressionValue += i * Progression.LEVELS.length;
 			}
 		}
-		((SeekBar) view.findViewById(R.id.progression_seek_normal))
-				.setProgress(progressionValue);
+		SeekBar progressBar = (SeekBar) view
+				.findViewById(R.id.progression_seek_normal);
+		progressBar.setProgress(progressionValue);
+		progressBar.setEnabled(false);
 		return view;
 	}
 

@@ -111,5 +111,12 @@ public class CareerProfile {
 	public List<Progression> getProgression() {
 		return progression;
 	}
+	
+	/**
+	 * @return the heroes
+	 */
+	public List<Hero> getHeroes() {
+		return heroes;
+	}
 
 }
