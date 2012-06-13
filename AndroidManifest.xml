@@ -28,7 +28,8 @@
         </activity>
         <activity
             android:name=".CareerProfileFragmentActivity"
-            android:theme="@style/Theme.Sherlock" >
+            android:theme="@style/Theme.Sherlock"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

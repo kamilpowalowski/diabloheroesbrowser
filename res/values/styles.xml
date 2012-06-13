@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="DiabloButton" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/btn_red_selector</item>
         <item name="android:textColor">@color/diablo_orange</item>
         <item name="android:textSize">12dp</item>
     </style>
-    
+
+
 </resources>

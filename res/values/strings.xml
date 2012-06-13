@@ -12,5 +12,9 @@
     <string name="artisans_tab">Atrisans</string>
     <string name="heroes_tab">Heroes</string>
     <string name="fallen_heroes_tab">Fallen heroes</string>
+    <string name="blacksmith">Blacksmith</string>
+    <string name="jeweler">Jeweler</string>
+    <string name="artisan_level">Level %d (Normal)</string>
+    <string name="artisan_level_hardcore">Level %d (Hardcore)</string>
 
 </resources>

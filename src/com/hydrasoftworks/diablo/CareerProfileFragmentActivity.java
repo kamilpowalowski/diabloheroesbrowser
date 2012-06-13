@@ -5,19 +5,20 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 
 public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
 		CareerProfile profile = CareerProfile.getElement(getIntent()
 				.getExtras().getString(BattleTag.BATTLETAG));
 		setContentView(R.layout.career_profile_fragment_activity);
@@ -31,10 +32,10 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.artisans_tab),
 				ArtisansFragment.class, null);
-		
+
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.heroes_tab),
 				HeroesFragment.class, null);
-		
+
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.fallen_heroes_tab),
 				FallenHeroesFragment.class, null);
 
@@ -44,10 +45,9 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 		bar.setTitle(profile.getBattleTag().getBattleTag());
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		super.onCreate(bundle);
 	}
 
-	public static class TabsAdapter extends FragmentPagerAdapter implements
+	public static class TabsAdapter extends FragmentStatePagerAdapter implements
 			ActionBar.TabListener, ViewPager.OnPageChangeListener {
 		private final Context mContext;
 		private final ActionBar mActionBar;

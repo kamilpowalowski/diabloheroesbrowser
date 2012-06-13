@@ -93,4 +93,11 @@ public class Hero implements Comparable<Hero> {
 		return new Integer(lastUpdated).compareTo(new Integer(lastUpdated));
 	}
 
+	/**
+	 * @return the hardcore
+	 */
+	public boolean isHardcore() {
+		return hardcore;
+	}
+
 }

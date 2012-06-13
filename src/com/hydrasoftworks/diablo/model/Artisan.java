@@ -7,4 +7,16 @@ public class Artisan {
 	private int level;
 	private int stepCurrent;
 	private int stepMax;
+	/**
+	 * @return the slug
+	 */
+	public String getSlug() {
+		return slug;
+	}
+	/**
+	 * @return the level
+	 */
+	public int getLevel() {
+		return level;
+	}
 }

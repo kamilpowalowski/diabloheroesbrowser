@@ -119,4 +119,18 @@ public class CareerProfile {
 		return heroes;
 	}
 
+	/**
+	 * @return the artisans
+	 */
+	public List<Artisan> getArtisans() {
+		return artisans;
+	}
+
+	/**
+	 * @return the hardcoreArtisans
+	 */
+	public List<Artisan> getHardcoreArtisans() {
+		return hardcoreArtisans;
+	}
+
 }

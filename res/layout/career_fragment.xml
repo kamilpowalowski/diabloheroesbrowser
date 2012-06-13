@@ -9,13 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="16"
-        android:progress="0" />
-
-    <SeekBar
-        android:id="@+id/progression_seek_hardcore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="16"
-        android:progress="0" />
+        android:progress="0"
+		android:maxHeight="40dp"
+        android:progressDrawable="@drawable/seekbar"
+        android:thumb="@drawable/seek_thumb"
+        android:thumbOffset="10dp"/>
 
 </LinearLayout>
