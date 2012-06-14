@@ -52,6 +52,24 @@ public class CareerProfile {
 		private int elites;
 		@SerializedName("hardcoreMonsters")
 		private int hardcoreMonsters;
+		/**
+		 * @return the monsters
+		 */
+		public int getMonsters() {
+			return monsters;
+		}
+		/**
+		 * @return the elites
+		 */
+		public int getElites() {
+			return elites;
+		}
+		/**
+		 * @return the hardcoreMonsters
+		 */
+		public int getHardcoreMonsters() {
+			return hardcoreMonsters;
+		}
 	}
 
 	public static class TimePlayed {
@@ -131,6 +149,13 @@ public class CareerProfile {
 	 */
 	public List<Artisan> getHardcoreArtisans() {
 		return hardcoreArtisans;
+	}
+
+	/**
+	 * @return the kills
+	 */
+	public Kills getKills() {
+		return kills;
 	}
 
 }

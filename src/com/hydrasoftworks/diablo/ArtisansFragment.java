@@ -24,22 +24,22 @@ public class ArtisansFragment extends SherlockFragment {
 		for (Artisan artisan : artisans) {
 			if (artisan.getSlug().equals(Artisan.SLUG_BLACKSMITH))
 				((TextView) view.findViewById(R.id.blacksmith_level))
-						.setText(getResources().getString(
+						.setText(getString(
 								R.string.artisan_level, artisan.getLevel()));
 			if (artisan.getSlug().equals(Artisan.SLUG_JEWELER))
 				((TextView) view.findViewById(R.id.jeweler_level))
-						.setText(getResources().getString(
+						.setText(getString(
 								R.string.artisan_level, artisan.getLevel()));
 		}
 		for (Artisan artisan : hardcoreArtisans) {
 			if (artisan.getSlug().equals(Artisan.SLUG_BLACKSMITH))
 				((TextView) view.findViewById(R.id.blacksmith_hardcore_level))
-						.setText(getResources().getString(
+						.setText(getString(
 								R.string.artisan_level_hardcore,
 								artisan.getLevel()));
 			if (artisan.getSlug().equals(Artisan.SLUG_JEWELER))
 				((TextView) view.findViewById(R.id.jeweler_hardcore_level))
-						.setText(getResources().getString(
+						.setText(getString(
 								R.string.artisan_level_hardcore,
 								artisan.getLevel()));
 		}

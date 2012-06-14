@@ -34,6 +34,7 @@
                 android:id="@+id/blacksmith_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/standard_text"
                 android:gravity="center" />
 
             <TextView
@@ -62,6 +63,7 @@
                 android:id="@+id/jeweler_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/standard_text"
                 android:gravity="center" />
 
             <TextView
