@@ -1,12 +1,14 @@
 package com.hydrasoftworks.diablo.model;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
 public class Hero implements Comparable<Hero> {
-	private static final String HERO_PROFILE_URL = "http://eu.battle.net/api/d3/hero/";
+	private static final String HERO_PROFILE_URL = "/hero/";
+	public static final String HERO_ID = "hero_id";
 	public static final String CLASS_BARBARIAN = "barbarian";
 	public static final String CLASS_DEMON_HUNTER = "demon-hunter";
 	public static final String CLASS_MONK = "monk";
@@ -14,9 +16,9 @@ public class Hero implements Comparable<Hero> {
 	public static final String CLASS_WIZARD = "wizard";
 
 	private String name;
-	private int id;
+	private int id = 0;
 	@SerializedName("heroId")
-	private int heroId;
+	private int heroId = 0;
 	private int level;
 	private int gender;
 	@SerializedName("class")
@@ -28,6 +30,10 @@ public class Hero implements Comparable<Hero> {
 	private Kills kills;
 	private Death death;
 
+	public URL createUrl(BattleTag tag) throws MalformedURLException {
+		return new URL(CareerProfile.createUrl(tag).toExternalForm() + HERO_PROFILE_URL + getId());
+	}
+	
 	public static class Stats {
 		private double damageIncrease;
 		private double damageReduction;
@@ -98,6 +104,13 @@ public class Hero implements Comparable<Hero> {
 	 */
 	public boolean isHardcore() {
 		return hardcore;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id + heroId;
 	}
 
 }

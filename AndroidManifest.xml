@@ -31,6 +31,11 @@
             android:theme="@style/Theme.Sherlock"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".HeroFragmentActivity"
+            android:theme="@style/Theme.Sherlock"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

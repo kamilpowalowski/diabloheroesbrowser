@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 public class CareerProfile {
 	private static final String CAREER_PROFILE_URL = "http://eu.battle.net/api/d3/account/";
 	private static HashMap<String, CareerProfile> elements = new HashMap<String, CareerProfile>();
-	private static CareerProfile activeElement;
+	private static CareerProfile activeProfile;
 
 	private BattleTag battleTag;
 	private int lastHeroPlayed;
@@ -30,12 +30,12 @@ public class CareerProfile {
 	}
 
 	public static CareerProfile getElement(String tag) {
-		CareerProfile.activeElement = CareerProfile.elements.get(tag);
-		return CareerProfile.activeElement;
+		CareerProfile.activeProfile = CareerProfile.elements.get(tag);
+		return CareerProfile.activeProfile;
 	}
 
-	public static CareerProfile getActiveElement() {
-		return CareerProfile.activeElement;
+	public static CareerProfile getActiveProfile() {
+		return CareerProfile.activeProfile;
 	}
 
 	public static boolean hasElement(String tag) {

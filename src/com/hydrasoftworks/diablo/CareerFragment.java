@@ -21,7 +21,7 @@ public class CareerFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View view = inflater
 				.inflate(R.layout.career_fragment, container, false);
-		CareerProfile profile = CareerProfile.getActiveElement();
+		CareerProfile profile = CareerProfile.getActiveProfile();
 
 		Collections.sort(profile.getProgression(), Collections.reverseOrder());
 		Progression progression = profile.getProgression().get(0);

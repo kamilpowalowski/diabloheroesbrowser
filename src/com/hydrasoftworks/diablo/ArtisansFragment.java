@@ -18,8 +18,8 @@ public class ArtisansFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.artisans_fragment, container,
 				false);
-		List<Artisan> artisans = CareerProfile.getActiveElement().getArtisans();
-		List<Artisan> hardcoreArtisans = CareerProfile.getActiveElement()
+		List<Artisan> artisans = CareerProfile.getActiveProfile().getArtisans();
+		List<Artisan> hardcoreArtisans = CareerProfile.getActiveProfile()
 				.getHardcoreArtisans();
 		for (Artisan artisan : artisans) {
 			if (artisan.getSlug().equals(Artisan.SLUG_BLACKSMITH))

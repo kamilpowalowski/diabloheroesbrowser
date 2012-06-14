@@ -20,7 +20,7 @@ public class FallenHeroesFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fallen_heroes_fragment,
 				container, false);
-		List<Hero> fallenHeroes = CareerProfile.getActiveElement()
+		List<Hero> fallenHeroes = CareerProfile.getActiveProfile()
 				.getFallenHeroes();
 		Collections.sort(fallenHeroes, Collections.reverseOrder());
 		((ListView) view.findViewById(R.id.fallen_heroes_listview))
