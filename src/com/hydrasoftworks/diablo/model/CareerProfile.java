@@ -158,4 +158,11 @@ public class CareerProfile {
 		return kills;
 	}
 
+	/**
+	 * @return the fallenHeroes
+	 */
+	public List<Hero> getFallenHeroes() {
+		return fallenHeroes;
+	}
+
 }

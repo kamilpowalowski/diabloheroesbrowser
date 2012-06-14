@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_banner"
     android:orientation="vertical"
-    android:paddingBottom="35dp"
-    android:paddingTop="35dp" >
+    android:paddingBottom="150dp"
+    android:paddingTop="50dp" >
 
     <ListView
-        android:id="@+id/heroes_listview"
+        android:id="@+id/fallen_heroes_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:cacheColorHint="#00000000" />
+        android:cacheColorHint="#00000000"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
 
 </LinearLayout>
