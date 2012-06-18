@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class CareerProfile {
 	private static final String CAREER_PROFILE_URL = "http://eu.battle.net/api/d3/account/";
-	private static HashMap<String, CareerProfile> elements = new HashMap<String, CareerProfile>();
+	private static HashMap<String, CareerProfile> downloadedProfiles = new HashMap<String, CareerProfile>();
 	private static CareerProfile activeProfile;
 
 	private BattleTag battleTag;
@@ -23,14 +23,16 @@ public class CareerProfile {
 	private Kills kills;
 	private TimePlayed timePlayed;
 	private List<Progression> progression;
+	private HashMap<Integer, Hero> downloadedHeroes = new HashMap<Integer, Hero>();
+	private Hero activeHero;
 
 	public static URL createUrl(BattleTag tag) throws MalformedURLException {
 		return new URL(CAREER_PROFILE_URL
 				+ tag.getBattleTag().replace("#", "-"));
 	}
 
-	public static CareerProfile getElement(String tag) {
-		CareerProfile.activeProfile = CareerProfile.elements.get(tag);
+	public static CareerProfile getDownloadedProfile(String tag) {
+		CareerProfile.activeProfile = CareerProfile.downloadedProfiles.get(tag);
 		return CareerProfile.activeProfile;
 	}
 
@@ -38,13 +40,13 @@ public class CareerProfile {
 		return CareerProfile.activeProfile;
 	}
 
-	public static boolean hasElement(String tag) {
-		return CareerProfile.elements.containsKey(tag);
+	public static boolean hasDownloadedProfile(String tag) {
+		return CareerProfile.downloadedProfiles.containsKey(tag);
 	}
 
-	public void addToElements(BattleTag battleTag) {
+	public void addToDownloadedProfiles(BattleTag battleTag) {
 		this.battleTag = battleTag;
-		CareerProfile.elements.put(battleTag.getBattleTag(), this);
+		CareerProfile.downloadedProfiles.put(battleTag.getBattleTag(), this);
 	}
 
 	public static class Kills {
@@ -52,18 +54,21 @@ public class CareerProfile {
 		private int elites;
 		@SerializedName("hardcoreMonsters")
 		private int hardcoreMonsters;
+
 		/**
 		 * @return the monsters
 		 */
 		public int getMonsters() {
 			return monsters;
 		}
+
 		/**
 		 * @return the elites
 		 */
 		public int getElites() {
 			return elites;
 		}
+
 		/**
 		 * @return the hardcoreMonsters
 		 */
@@ -72,7 +77,7 @@ public class CareerProfile {
 		}
 	}
 
-	public static class TimePlayed {
+	public static class TimePlayed { //TODO: Showing plaing time
 		private double barbarian;
 		private double demonHunter;
 		private double monk;
@@ -129,7 +134,7 @@ public class CareerProfile {
 	public List<Progression> getProgression() {
 		return progression;
 	}
-	
+
 	/**
 	 * @return the heroes
 	 */
@@ -163,6 +168,24 @@ public class CareerProfile {
 	 */
 	public List<Hero> getFallenHeroes() {
 		return fallenHeroes;
+	}
+
+	public boolean hasDownloadedHero(int id) {
+		return downloadedHeroes.containsKey(id);
+	}
+
+	public Hero getDownloadedHero(int id) {
+		activeHero = downloadedHeroes.get(id);
+		return activeHero;
+	}
+
+	public void addToDownloadedHeroes(Hero fullHero) {
+		downloadedHeroes.put(fullHero.getId(), fullHero);
+
+	}
+	
+	public Hero getActiveHero() {
+		return activeHero;
 	}
 
 }

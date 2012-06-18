@@ -15,26 +15,27 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.hydrasoftworks.diablo.model.CareerProfile;
+import com.hydrasoftworks.diablo.model.Hero;
 
 public class HeroFragmentActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		CareerProfile profile = CareerProfile.getActiveProfile();
+		Hero hero = CareerProfile.getActiveProfile().getDownloadedHero(getIntent().getIntExtra(Hero.HERO_ID, 0));
 		setContentView(R.layout.career_profile_fragment_activity);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
 		TabsAdapter mTabsAdapter = new TabsAdapter(this, viewPager);
 		ActionBar bar = getSupportActionBar();
 
-//		mTabsAdapter.addTab(bar.newTab().setText(R.string.career_tab),
-//				CareerFragment.class, null);
+		mTabsAdapter.addTab(bar.newTab().setText(R.string.equipment_tab),
+				EquipmentFragment.class, null);
 
 
 		viewPager.setAdapter(mTabsAdapter);
 		viewPager.setOffscreenPageLimit(3);
 
-		bar.setTitle(profile.getBattleTag().getBattleTag());
+		bar.setTitle(hero.getName());
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setHomeButtonEnabled(true);
 		bar.setDisplayHomeAsUpEnabled(true);

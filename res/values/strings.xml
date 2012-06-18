@@ -6,12 +6,15 @@
     <string name="battletag_find_button_text">SHOW PLAYER</string>
     <string name="battletag_wrong">BattleTag is wrong</string>
     <string name="internt_connection_error">Internet connection is needed for showing profile</string>
+    <string name="wrong_url">Something wrong with url you try to download</string>
+    <string name="no_career_profile">Carerr profile dosn\'t exist. Check entered BattleTag twice.</string>
+    <string name="no_hero">There\'s an error while download hero data. Try again later.</string>
     <string name="alert_dialog_ok">OK</string>
-    <string name="battletag_not_found">Can\'t downoload BattleTag data.</string>
     <string name="career_tab">Career</string>
     <string name="artisans_tab">Atrisans</string>
     <string name="heroes_tab">Heroes</string>
     <string name="fallen_heroes_tab">Fallen heroes</string>
+    <string name="equipment_tab">Equipment</string>
     <string name="blacksmith">Blacksmith</string>
     <string name="jeweler">Jeweler</string>
     <string name="artisan_level">Level %d (Normal)</string>

@@ -16,10 +16,13 @@ import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 
 public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
+	public static final String ACTIVE_TAB = "career_profile_acitve_tab";
+
+
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		CareerProfile profile = CareerProfile.getElement(getIntent()
+		CareerProfile profile = CareerProfile.getDownloadedProfile(getIntent()
 				.getExtras().getString(BattleTag.BATTLETAG));
 		setContentView(R.layout.career_profile_fragment_activity);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -44,6 +47,7 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 
 		bar.setTitle(profile.getBattleTag().getBattleTag());
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		bar.setSelectedNavigationItem(getIntent().getIntExtra(ACTIVE_TAB, 0));
 
 	}
 	
