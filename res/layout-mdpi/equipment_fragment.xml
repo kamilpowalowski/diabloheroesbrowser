@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/equipment_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/equipment_barbarian_male" />
+
+    <ImageView
+        android:id="@+id/head"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignTop="@+id/equipment_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/shoulders"
+        android:layout_width="66dp"
+        android:layout_height="88dp"
+        android:layout_alignTop="@+id/head"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/head"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/torso"
+        android:layout_width="80dp"
+        android:layout_height="114dp"
+        android:layout_below="@+id/head"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/neck"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_alignBottom="@+id/shoulders"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/torso"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/hands"
+        android:layout_width="64dp"
+        android:layout_height="86dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/shoulders"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/bracers"
+        android:layout_width="64dp"
+        android:layout_height="86dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/hands"
+        android:layout_marginRight="22dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/waist"
+        android:layout_width="82dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/torso"
+        android:layout_below="@+id/torso"
+        android:layout_marginTop="2dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/legs"
+        android:layout_width="66dp"
+        android:layout_height="88dp"
+        android:layout_alignLeft="@+id/head"
+        android:layout_below="@+id/waist"
+        android:layout_marginTop="2dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/feet"
+        android:layout_width="66dp"
+        android:layout_height="86dp"
+        android:layout_alignLeft="@+id/legs"
+        android:layout_below="@+id/legs"
+        android:layout_marginTop="6dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/leftFinger"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/hands"
+        android:layout_alignTop="@+id/legs"
+        android:layout_marginLeft="12dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/rightFinger"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/bracers"
+        android:layout_alignTop="@+id/legs"
+        android:layout_marginRight="12dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/mainHand"
+        android:layout_width="64dp"
+        android:layout_height="128dp"
+        android:layout_alignBottom="@+id/feet"
+        android:layout_alignLeft="@+id/hands"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/offHand"
+        android:layout_width="64dp"
+        android:layout_height="128dp"
+        android:layout_alignBottom="@+id/feet"
+        android:layout_alignLeft="@+id/bracers"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+</RelativeLayout>

@@ -112,5 +112,9 @@ public class Hero implements Comparable<Hero> {
 	public int getId() {
 		return id + heroId;
 	}
+	
+	public Item getItem(String partOfBody) {
+		return items.get(partOfBody);
+	}
 
 }
