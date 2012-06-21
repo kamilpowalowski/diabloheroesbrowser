@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
@@ -28,19 +30,27 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		TabsAdapter mTabsAdapter = new TabsAdapter(this, viewPager);
 		ActionBar bar = getSupportActionBar();
 
+		bar.setTitle(hero.getName());
+		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		bar.setHomeButtonEnabled(true);
+		bar.setDisplayHomeAsUpEnabled(true);
+		
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.equipment_tab),
 				EquipmentFragment.class, null);
 
 
 		viewPager.setAdapter(mTabsAdapter);
-		viewPager.setOffscreenPageLimit(3);
-
-		bar.setTitle(hero.getName());
-		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		bar.setHomeButtonEnabled(true);
-		bar.setDisplayHomeAsUpEnabled(true);
+		viewPager.setOffscreenPageLimit(3);		
 
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.actionbar_menu, menu);
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -128,4 +138,5 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		}
 	}
+
 }

@@ -2,6 +2,7 @@ package com.hydrasoftworks.diablo;
 
 import java.io.InputStream;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,9 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
 import com.hydrasoftworks.diablo.model.Item;
@@ -20,14 +26,15 @@ public class EquipmentFragment extends SherlockFragment {
 	private static final String TAG = EquipmentFragment.class.getSimpleName();
 	private Hero hero;
 	private View view;
+	private int counter = 0;
+	private MenuItem refreshItem;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.equipment_fragment, container, false);
 		hero = CareerProfile.getActiveProfile().getActiveHero();
-		
-		if(hero.getHeroClass().equals(Hero.CLASS_BARBARIAN))
+
 		new EquipmentLoad("shoulders", R.id.shoulders).execute();
 		new EquipmentLoad("head", R.id.head).execute();
 		new EquipmentLoad("torso", R.id.torso).execute();
@@ -41,14 +48,17 @@ public class EquipmentFragment extends SherlockFragment {
 		new EquipmentLoad("rightFinger", R.id.rightFinger).execute();
 		new EquipmentLoad("mainHand", R.id.mainHand).execute();
 		new EquipmentLoad("offHand", R.id.offHand).execute();
-		
-		ImageView equipmentImage = (ImageView)view.findViewById(R.id.equipment_image);
-		
+
+		ImageView equipmentImage = (ImageView) view
+				.findViewById(R.id.equipment_image);
+
 		if (hero.getHeroClass().equals(Hero.CLASS_BARBARIAN)) {
 			if (hero.getGender() == 0) {
-				equipmentImage.setImageResource(R.drawable.equipment_barbarian_male);
+				equipmentImage
+						.setImageResource(R.drawable.equipment_barbarian_male);
 			} else {
-				equipmentImage.setImageResource(R.drawable.equipment_barbarian_female);
+				equipmentImage
+						.setImageResource(R.drawable.equipment_barbarian_female);
 			}
 		} else if (hero.getHeroClass().equals(Hero.CLASS_DEMON_HUNTER)) {
 			if (hero.getGender() == 0) {
@@ -60,7 +70,8 @@ public class EquipmentFragment extends SherlockFragment {
 			if (hero.getGender() == 0) {
 				equipmentImage.setImageResource(R.drawable.equipment_monk_male);
 			} else {
-				equipmentImage.setImageResource(R.drawable.equipment_monk_female);
+				equipmentImage
+						.setImageResource(R.drawable.equipment_monk_female);
 			}
 		} else if (hero.getHeroClass().equals(Hero.CLASS_WITCH_DOCTOR)) {
 			if (hero.getGender() == 0) {
@@ -70,13 +81,34 @@ public class EquipmentFragment extends SherlockFragment {
 			}
 		} else if (hero.getHeroClass().equals(Hero.CLASS_WIZARD)) {
 			if (hero.getGender() == 0) {
-				equipmentImage.setImageResource(R.drawable.equipment_wizard_male);
+				equipmentImage
+						.setImageResource(R.drawable.equipment_wizard_male);
 			} else {
-				equipmentImage.setImageResource(R.drawable.equipment_wizard_female);
+				equipmentImage
+						.setImageResource(R.drawable.equipment_wizard_female);
 			}
 		}
 
+		setHasOptionsMenu(true);
 		return view;
+	}
+
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		refreshItem = menu.findItem(R.id.menu_refresh);
+
+		ImageView iv = (ImageView) ((LayoutInflater) getActivity()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(
+				R.layout.refresh_action_view, null);
+
+		Animation rotation = AnimationUtils.loadAnimation(getActivity(),
+				R.anim.rotate);
+		rotation.setRepeatCount(Animation.INFINITE);
+		iv.startAnimation(rotation);
+
+		refreshItem.setActionView(iv);
+		super.onPrepareOptionsMenu(menu);
+
 	}
 
 	private int getBackground(String color) {
@@ -94,7 +126,7 @@ public class EquipmentFragment extends SherlockFragment {
 		return 0;
 	}
 
-	class EquipmentLoad extends AsyncTask<Void, Void, Drawable> {
+	private class EquipmentLoad extends AsyncTask<Void, Void, Drawable> {
 		private String itemName;
 		private int imageViewId;
 		private Item item;
@@ -126,7 +158,7 @@ public class EquipmentFragment extends SherlockFragment {
 				} catch (Exception ex2) {
 					Log.d(TAG,
 							"Error when downloading image file "
-									+ ex2.getMessage());
+									+ ex2.getLocalizedMessage());
 
 					return null;
 				}
@@ -140,6 +172,13 @@ public class EquipmentFragment extends SherlockFragment {
 				imageView.setImageDrawable(result);
 				imageView.setBackgroundResource(getBackground(item
 						.getDisplayColor()));
+			}
+			synchronized (this) {
+				counter++;
+			}
+
+			if (counter == 13) {
+				refreshItem.setVisible(false);
 			}
 		}
 
