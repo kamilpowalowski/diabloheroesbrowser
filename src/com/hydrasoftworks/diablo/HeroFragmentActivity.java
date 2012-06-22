@@ -13,8 +13,6 @@ import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
@@ -38,6 +36,10 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_general_tab),
 				HeroGeneralFragment.class, null);
 		
+		mTabsAdapter.addTab(bar.newTab().setText(R.string.skills_tab),
+				SkillsFragment.class, null);
+		
+		
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.equipment_tab),
 				EquipmentFragment.class, null);
 
@@ -49,12 +51,6 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 
 	}
 
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.actionbar_menu, menu);
-		return super.onPrepareOptionsMenu(menu);
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

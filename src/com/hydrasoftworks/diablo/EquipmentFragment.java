@@ -2,31 +2,23 @@ package com.hydrasoftworks.diablo;
 
 import java.io.InputStream;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.hydrasoftworks.diablo.DiabloHeroesBrowserActivity.InfoDialogFragment;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
 import com.hydrasoftworks.diablo.model.Item;
@@ -35,15 +27,14 @@ public class EquipmentFragment extends SherlockFragment {
 	private static final String TAG = EquipmentFragment.class.getSimpleName();
 	private Hero hero;
 	private View view;
-	private int counter = 0;
-	private MenuItem refreshItem;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.equipment_fragment, container, false);
 		hero = CareerProfile.getActiveProfile().getActiveHero();
-
+		
 		new EquipmentLoad("shoulders", R.id.shoulders).execute();
 		new EquipmentLoad("head", R.id.head).execute();
 		new EquipmentLoad("torso", R.id.torso).execute();
@@ -97,28 +88,9 @@ public class EquipmentFragment extends SherlockFragment {
 						.setImageResource(R.drawable.equipment_wizard_female);
 			}
 		}
-
-		setHasOptionsMenu(true);
 		return view;
 	}
 
-	@Override
-	public void onPrepareOptionsMenu(Menu menu) {
-		refreshItem = menu.findItem(R.id.menu_refresh);
-
-		ImageView iv = (ImageView) ((LayoutInflater) getActivity()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(
-				R.layout.refresh_action_view, null);
-
-		Animation rotation = AnimationUtils.loadAnimation(getActivity(),
-				R.anim.rotate);
-		rotation.setRepeatCount(Animation.INFINITE);
-		iv.startAnimation(rotation);
-
-		refreshItem.setActionView(iv);
-		super.onPrepareOptionsMenu(menu);
-
-	}
 
 	private int getBackground(String color) {
 		if (color.equals("white")) {
@@ -188,18 +160,11 @@ public class EquipmentFragment extends SherlockFragment {
 						Intent intent = new Intent(getActivity(),
 								TooltipWebViewActivity.class);
 						intent.putExtra(TooltipWebViewActivity.URL,
-								"http://wp.pl"); //TODO: Load proper link
+								"http://wp.pl"); // TODO: Load proper link
 						startActivity(intent);
 
 					}
 				});
-			}
-			synchronized (this) {
-				counter++;
-			}
-
-			if (counter == 13) {
-				refreshItem.setVisible(false);
 			}
 		}
 

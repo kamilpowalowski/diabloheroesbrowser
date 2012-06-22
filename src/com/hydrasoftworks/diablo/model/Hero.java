@@ -215,4 +215,11 @@ public class Hero implements Comparable<Hero> {
 		return items.get(partOfBody);
 	}
 
+	/**
+	 * @return the stats
+	 */
+	public Stats getStats() {
+		return stats;
+	}
+
 }
