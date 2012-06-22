@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <Button
+        android:id="@+id/skill_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_skill_selector" />
+
+    <ImageView
+        android:id="@+id/skill_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/skill_button"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="18dp" />
+
+    <TextView
+        android:id="@+id/skill_name"
+        android:layout_width="160dp"
+        android:layout_height="18dp"
+        android:layout_alignTop="@+id/skill_icon"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/skill_icon" />
+
+    <TextView
+        android:id="@+id/skill_rune"
+        android:layout_width="160dp"
+        android:layout_height="18dp"
+        android:layout_alignBottom="@+id/skill_icon"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/skill_icon"
+        android:textColor="@color/diablo_orange" />
+
+    <TextView
+        android:id="@+id/skill_small_icon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/skill_rune"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal|top"
+        android:textColor="@color/diablo_orange"/>
+
+</RelativeLayout>
