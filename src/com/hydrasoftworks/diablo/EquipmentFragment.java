@@ -2,22 +2,31 @@ package com.hydrasoftworks.diablo;
 
 import java.io.InputStream;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.hydrasoftworks.diablo.DiabloHeroesBrowserActivity.InfoDialogFragment;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
 import com.hydrasoftworks.diablo.model.Item;
@@ -172,6 +181,18 @@ public class EquipmentFragment extends SherlockFragment {
 				imageView.setImageDrawable(result);
 				imageView.setBackgroundResource(getBackground(item
 						.getDisplayColor()));
+				imageView.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(getActivity(),
+								TooltipWebViewActivity.class);
+						intent.putExtra(TooltipWebViewActivity.URL,
+								"http://wp.pl"); //TODO: Load proper link
+						startActivity(intent);
+
+					}
+				});
 			}
 			synchronized (this) {
 				counter++;
@@ -183,4 +204,5 @@ public class EquipmentFragment extends SherlockFragment {
 		}
 
 	}
+
 }

@@ -23,7 +23,8 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		Hero hero = CareerProfile.getActiveProfile().getDownloadedHero(getIntent().getIntExtra(Hero.HERO_ID, 0));
+		Hero hero = CareerProfile.getActiveProfile().getDownloadedHero(
+				getIntent().getIntExtra(Hero.HERO_ID, 0));
 		setContentView(R.layout.career_profile_fragment_activity);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -34,29 +35,33 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setHomeButtonEnabled(true);
 		bar.setDisplayHomeAsUpEnabled(true);
+		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_general_tab),
+				HeroGeneralFragment.class, null);
 		
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.equipment_tab),
 				EquipmentFragment.class, null);
 
+		mTabsAdapter.addTab(bar.newTab().setText(R.string.followers_tab),
+				FollowersFragment.class, null);
 
 		viewPager.setAdapter(mTabsAdapter);
-		viewPager.setOffscreenPageLimit(3);		
+		viewPager.setOffscreenPageLimit(3);
 
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.actionbar_menu, menu);
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = getIntent().setClass(this, CareerProfileFragmentActivity.class);
+			Intent intent = getIntent().setClass(this,
+					CareerProfileFragmentActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			return true;

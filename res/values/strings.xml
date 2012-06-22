@@ -15,6 +15,8 @@
     <string name="heroes_tab">Heroes</string>
     <string name="fallen_heroes_tab">Fallen heroes</string>
     <string name="equipment_tab">Equipment</string>
+    <string name="followers_tab">Followers</string>
+<string name="hero_general_tab">Stats</string>
     <string name="blacksmith">Blacksmith</string>
     <string name="jeweler">Jeweler</string>
     <string name="artisan_level">Level %d (Normal)</string>
@@ -23,8 +25,11 @@
     <string name="progression_level_nightmare">Nightmare</string>
     <string name="progression_level_hell">Hell</string>
     <string name="progression_level_inferno">Inferno</string>
-    <string name="kills"><![CDATA[<b>%d</b><br>Monsters kills]]></string>
-    <string name="elite_kills"><![CDATA[<b>%d</b><br>Elite kills]]></string>
-    <string name="hardcore_kills"><![CDATA[<b>%d</b><br>Hardcore<br>monsters kills]]></string>
+    <string name="kills">        <![CDATA[<b>%d</b><br>Monsters kills]]>
+    </string>
+    <string name="elite_kills">        <![CDATA[<b>%d</b><br>Elite kills]]>
+    </string>
+    <string name="hardcore_kills">        <![CDATA[<b>%d</b><br>Hardcore<br>monsters kills]]>
+    </string>
 
 </resources>

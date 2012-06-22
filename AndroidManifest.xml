@@ -28,13 +28,19 @@
         </activity>
         <activity
             android:name=".CareerProfileFragmentActivity"
-            android:theme="@style/Theme.Sherlock"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sherlock" >
         </activity>
         <activity
             android:name=".HeroFragmentActivity"
-            android:theme="@style/Theme.Sherlock"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sherlock" >
+        </activity>
+        <activity
+            android:name=".TooltipWebViewActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.Sherlock.Dialog" >
         </activity>
     </application>
 

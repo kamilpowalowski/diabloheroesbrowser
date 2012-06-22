@@ -35,8 +35,11 @@ public class Hero implements Comparable<Hero> {
 	}
 	
 	public static class Stats {
+		@SerializedName("damageIncrease")
 		private double damageIncrease;
+		@SerializedName("damageReduction")
 		private double damageReduction;
+		@SerializedName("critChance")
 		private double critChance;
 		private int life;
 		private int strength;
@@ -44,12 +47,107 @@ public class Hero implements Comparable<Hero> {
 		private int intelligence;
 		private int vitality;
 		private int armor;
+		@SerializedName("coldResist")
 		private int coldResist;
+		@SerializedName("fireResist")
 		private int fireResist;
+		@SerializedName("lightningResist")
 		private int lightningResist;
+		@SerializedName("poisonResist")
 		private int poisonResist;
+		@SerializedName("arcaneResist")
 		private int arcaneResist;
 		private double damage;
+		/**
+		 * @return the damageIncrease
+		 */
+		public double getDamageIncrease() {
+			return damageIncrease;
+		}
+		/**
+		 * @return the damageReduction
+		 */
+		public double getDamageReduction() {
+			return damageReduction;
+		}
+		/**
+		 * @return the critChance
+		 */
+		public double getCritChance() {
+			return critChance;
+		}
+		/**
+		 * @return the life
+		 */
+		public int getLife() {
+			return life;
+		}
+		/**
+		 * @return the strength
+		 */
+		public int getStrength() {
+			return strength;
+		}
+		/**
+		 * @return the dexterity
+		 */
+		public int getDexterity() {
+			return dexterity;
+		}
+		/**
+		 * @return the intelligence
+		 */
+		public int getIntelligence() {
+			return intelligence;
+		}
+		/**
+		 * @return the vitality
+		 */
+		public int getVitality() {
+			return vitality;
+		}
+		/**
+		 * @return the armor
+		 */
+		public int getArmor() {
+			return armor;
+		}
+		/**
+		 * @return the coldResist
+		 */
+		public int getColdResist() {
+			return coldResist;
+		}
+		/**
+		 * @return the fireResist
+		 */
+		public int getFireResist() {
+			return fireResist;
+		}
+		/**
+		 * @return the lightningResist
+		 */
+		public int getLightningResist() {
+			return lightningResist;
+		}
+		/**
+		 * @return the poisonResist
+		 */
+		public int getPoisonResist() {
+			return poisonResist;
+		}
+		/**
+		 * @return the arcaneResist
+		 */
+		public int getArcaneResist() {
+			return arcaneResist;
+		}
+		/**
+		 * @return the damage
+		 */
+		public double getDamage() {
+			return damage;
+		}
 	}
 
 	public static class Kills {
