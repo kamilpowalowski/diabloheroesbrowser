@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,13 +60,22 @@ public class SkillView extends RelativeLayout {
 	public void setSkillName(String text) {
 		skillName.setText(text);
 	}
-
-	public void setRune(Drawable drawble, String text) {
-		runeName.setCompoundDrawables(drawble, null, null, null);
+	
+	public void setRuneName(String text) {
 		runeName.setText(text);
+	}
+
+	public void setRuneImage(Drawable drawble) {
+		runeName.setCompoundDrawablesWithIntrinsicBounds(drawble, null, null, null);
 	}
 
 	public void setSkillImage(Drawable drawable) {
 		skillImage.setImageDrawable(drawable);
+	}
+	
+	@Override
+	public void setOnClickListener(OnClickListener l) {
+		Button btn = (Button) findViewById(R.id.skill_button);
+		btn.setOnClickListener(l);
 	}
 }

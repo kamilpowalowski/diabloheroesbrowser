@@ -3,6 +3,9 @@ package com.hydrasoftworks.diablo.model;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
+
+import android.util.Pair;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -29,6 +32,7 @@ public class Hero implements Comparable<Hero> {
 	private Stats stats;
 	private Kills kills;
 	private Death death;
+	private HashMap<String, List<Skill>> skills;
 
 	public URL createUrl(BattleTag tag) throws MalformedURLException {
 		return new URL(CareerProfile.createUrl(tag).toExternalForm() + HERO_PROFILE_URL + getId());
@@ -220,6 +224,13 @@ public class Hero implements Comparable<Hero> {
 	 */
 	public Stats getStats() {
 		return stats;
+	}
+
+	/**
+	 * @return the skills
+	 */
+	public HashMap<String, List<Skill>> getSkills() {
+		return skills;
 	}
 
 }

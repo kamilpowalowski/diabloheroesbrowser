@@ -6,7 +6,7 @@ import java.net.URL;
 import com.google.gson.annotations.SerializedName;
 
 public class Item {
-	private static final String image_link = "http://eu.media.blizzard.com/d3/icons/items/large/";
+	private static final String IMAGE_LINK = "http://eu.media.blizzard.com/d3/icons/items/large/";
 	private String name;
 	private String icon;
 	@SerializedName("displayColor")
@@ -16,7 +16,7 @@ public class Item {
 
 	public URL createImageLink(String heroClass, int gender)
 			throws MalformedURLException {
-		return new URL(Item.image_link + icon + "_"
+		return new URL(Item.IMAGE_LINK + icon + "_"
 				+ heroClass.replace("-", "") + "_"
 				+ (gender == 0 ? "male" : "female") + ".png");
 	}
