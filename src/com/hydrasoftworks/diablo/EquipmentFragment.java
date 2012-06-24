@@ -27,14 +27,13 @@ public class EquipmentFragment extends SherlockFragment {
 	private static final String TAG = EquipmentFragment.class.getSimpleName();
 	private Hero hero;
 	private View view;
-	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.equipment_fragment, container, false);
 		hero = CareerProfile.getActiveProfile().getActiveHero();
-		
+
 		new EquipmentLoad("shoulders", R.id.shoulders).execute();
 		new EquipmentLoad("head", R.id.head).execute();
 		new EquipmentLoad("torso", R.id.torso).execute();
@@ -91,7 +90,6 @@ public class EquipmentFragment extends SherlockFragment {
 		return view;
 	}
 
-
 	private int getBackground(String color) {
 		if (color.equals("white")) {
 			return R.drawable.item_white_shape;
@@ -103,6 +101,8 @@ public class EquipmentFragment extends SherlockFragment {
 			return R.drawable.item_blue_shape;
 		} else if (color.equals("green")) {
 			return R.drawable.item_green_shape;
+		} else if (color.equals("grey")) {
+			return R.drawable.item_grey_shape;
 		}
 		return 0;
 	}

@@ -1,7 +1,5 @@
 package com.hydrasoftworks.diablo;
 
-import java.util.ArrayList;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Bundle;
@@ -16,7 +14,7 @@ import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
 import com.hydrasoftworks.diablo.model.Hero.Stats;
 
-public class HeroGeneralFragment extends SherlockFragment {
+public class HeroStatisticFragment extends SherlockFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,7 +22,7 @@ public class HeroGeneralFragment extends SherlockFragment {
 		Hero hero = CareerProfile.getActiveProfile().getActiveHero();
 		Stats stats = hero.getStats();
 
-		View view = inflater.inflate(R.layout.hero_general_fragment, container,
+		View view = inflater.inflate(R.layout.hero_statistic_fragment, container,
 				false);
 		((TextView) view.findViewById(R.id.attributes_description))
 				.setText(Html

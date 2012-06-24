@@ -2,6 +2,8 @@ package com.hydrasoftworks.diablo;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,13 +31,15 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		TabsAdapter mTabsAdapter = new TabsAdapter(this, viewPager);
 		ActionBar bar = getSupportActionBar();
 
-		bar.setTitle(hero.getName());
+		bar.setTitle(hero.getName() + " (" + hero.getLevel() + " "
+				+ WordUtils.capitalize(hero.getHeroClass().replace("-", " "))
+				+ ")");
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setHomeButtonEnabled(true);
 		bar.setDisplayHomeAsUpEnabled(true);
 
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_general_tab),
-				HeroGeneralFragment.class, null);
+				HeroStatisticFragment.class, null);
 
 		if (!hero.isFallen()) {
 			mTabsAdapter.addTab(bar.newTab().setText(R.string.skills_tab),
