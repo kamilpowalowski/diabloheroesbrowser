@@ -7,5 +7,36 @@
         <item name="android:textSize">12dp</item>
     </style>
 
+    <style name="Theme.Diablo" parent="Theme.Sherlock">
+        <item name="actionBarStyle">@style/Widget.Diablo.ActionBar</item>
+        <item name="android:actionBarStyle">@style/Widget.Diablo.ActionBar</item>
+        <item name="actionBarTabStyle">@style/Widget.Diablo.ActionBar.TabBar</item>
+        <item name="android:actionBarTabStyle">@style/Widget.Diablo.ActionBar.TabBar</item>
+        <item name="actionBarTabTextStyle">@style/Widget.Diablo.ActionBar.TabText</item>
+        <item name="android:actionBarTabTextStyle">@style/Widget.Diablo.ActionBar.TabText</item>
+    </style>
+
+    <style name="Widget.Diablo.ActionBar" parent="Widget.Sherlock.ActionBar">
+        <item name="background">@drawable/bg_solid</item>
+        <item name="android:background">@drawable/bg_solid</item>
+        <item name="titleTextStyle">@style/TextAppearance.Diablo.Widget.ActionBar.Title</item>
+    </style>
+
+    <style name="Widget.Diablo.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">
+        <item name="background">@drawable/actionbar_tab_bg</item>
+        <item name="android:background">@drawable/actionbar_tab_bg</item>
+        <item name="android:paddingLeft">32dp</item>
+        <item name="android:paddingRight">32dp</item>
+    </style>
+
+    <style name="TextAppearance.Diablo.Widget.ActionBar.Title" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
+        <item name="textColor">@color/orange</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="Widget.Diablo.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
+        <item name="textColor">@color/ad_tab_orange</item>
+        <item name="android:textColor">@color/ad_tab_orange</item>
+    </style>
 
 </resources>

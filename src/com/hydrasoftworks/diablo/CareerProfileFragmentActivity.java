@@ -3,6 +3,7 @@ package com.hydrasoftworks.diablo;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -12,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 
@@ -48,7 +50,24 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 		bar.setTitle(profile.getBattleTag().getBattleTag());
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setSelectedNavigationItem(getIntent().getIntExtra(ACTIVE_TAB, 0));
+		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		bar.setHomeButtonEnabled(true);
+		bar.setDisplayHomeAsUpEnabled(true);
 
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			Intent intent = getIntent().setClass(this,
+					DiabloHeroesBrowserActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 	
 

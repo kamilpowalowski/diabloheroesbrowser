@@ -19,7 +19,7 @@
             android:name=".DiabloHeroesBrowserActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Sherlock" >
+            android:theme="@style/Theme.Diablo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,12 +29,12 @@
         <activity
             android:name=".CareerProfileFragmentActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Sherlock" >
+            android:theme="@style/Theme.Diablo" >
         </activity>
         <activity
             android:name=".HeroFragmentActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Sherlock" >
+            android:theme="@style/Theme.Diablo" >
         </activity>
         <activity
             android:name=".TooltipWebViewActivity"
