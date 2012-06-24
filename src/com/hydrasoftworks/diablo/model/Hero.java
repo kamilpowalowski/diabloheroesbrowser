@@ -35,9 +35,10 @@ public class Hero implements Comparable<Hero> {
 	private HashMap<String, List<Skill>> skills;
 
 	public URL createUrl(BattleTag tag) throws MalformedURLException {
-		return new URL(CareerProfile.createUrl(tag).toExternalForm() + HERO_PROFILE_URL + getId());
+		return new URL(CareerProfile.createUrl(tag).toExternalForm()
+				+ HERO_PROFILE_URL + getId());
 	}
-	
+
 	public static class Stats {
 		@SerializedName("damageIncrease")
 		private double damageIncrease;
@@ -62,90 +63,105 @@ public class Hero implements Comparable<Hero> {
 		@SerializedName("arcaneResist")
 		private int arcaneResist;
 		private double damage;
+
 		/**
 		 * @return the damageIncrease
 		 */
 		public double getDamageIncrease() {
 			return damageIncrease;
 		}
+
 		/**
 		 * @return the damageReduction
 		 */
 		public double getDamageReduction() {
 			return damageReduction;
 		}
+
 		/**
 		 * @return the critChance
 		 */
 		public double getCritChance() {
 			return critChance;
 		}
+
 		/**
 		 * @return the life
 		 */
 		public int getLife() {
 			return life;
 		}
+
 		/**
 		 * @return the strength
 		 */
 		public int getStrength() {
 			return strength;
 		}
+
 		/**
 		 * @return the dexterity
 		 */
 		public int getDexterity() {
 			return dexterity;
 		}
+
 		/**
 		 * @return the intelligence
 		 */
 		public int getIntelligence() {
 			return intelligence;
 		}
+
 		/**
 		 * @return the vitality
 		 */
 		public int getVitality() {
 			return vitality;
 		}
+
 		/**
 		 * @return the armor
 		 */
 		public int getArmor() {
 			return armor;
 		}
+
 		/**
 		 * @return the coldResist
 		 */
 		public int getColdResist() {
 			return coldResist;
 		}
+
 		/**
 		 * @return the fireResist
 		 */
 		public int getFireResist() {
 			return fireResist;
 		}
+
 		/**
 		 * @return the lightningResist
 		 */
 		public int getLightningResist() {
 			return lightningResist;
 		}
+
 		/**
 		 * @return the poisonResist
 		 */
 		public int getPoisonResist() {
 			return poisonResist;
 		}
+
 		/**
 		 * @return the arcaneResist
 		 */
 		public int getArcaneResist() {
 			return arcaneResist;
 		}
+
 		/**
 		 * @return the damage
 		 */
@@ -214,7 +230,7 @@ public class Hero implements Comparable<Hero> {
 	public int getId() {
 		return id + heroId;
 	}
-	
+
 	public Item getItem(String partOfBody) {
 		return items.get(partOfBody);
 	}
@@ -233,4 +249,14 @@ public class Hero implements Comparable<Hero> {
 		return skills;
 	}
 
+	/**
+	 * @return the death
+	 */
+	public Death getDeath() {
+		return death;
+	}
+
+	public boolean isFallen() {
+		return death != null;
+	}
 }

@@ -3,10 +3,13 @@ package com.hydrasoftworks.diablo;
 import java.util.Collections;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -23,10 +26,29 @@ public class FallenHeroesFragment extends SherlockFragment {
 		List<Hero> fallenHeroes = CareerProfile.getActiveProfile()
 				.getFallenHeroes();
 		Collections.sort(fallenHeroes, Collections.reverseOrder());
-		((ListView) view.findViewById(R.id.fallen_heroes_listview))
-				.setAdapter(new HeroesAdapter(getActivity(),
-						R.layout.heroes_row, fallenHeroes
-								.toArray(new Hero[fallenHeroes.size()])));
+		ListView listview = (ListView) view
+				.findViewById(R.id.fallen_heroes_listview);
+		listview.setAdapter(new HeroesAdapter(getActivity(),
+				R.layout.heroes_row, fallenHeroes.toArray(new Hero[fallenHeroes
+						.size()])));
+
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Hero hero = (Hero) parent.getAdapter().getItem(position);
+				CareerProfile.getActiveProfile().addToDownloadedHeroes(hero);
+				Intent intent = getActivity().getIntent().setClass(
+						getActivity(), HeroFragmentActivity.class);
+				intent.putExtra(Hero.HERO_ID, hero.getId());
+				intent.putExtra(CareerProfileFragmentActivity.ACTIVE_TAB,
+						getSherlockActivity().getSupportActionBar()
+								.getSelectedNavigationIndex());
+				startActivity(intent);
+
+			}
+		});
 		return view;
 	}
 

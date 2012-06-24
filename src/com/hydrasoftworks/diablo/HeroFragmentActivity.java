@@ -33,24 +33,25 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setHomeButtonEnabled(true);
 		bar.setDisplayHomeAsUpEnabled(true);
+
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_general_tab),
 				HeroGeneralFragment.class, null);
-		
-		mTabsAdapter.addTab(bar.newTab().setText(R.string.skills_tab),
-				SkillsFragment.class, null);
-		
-		
+
+		if (!hero.isFallen()) {
+			mTabsAdapter.addTab(bar.newTab().setText(R.string.skills_tab),
+					SkillsFragment.class, null);
+		}
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.equipment_tab),
 				EquipmentFragment.class, null);
 
-		mTabsAdapter.addTab(bar.newTab().setText(R.string.followers_tab),
-				FollowersFragment.class, null);
-
+		if (!hero.isFallen()) {
+			mTabsAdapter.addTab(bar.newTab().setText(R.string.followers_tab),
+					FollowersFragment.class, null);
+		}
 		viewPager.setAdapter(mTabsAdapter);
 		viewPager.setOffscreenPageLimit(3);
 
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
