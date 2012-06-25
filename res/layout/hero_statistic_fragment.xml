@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fadeScrollbars="false"
     android:paddingBottom="35dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -12,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,9 +46,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/ui_divider"
+            android:paddingTop="10dp"
             android:text="@string/defensive"
             android:textAllCaps="true"
-            android:paddingTop="10dp"
             android:textColor="@color/standard_text" />
 
         <LinearLayout
