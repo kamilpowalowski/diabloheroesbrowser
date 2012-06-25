@@ -14,6 +14,8 @@
         <item name="android:actionBarTabStyle">@style/Widget.Diablo.ActionBar.TabBar</item>
         <item name="actionBarTabTextStyle">@style/Widget.Diablo.ActionBar.TabText</item>
         <item name="android:actionBarTabTextStyle">@style/Widget.Diablo.ActionBar.TabText</item>
+        <item name="actionBarItemBackground">@drawable/ad_selectable_background</item>
+        <item name="android:actionBarItemBackground">@drawable/ad_selectable_background</item>
     </style>
 
     <style name="Widget.Diablo.ActionBar" parent="Widget.Sherlock.ActionBar">
