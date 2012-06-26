@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/follower_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/follower_templar" />
+
+        <ImageView
+            android:id="@+id/mainHand"
+            android:layout_width="40dp"
+            android:layout_height="80dp"
+            android:layout_alignRight="@+id/follower_image"
+            android:layout_alignTop="@+id/follower_image"
+            android:layout_marginRight="115dp"
+            android:layout_marginTop="6dp" />
+
+        <ImageView
+            android:id="@+id/special"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignTop="@+id/mainHand"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/mainHand" />
+
+        <ImageView
+            android:id="@+id/offHand"
+            android:layout_width="40dp"
+            android:layout_height="80dp"
+            android:layout_alignRight="@+id/follower_image"
+            android:layout_alignTop="@+id/mainHand"
+            android:layout_marginRight="9dp" />
+
+        <ImageView
+            android:id="@+id/neck"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignTop="@+id/special"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="2dp"
+            android:layout_toLeftOf="@+id/offHand" />
+
+        <ImageView
+            android:id="@+id/leftFinger"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@+id/special"
+            android:layout_marginRight="-12dp"
+            android:layout_marginTop="4dp"
+            android:layout_toLeftOf="@+id/neck" />
+
+        <ImageView
+            android:id="@+id/rightFinger"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/leftFinger"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/offHand" />
+    </RelativeLayout>
+
+</LinearLayout>

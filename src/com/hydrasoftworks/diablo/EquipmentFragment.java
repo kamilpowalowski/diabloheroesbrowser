@@ -90,7 +90,7 @@ public class EquipmentFragment extends SherlockFragment {
 		return view;
 	}
 
-	private int getBackground(String color) {
+	public static int getBackground(String color) {
 		if (color.equals("white")) {
 			return R.drawable.item_white_shape;
 		} else if (color.equals("yellow")) {
@@ -129,7 +129,6 @@ public class EquipmentFragment extends SherlockFragment {
 				return d;
 			} catch (Exception ex1) {
 				try {
-					item = hero.getItem(itemName);
 
 					InputStream is = item.createImageLink(hero.getHeroClass(),
 							(hero.getGender() + 1) % 2).openStream();

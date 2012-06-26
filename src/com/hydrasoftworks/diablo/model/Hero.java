@@ -33,6 +33,7 @@ public class Hero implements Comparable<Hero> {
 	private Kills kills;
 	private Death death;
 	private HashMap<String, List<Skill>> skills;
+	private HashMap<String, Follower> followers;
 
 	public URL createUrl(BattleTag tag) throws MalformedURLException {
 		return new URL(CareerProfile.createUrl(tag).toExternalForm()
@@ -245,8 +246,8 @@ public class Hero implements Comparable<Hero> {
 	/**
 	 * @return the skills
 	 */
-	public HashMap<String, List<Skill>> getSkills() {
-		return skills;
+	public List<Skill> getSkills(String typeOfSkills) {
+		return skills.get(typeOfSkills);
 	}
 
 	/**
@@ -258,5 +259,9 @@ public class Hero implements Comparable<Hero> {
 
 	public boolean isFallen() {
 		return death != null;
+	}
+	
+	public Follower getFollower(String name) {
+		return followers.get(name);
 	}
 }

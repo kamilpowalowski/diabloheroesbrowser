@@ -33,8 +33,8 @@ public class PassiveSkillView extends RelativeLayout {
 	}
 
 	private void init(Context context) {
-		String service = Context.LAYOUT_INFLATER_SERVICE;
-		LayoutInflater li = (LayoutInflater) context.getSystemService(service);
+		LayoutInflater li = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		li.inflate(R.layout.passive_skill_button, this, true);
 
 		skillName = (TextView) findViewById(R.id.skill_name);
@@ -48,7 +48,7 @@ public class PassiveSkillView extends RelativeLayout {
 	public void setSkillImage(Drawable drawable) {
 		skillImage.setImageDrawable(drawable);
 	}
-	
+
 	@Override
 	public void setOnClickListener(OnClickListener l) {
 		Button btn = (Button) findViewById(R.id.skill_button);

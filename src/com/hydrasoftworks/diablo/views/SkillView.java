@@ -21,7 +21,7 @@ public class SkillView extends RelativeLayout {
 		super(context);
 		init(context, null);
 	}
-	
+
 	public SkillView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context, attrs);
@@ -33,8 +33,8 @@ public class SkillView extends RelativeLayout {
 	}
 
 	private void init(Context context, AttributeSet attrs) {
-		String service = Context.LAYOUT_INFLATER_SERVICE;
-		LayoutInflater li = (LayoutInflater) context.getSystemService(service);
+		LayoutInflater li = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		li.inflate(R.layout.skill_button, this, true);
 
 		TypedArray typedArray = context.obtainStyledAttributes(attrs,
@@ -60,19 +60,20 @@ public class SkillView extends RelativeLayout {
 	public void setSkillName(String text) {
 		skillName.setText(text);
 	}
-	
+
 	public void setRuneName(String text) {
 		runeName.setText(text);
 	}
 
 	public void setRuneImage(Drawable drawble) {
-		runeName.setCompoundDrawablesWithIntrinsicBounds(drawble, null, null, null);
+		runeName.setCompoundDrawablesWithIntrinsicBounds(drawble, null, null,
+				null);
 	}
 
 	public void setSkillImage(Drawable drawable) {
 		skillImage.setImageDrawable(drawable);
 	}
-	
+
 	@Override
 	public void setOnClickListener(OnClickListener l) {
 		Button btn = (Button) findViewById(R.id.skill_button);

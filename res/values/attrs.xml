@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SkillViewStyleable">          
-        <attr name="positionIcon" format="integer"/>
-        <attr name="positionText" format="integer"/>
+
+    <declare-styleable name="SkillViewStyleable">
+        <attr name="positionIcon" format="integer" />
+        <attr name="positionText" format="integer" />
     </declare-styleable>
+    <declare-styleable name="FollowerInfoViewStyleable">
+        <attr name="followerBackground" format="integer" />
+    </declare-styleable>
+
 </resources>

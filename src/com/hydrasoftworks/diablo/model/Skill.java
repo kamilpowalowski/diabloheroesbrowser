@@ -21,6 +21,8 @@ public class Skill {
 	private String tooltipParams;
 	private String description;
 	private String flavor;
+	@SerializedName("simpleDescription")
+	private String simpleDescription;
 	
 	public URL createImageLink() throws MalformedURLException {
 		return new URL(IMAGE_LINK + icon + ".png");

@@ -43,7 +43,7 @@ public class SkillsFragment extends SherlockFragment {
 		View view = inflater
 				.inflate(R.layout.skills_fragment, container, false);
 		List<Skill> activeSkills = CareerProfile.getActiveProfile()
-				.getActiveHero().getSkills().get(Skill.ACTIVE_SKILL);
+				.getActiveHero().getSkills(Skill.ACTIVE_SKILL);
 
 		for (int i = 0; i < skillsViewsIds.length; i++) {
 			SkillView skillView = (SkillView) view
@@ -81,7 +81,7 @@ public class SkillsFragment extends SherlockFragment {
 		}
 
 		List<Skill> passiveSkills = CareerProfile.getActiveProfile()
-				.getActiveHero().getSkills().get(Skill.PASSIVE_SKILL);
+				.getActiveHero().getSkills(Skill.PASSIVE_SKILL);
 		for (int i = 0; i < passvieSkillsViewsIds.length; i++) {
 			PassiveSkillView skillView = (PassiveSkillView) view
 					.findViewById(passvieSkillsViewsIds[i]);

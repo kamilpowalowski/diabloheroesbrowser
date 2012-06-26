@@ -39,6 +39,8 @@
     <style name="Widget.Diablo.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
         <item name="textColor">@color/ad_tab_orange</item>
         <item name="android:textColor">@color/ad_tab_orange</item>
+        <item name="android:textSize">10dp</item>
+        <item name="textSize">10dp</item>
     </style>
 
 </resources>
