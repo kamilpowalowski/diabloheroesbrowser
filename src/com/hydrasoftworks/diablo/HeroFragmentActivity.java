@@ -38,6 +38,9 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		bar.setHomeButtonEnabled(true);
 		bar.setDisplayHomeAsUpEnabled(true);
 
+		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_progression_tab),
+				HeroProgressionFragment.class, null);
+		
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_general_tab),
 				HeroStatisticFragment.class, null);
 
@@ -53,7 +56,7 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 					FollowersFragment.class, null);
 		}
 		viewPager.setAdapter(mTabsAdapter);
-		viewPager.setOffscreenPageLimit(3);
+		viewPager.setOffscreenPageLimit(5);
 
 	}
 

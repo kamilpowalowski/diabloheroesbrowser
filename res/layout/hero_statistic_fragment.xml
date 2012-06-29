@@ -71,5 +71,7 @@
                 android:textColor="@color/standard_text" />
         </LinearLayout>
     </LinearLayout>
+    
+    
 
 </ScrollView>

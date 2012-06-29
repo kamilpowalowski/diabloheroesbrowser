@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="35dp"
+    android:paddingTop="35dp" >
+
+    <LinearLayout
+        android:id="@+id/fallen_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/fallen_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/tombstone"
+            android:gravity="center"
+            android:textColor="@color/standard_text" />
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/progression_seek_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="16"
+        android:maxHeight="40dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/seekbar"
+        android:thumb="@drawable/seek_thumb"
+        android:thumbOffset="10dp" />
+
+    <LinearLayout
+        android:id="@+id/progression_labels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="@string/progression_level_normal"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/progression_level_nightmare"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/progression_level_hell"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/progression_level_inferno"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/quest_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="30dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="30dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/last_finished_quest"
+            android:textColor="@color/standard_text" />
+
+        <TextView
+            android:id="@+id/last_quest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/orange" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp" >
+
+        <TextView
+            android:id="@+id/kills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/swords"
+            android:gravity="center_vertical"
+            android:textColor="@color/standard_text"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/elite_kills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/star"
+            android:gravity="center_vertical"
+            android:textColor="@color/standard_text" />
+    </LinearLayout>
+
+</LinearLayout>

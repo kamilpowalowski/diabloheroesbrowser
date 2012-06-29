@@ -3,6 +3,7 @@ package com.hydrasoftworks.diablo.model;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class CareerProfile {
 		}
 	}
 
-	public static class TimePlayed { //TODO: Showing plaing time
+	public static class TimePlayed { // TODO: Showing plaing time
 		private double barbarian;
 		private double demonHunter;
 		private double monk;
@@ -120,7 +121,9 @@ public class CareerProfile {
 				if (another.difficulty.equals(Progression.LEVELS[i]))
 					anotherValue += 10 * i;
 			}
-			return new Integer(thisValue).compareTo(new Integer(anotherValue));
+
+			return Integer.valueOf(thisValue).compareTo(
+					Integer.valueOf(anotherValue));
 		}
 	}
 
@@ -183,9 +186,21 @@ public class CareerProfile {
 		downloadedHeroes.put(fullHero.getId(), fullHero);
 
 	}
-	
+
 	public Hero getActiveHero() {
 		return activeHero;
+	}
+
+	public int getProgressValue() {
+		Collections.sort(getProgression(), Collections.reverseOrder());
+		Progression progression = getProgression().get(0);
+		int progressionValue = progression.getAct();
+		for (int i = 0; i < Progression.LEVELS.length; i++) {
+			if (progression.getDifficulty().equals(Progression.LEVELS[i])) {
+				progressionValue += i * Progression.LEVELS.length;
+			}
+		}
+		return progressionValue;
 	}
 
 }

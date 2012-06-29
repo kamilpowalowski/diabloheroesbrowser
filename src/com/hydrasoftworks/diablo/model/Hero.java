@@ -8,6 +8,8 @@ import java.util.List;
 import android.util.Pair;
 
 import com.google.gson.annotations.SerializedName;
+import com.hydrasoftworks.diablo.model.Act.Quest;
+import com.hydrasoftworks.diablo.model.CareerProfile.Progression;
 
 public class Hero implements Comparable<Hero> {
 	private static final String HERO_PROFILE_URL = "/hero/";
@@ -34,6 +36,7 @@ public class Hero implements Comparable<Hero> {
 	private Death death;
 	private HashMap<String, List<Skill>> skills;
 	private HashMap<String, Follower> followers;
+	private HashMap<String, HashMap<String, Act>> progress;
 
 	public URL createUrl(BattleTag tag) throws MalformedURLException {
 		return new URL(CareerProfile.createUrl(tag).toExternalForm()
@@ -174,12 +177,36 @@ public class Hero implements Comparable<Hero> {
 	public static class Kills {
 		private int monsters;
 		private int elites;
+		/**
+		 * @return the monsters
+		 */
+		public int getMonsters() {
+			return monsters;
+		}
+		/**
+		 * @return the elites
+		 */
+		public int getElites() {
+			return elites;
+		}
 	}
 
 	public static class Death {
 		private String location;
 		private String killer;
 		private int time;
+		/**
+		 * @return the location
+		 */
+		public String getLocation() {
+			return location;
+		}
+		/**
+		 * @return the killer
+		 */
+		public String getKiller() {
+			return killer;
+		}
 	}
 
 	/**
@@ -213,9 +240,10 @@ public class Hero implements Comparable<Hero> {
 	@Override
 	public int compareTo(Hero another) {
 		if (getLevel() != another.getLevel())
-			return new Integer(getLevel()).compareTo(new Integer(another
-					.getLevel()));
-		return new Integer(lastUpdated).compareTo(new Integer(lastUpdated));
+			return Integer.valueOf(getLevel()).compareTo(
+					Integer.valueOf(another.getLevel()));
+		return Integer.valueOf(getLastUpdated()).compareTo(
+				Integer.valueOf(another.getLastUpdated()));
 	}
 
 	/**
@@ -260,8 +288,56 @@ public class Hero implements Comparable<Hero> {
 	public boolean isFallen() {
 		return death != null;
 	}
-	
+
 	public Follower getFollower(String name) {
 		return followers.get(name);
+	}
+
+	public int getProgressValue() {
+		int value = 0;
+		for (int i = 0; i < Progression.LEVELS.length; i++) {
+			HashMap<String, Act> acts = progress.get(Progression.LEVELS[i]);
+			for (int j = 0; j < Act.ACTS.length; j++) {
+				if (acts.get(Act.ACTS[j]).isCompleted())
+					value++;
+				else
+					return value;
+			}
+		}
+		return value;
+	}
+
+	public Quest getLastFinishedQuest() {
+		Quest lastFinished = null;
+		for (int i = 0; i < Progression.LEVELS.length; i++) {
+			HashMap<String, Act> acts = progress.get(Progression.LEVELS[i]);
+			for (int j = 0; j < Act.ACTS.length; j++) {
+				Act act = acts.get(Act.ACTS[j]);
+				if (act.isCompleted())
+					continue;
+				List<Quest> quests = act.getQuests();
+				for (int k = 0; k < quests.size(); k++) {
+					if (quests.get(k).isCompleted())
+						lastFinished = quests.get(k);
+					else
+						return lastFinished;
+				}
+			}
+		}
+		return lastFinished;
+	}
+
+	/**
+	 * @return the kills
+	 */
+	public Kills getKills() {
+		return kills;
+	}
+
+	/**
+	 * @return the lastUpdated
+	 */
+	public int getLastUpdated() {
+		return lastUpdated;
 	}
 }

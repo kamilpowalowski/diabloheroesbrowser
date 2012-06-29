@@ -17,6 +17,7 @@
     <string name="equipment_tab">Equipment</string>
     <string name="followers_tab">Followers</string>
     <string name="hero_general_tab">Statistic</string>
+    <string name="hero_progression_tab">Progress</string>
     <string name="skills_tab">Skills</string>
     <string name="blacksmith">Blacksmith</string>
     <string name="jeweler">Jeweler</string>
@@ -38,5 +39,7 @@
     <string name="defensive">Defensive</string>
     <string name="defensive_description">        <![CDATA[Cold Reduction<br>Fire Reduction<br>Lightning Reduction<br>Poison Reduction<br>Arcane Reduction]]>
     </string>
+    <string name="last_finished_quest">Last finished quest</string>
+    <string name="fallen_info">Killed by %1$s\nin %2$s</string>
 
 </resources>

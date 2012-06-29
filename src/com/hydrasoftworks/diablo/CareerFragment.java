@@ -1,7 +1,5 @@
 package com.hydrasoftworks.diablo;
 
-import java.util.Collections;
-
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.hydrasoftworks.diablo.model.CareerProfile;
-import com.hydrasoftworks.diablo.model.CareerProfile.Progression;
 
 public class CareerFragment extends SherlockFragment {
 
@@ -23,17 +20,10 @@ public class CareerFragment extends SherlockFragment {
 				.inflate(R.layout.career_fragment, container, false);
 		CareerProfile profile = CareerProfile.getActiveProfile();
 
-		Collections.sort(profile.getProgression(), Collections.reverseOrder());
-		Progression progression = profile.getProgression().get(0);
-		int progressionValue = progression.getAct();
-		for (int i = 0; i < Progression.LEVELS.length; i++) {
-			if (progression.getDifficulty().equals(Progression.LEVELS[i])) {
-				progressionValue += i * Progression.LEVELS.length;
-			}
-		}
+
 		SeekBar progressBar = (SeekBar) view
 				.findViewById(R.id.progression_seek_normal);
-		progressBar.setProgress(progressionValue);
+		progressBar.setProgress(profile.getProgressValue());
 		progressBar.setEnabled(false);
 
 		((TextView) view.findViewById(R.id.kills)).setText(Html
