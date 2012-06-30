@@ -6,10 +6,12 @@ import java.net.URL;
 import com.google.gson.annotations.SerializedName;
 
 public class Skill {
+	private static final String SKILL_URL = CareerProfile.HOST
+			+ "d3/en/tooltip/";
 	private static final String IMAGE_LINK = "http://eu.media.blizzard.com/d3/icons/skills/64/";
 	public static final String ACTIVE_SKILL = "active";
 	public static final String PASSIVE_SKILL = "passive";
-	
+
 	@SerializedName("skill")
 	private SkillInfo skillInfo;
 	private Rune rune;
@@ -23,9 +25,19 @@ public class Skill {
 	private String flavor;
 	@SerializedName("simpleDescription")
 	private String simpleDescription;
-	
+
 	public URL createImageLink() throws MalformedURLException {
 		return new URL(IMAGE_LINK + icon + ".png");
+	}
+
+	public String createTooltipLink() {
+		if (getSkillInfo() != null) {
+			return SKILL_URL
+					+ getSkillInfo().tooltipParams
+					+ (getRune() != null ? "?runeType=" + getRune().getType()
+							: "");
+		} else
+			return SKILL_URL + tooltipParams;
 	}
 
 	/**

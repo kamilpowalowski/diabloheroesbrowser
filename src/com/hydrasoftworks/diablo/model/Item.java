@@ -6,6 +6,7 @@ import java.net.URL;
 import com.google.gson.annotations.SerializedName;
 
 public class Item {
+	private static final String ITEM_URL = CareerProfile.HOST + "d3/en/tooltip/";
 	private static final String IMAGE_LINK = "http://eu.media.blizzard.com/d3/icons/items/large/";
 	private String name;
 	private String icon;
@@ -19,6 +20,10 @@ public class Item {
 		return new URL(Item.IMAGE_LINK + icon + "_"
 				+ heroClass.replace("-", "") + "_"
 				+ (gender == 0 ? "male" : "female") + ".png");
+	}
+
+	public String createTooltipLink() {
+		return ITEM_URL + tooltipParams.replace("item-data/", "item/");
 	}
 
 	/**

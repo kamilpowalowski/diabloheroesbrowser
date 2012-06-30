@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.hydrasoftworks.diablo.model.CareerProfile;
+import com.hydrasoftworks.diablo.model.Hero;
 import com.hydrasoftworks.diablo.model.Skill;
 import com.hydrasoftworks.diablo.views.PassiveSkillView;
 import com.hydrasoftworks.diablo.views.SkillView;
@@ -48,7 +49,7 @@ public class SkillsFragment extends SherlockFragment {
 		for (int i = 0; i < skillsViewsIds.length; i++) {
 			SkillView skillView = (SkillView) view
 					.findViewById(skillsViewsIds[i]);
-			Skill skill = activeSkills.get(i);
+			final Skill skill = activeSkills.get(i);
 			if (skill != null) {
 				skillView.setSkillName(skill.getSkillInfo().getName());
 				if (skill.getRune() != null) {
@@ -65,7 +66,7 @@ public class SkillsFragment extends SherlockFragment {
 						Intent intent = new Intent(getActivity(),
 								TooltipWebViewActivity.class);
 						intent.putExtra(TooltipWebViewActivity.URL,
-								"http://wp.pl"); // TODO: Load proper link
+								skill.createTooltipLink());
 						startActivity(intent);
 
 					}
@@ -85,7 +86,7 @@ public class SkillsFragment extends SherlockFragment {
 		for (int i = 0; i < passvieSkillsViewsIds.length; i++) {
 			PassiveSkillView skillView = (PassiveSkillView) view
 					.findViewById(passvieSkillsViewsIds[i]);
-			Skill skill = passiveSkills.get(i);
+			final Skill skill = passiveSkills.get(i);
 			if (skill != null) {
 				skillView.setSkillName(skill.getName());
 
@@ -96,7 +97,7 @@ public class SkillsFragment extends SherlockFragment {
 						Intent intent = new Intent(getActivity(),
 								TooltipWebViewActivity.class);
 						intent.putExtra(TooltipWebViewActivity.URL,
-								"http://wp.pl"); // TODO: Load proper link
+								skill.createTooltipLink());
 						startActivity(intent);
 
 					}

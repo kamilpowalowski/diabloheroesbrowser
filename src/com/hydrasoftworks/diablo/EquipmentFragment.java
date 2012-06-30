@@ -159,7 +159,7 @@ public class EquipmentFragment extends SherlockFragment {
 						Intent intent = new Intent(getActivity(),
 								TooltipWebViewActivity.class);
 						intent.putExtra(TooltipWebViewActivity.URL,
-								"http://wp.pl"); // TODO: Load proper link
+								item.createTooltipLink());
 						startActivity(intent);
 
 					}

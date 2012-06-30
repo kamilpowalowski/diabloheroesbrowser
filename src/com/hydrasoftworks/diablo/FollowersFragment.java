@@ -94,7 +94,7 @@ public class FollowersFragment extends SherlockFragment {
 		firstLine.setOrientation(LinearLayout.HORIZONTAL);
 		layout.addView(secondLine);
 
-		for (Skill skill : follower.getSkills()) {
+		for (final Skill skill : follower.getSkills()) {
 			TextView tv = new TextView(getActivity());
 			tv.setText(skill.getName());
 			tv.setPadding(10, 5, 10, 5);
@@ -111,7 +111,7 @@ public class FollowersFragment extends SherlockFragment {
 					Intent intent = new Intent(getActivity(),
 							TooltipWebViewActivity.class);
 					intent.putExtra(TooltipWebViewActivity.URL,
-							"http://wp.pl"); // TODO: Load proper link
+							skill.createTooltipLink());
 					startActivity(intent);
 					
 				}
@@ -186,7 +186,7 @@ public class FollowersFragment extends SherlockFragment {
 						Intent intent = new Intent(getActivity(),
 								TooltipWebViewActivity.class);
 						intent.putExtra(TooltipWebViewActivity.URL,
-								"http://wp.pl"); // TODO: Load proper link
+								item.createTooltipLink());
 						startActivity(intent);
 
 					}

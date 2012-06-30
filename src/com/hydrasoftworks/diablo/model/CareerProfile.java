@@ -10,7 +10,8 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class CareerProfile {
-	private static final String CAREER_PROFILE_URL = "http://eu.battle.net/api/d3/account/";
+	public static final String HOST = "http://eu.battle.net/";
+	private static final String CAREER_PROFILE_URL = HOST + "api/d3/account/";
 	private static HashMap<String, CareerProfile> downloadedProfiles = new HashMap<String, CareerProfile>();
 	private static CareerProfile activeProfile;
 
