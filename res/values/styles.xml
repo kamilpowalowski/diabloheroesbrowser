@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="DiabloButton" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/btn_red_selector</item>
@@ -22,6 +22,7 @@
         <item name="background">@drawable/bg_solid</item>
         <item name="android:background">@drawable/bg_solid</item>
         <item name="titleTextStyle">@style/TextAppearance.Diablo.Widget.ActionBar.Title</item>
+        <item name="android:titleTextStyle">@style/TextAppearance.Diablo.Widget.ActionBar.Title</item>
     </style>
 
     <style name="Widget.Diablo.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">

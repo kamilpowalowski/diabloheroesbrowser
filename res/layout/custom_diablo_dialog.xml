@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:minWidth="300dp"
+    android:minWidth="250dp"
     android:padding="10dp">
 
     <TextView
@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:drawableLeft="@drawable/dialog_alert"
         android:paddingTop="10dp"
-        android:textColor="#FFF" />
+        android:textColor="#FFF"
+        android:gravity="center"/>
 
     <Button
         android:id="@+id/button"

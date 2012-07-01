@@ -98,6 +98,7 @@ public class TooltipWebViewActivity extends SherlockActivity {
 					+ "</style>" + "<body><div class=\"ui-tooltip\">" + result
 					+ "</div></body></html>";
 			webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
+			//webView.loadData(html, "text/html", "utf-8");
 		}
 
 	}

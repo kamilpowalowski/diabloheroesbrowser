@@ -1,5 +1,10 @@
 package com.hydrasoftworks.diablo;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,6 +14,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +30,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hydrasoftworks.diablo.DiabloHeroesBrowserActivity.DownloadDialogFragment;
 import com.hydrasoftworks.diablo.adapters.HeroesAdapter;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
@@ -56,6 +63,15 @@ public class HeroesFragment extends SherlockFragment {
 	}
 
 	class HeroDataDownload extends AsyncTask<Hero, Void, Hero> {
+		private DialogFragment dialog;
+
+		@Override
+		protected void onPreExecute() {
+			dialog = DiabloHeroesBrowserActivity.DownloadDialogFragment
+					.newInstance(R.string.downloading_data);
+			dialog.show(getActivity().getSupportFragmentManager(), "download");
+			super.onPreExecute();
+		}
 
 		@Override
 		protected Hero doInBackground(Hero... params) {
@@ -65,30 +81,32 @@ public class HeroesFragment extends SherlockFragment {
 				return profil.getDownloadedHero(hero.getId());
 			}
 
-			// StringBuilder sb = new StringBuilder();
-			// try {
-			// URL url = hero.createUrl(profil.getBattleTag());
-			// BufferedReader in = new BufferedReader(new InputStreamReader(
-			// url.openStream()));
-			// String inputLine;
-			//
-			// while ((inputLine = in.readLine()) != null)
-			// sb.append(inputLine);
-			//
-			// in.close();
-			// } catch (MalformedURLException e) {
-			// Log.e(TAG, e.getMessage());
-			// InfoDialogFragment.newInstance(R.string.wrong_url).show(
-			// getActivity().getSupportFragmentManager(),
-			// "dialogWrongUrl");
-			// return null;
-			// } catch (IOException e) {
-			// Log.e(TAG, e.getMessage());
-			// InfoDialogFragment.newInstance(R.string.no_hero).show(
-			// getActivity().getSupportFragmentManager(),
-			// "dialogNoHero");
-			// return null;
-			// }
+			StringBuilder sb = new StringBuilder();
+			try {
+				URL url = hero.createUrl(profil.getBattleTag());
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						url.openStream()));
+				String inputLine;
+
+				while ((inputLine = in.readLine()) != null)
+					sb.append(inputLine);
+
+				in.close();
+			} catch (MalformedURLException e) {
+				Log.e(TAG, e.getMessage());
+				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
+						R.string.wrong_url).show(
+						getActivity().getSupportFragmentManager(),
+						"dialogWrongUrl");
+				return null;
+			} catch (IOException e) {
+				Log.e(TAG, e.getMessage());
+				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
+						R.string.no_hero).show(
+						getActivity().getSupportFragmentManager(),
+						"dialogNoHero");
+				return null;
+			}
 			// String result = sb.toString();
 
 			String result = DiabloHeroesBrowserActivity
@@ -105,6 +123,7 @@ public class HeroesFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Hero result) {
 			super.onPostExecute(result);
+			dialog.dismiss();
 			if (result != null) {
 				Intent intent = getActivity().getIntent().setClass(
 						getActivity(), HeroFragmentActivity.class);
@@ -116,41 +135,6 @@ public class HeroesFragment extends SherlockFragment {
 			}
 		}
 
-	}
-
-	public static class InfoDialogFragment extends DialogFragment {
-
-		public static InfoDialogFragment newInstance(int title) {
-			InfoDialogFragment frag = new InfoDialogFragment();
-			Bundle args = new Bundle();
-			args.putInt("title", title);
-			frag.setArguments(args);
-			return frag;
-		}
-
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			int title = getArguments().getInt("title");
-
-			Context mContext = getActivity();
-			final Dialog dialog = new Dialog(mContext);
-			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialog.setContentView(R.layout.custom_diablo_dialog);
-
-			((TextView) dialog.findViewById(R.id.text)).setText(title);
-			Button button = (Button) dialog.findViewById(R.id.button);
-			button.setText(R.string.alert_dialog_ok);
-			button.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					dialog.dismiss();
-
-				}
-			});
-
-			return dialog;
-		}
 	}
 
 }

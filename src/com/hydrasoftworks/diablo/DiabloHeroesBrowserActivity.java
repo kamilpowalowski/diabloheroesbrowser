@@ -114,6 +114,8 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 	class CareerProfileDataDownload extends
 			AsyncTask<BattleTag, Integer, CareerProfile> {
 
+		private DialogFragment dialog;
+		
 		@Override
 		protected void onPreExecute() {
 			List<BattleTag> tags = dataSource.getAllBattleTag();
@@ -122,6 +124,9 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 					getApplicationContext(),
 					R.layout.battletag_one_result_details_row, elements);
 			listView.setAdapter(adapter);
+			dialog = DownloadDialogFragment
+					.newInstance(R.string.downloading_data);
+			dialog.show(getSupportFragmentManager(), "download");
 			super.onPreExecute();
 		}
 
@@ -132,29 +137,29 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 				return CareerProfile.getDownloadedProfile(tag.getBattleTag());
 			}
 
-//			StringBuilder sb = new StringBuilder();
-//			try {
-//				URL url = CareerProfile.createUrl(tag);
-//				BufferedReader in = new BufferedReader(new InputStreamReader(
-//						url.openStream()));
-//				String inputLine;
-//
-//				while ((inputLine = in.readLine()) != null)
-//					sb.append(inputLine);
-//
-//				in.close();
-//			} catch (MalformedURLException e) {
-//				Log.e(TAG, e.getMessage());
-//				InfoDialogFragment.newInstance(R.string.wrong_url).show(
-//						getSupportFragmentManager(), "dialogWrongUrl");
-//				return null;
-//			} catch (IOException e) {
-//				Log.e(TAG, e.getMessage());
-//				InfoDialogFragment.newInstance(R.string.no_career_profile)
-//						.show(getSupportFragmentManager(), "dialogNoProfile");
-//				return null;
-//			}
-//			String result = sb.toString();
+			// StringBuilder sb = new StringBuilder();
+			// try {
+			// URL url = CareerProfile.createUrl(tag);
+			// BufferedReader in = new BufferedReader(new InputStreamReader(
+			// url.openStream()));
+			// String inputLine;
+			//
+			// while ((inputLine = in.readLine()) != null)
+			// sb.append(inputLine);
+			//
+			// in.close();
+			// } catch (MalformedURLException e) {
+			// Log.e(TAG, e.getMessage());
+			// InfoDialogFragment.newInstance(R.string.wrong_url).show(
+			// getSupportFragmentManager(), "dialogWrongUrl");
+			// return null;
+			// } catch (IOException e) {
+			// Log.e(TAG, e.getMessage());
+			// InfoDialogFragment.newInstance(R.string.no_career_profile)
+			// .show(getSupportFragmentManager(), "dialogNoProfile");
+			// return null;
+			// }
+			// String result = sb.toString();
 
 			String result = getTextFromInputStream(getResources()
 					.openRawResource(R.raw.career_profile_v2)); // TODO: remove
@@ -169,11 +174,13 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		@Override
 		protected void onPostExecute(CareerProfile result) {
 			super.onPostExecute(result);
+			dialog.dismiss();
 			if (result != null) {
 				Intent intent = new Intent(getApplicationContext(),
 						CareerProfileFragmentActivity.class);
 				intent.putExtra(BattleTag.BATTLETAG, result.getBattleTag()
 						.getBattleTag());
+				
 				startActivity(intent);
 			}
 		}
@@ -286,6 +293,30 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 				}
 			});
 
+			return dialog;
+		}
+	}
+
+	public static class DownloadDialogFragment extends DialogFragment {
+
+		public static DownloadDialogFragment newInstance(int title) {
+			DownloadDialogFragment frag = new DownloadDialogFragment();
+			Bundle args = new Bundle();
+			args.putInt("title", title);
+			frag.setArguments(args);
+			return frag;
+		}
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			int title = getArguments().getInt("title");
+
+			Context mContext = getActivity();
+			final Dialog dialog = new Dialog(mContext);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialog.setContentView(R.layout.download_dialog);
+
+			((TextView) dialog.findViewById(R.id.text)).setText(title);
 			return dialog;
 		}
 	}
