@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/textview_selector">
 
     <TextView
         android:id="@+id/battletag_text"
@@ -19,6 +19,7 @@
         android:id="@+id/delete_entry_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_delete_selector"/>
+        android:background="@drawable/btn_delete_selector"
+        android:focusable="false"/>
 
 </RelativeLayout>

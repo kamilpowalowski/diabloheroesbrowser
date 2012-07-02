@@ -22,6 +22,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -32,8 +34,10 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hydrasoftworks.diablo.HeroesFragment.HeroDataDownload;
 import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
+import com.hydrasoftworks.diablo.model.Hero;
 
 public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 	private static final String TAG = DiabloHeroesBrowserActivity.class
@@ -60,6 +64,17 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		final BattleTagAdapter adapter = new BattleTagAdapter(this,
 				R.layout.battletag_one_result_details_row, elements);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				BattleTag tag = (BattleTag) parent.getAdapter().getItem(position);
+				downloadBattleTagData(tag);
+
+			}
+		
+		});
 
 		((Button) findViewById(R.id.battletag_find_button))
 				.setOnClickListener(new OnClickListener() {
@@ -212,14 +227,6 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			textView.setText(bt.getBattleTag());
 			Button deleteButton = (Button) row
 					.findViewById(R.id.delete_entry_button);
-			textView.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					downloadBattleTagData(bt);
-
-				}
-			});
 
 			deleteButton.setOnClickListener(new Button.OnClickListener() {
 				@Override

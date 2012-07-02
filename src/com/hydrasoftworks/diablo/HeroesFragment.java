@@ -1,36 +1,23 @@
 package com.hydrasoftworks.diablo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hydrasoftworks.diablo.DiabloHeroesBrowserActivity.DownloadDialogFragment;
 import com.hydrasoftworks.diablo.adapters.HeroesAdapter;
 import com.hydrasoftworks.diablo.model.CareerProfile;
 import com.hydrasoftworks.diablo.model.Hero;
@@ -81,32 +68,32 @@ public class HeroesFragment extends SherlockFragment {
 				return profil.getDownloadedHero(hero.getId());
 			}
 
-			StringBuilder sb = new StringBuilder();
-			try {
-				URL url = hero.createUrl(profil.getBattleTag());
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						url.openStream()));
-				String inputLine;
-
-				while ((inputLine = in.readLine()) != null)
-					sb.append(inputLine);
-
-				in.close();
-			} catch (MalformedURLException e) {
-				Log.e(TAG, e.getMessage());
-				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
-						R.string.wrong_url).show(
-						getActivity().getSupportFragmentManager(),
-						"dialogWrongUrl");
-				return null;
-			} catch (IOException e) {
-				Log.e(TAG, e.getMessage());
-				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
-						R.string.no_hero).show(
-						getActivity().getSupportFragmentManager(),
-						"dialogNoHero");
-				return null;
-			}
+//			StringBuilder sb = new StringBuilder();
+//			try {
+//				URL url = hero.createUrl(profil.getBattleTag());
+//				BufferedReader in = new BufferedReader(new InputStreamReader(
+//						url.openStream()));
+//				String inputLine;
+//
+//				while ((inputLine = in.readLine()) != null)
+//					sb.append(inputLine);
+//
+//				in.close();
+//			} catch (MalformedURLException e) {
+//				Log.e(TAG, e.getMessage());
+//				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
+//						R.string.wrong_url).show(
+//						getActivity().getSupportFragmentManager(),
+//						"dialogWrongUrl");
+//				return null;
+//			} catch (IOException e) {
+//				Log.e(TAG, e.getMessage());
+//				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
+//						R.string.no_hero).show(
+//						getActivity().getSupportFragmentManager(),
+//						"dialogNoHero");
+//				return null;
+//			}
 			// String result = sb.toString();
 
 			String result = DiabloHeroesBrowserActivity
