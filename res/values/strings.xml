@@ -42,6 +42,6 @@
     <string name="last_finished_quest">Last finished quest</string>
     <string name="fallen_info">Killed by %1$s\nin %2$s</string>
     <string name="tooltip_download_error">Couldn\'t download info.</string>
-    <string name="downloading_data">Downloadaing data</string>
+    <string name="downloading_data">Downloading data&#8230;</string>
 
 </resources>
