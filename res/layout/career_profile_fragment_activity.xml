@@ -1,31 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/background_battletags"
+    android:orientation="vertical">
 
-    <com.google.ads.AdView
-        android:id="@+id/adView"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="a14ff429cd38408"
-        ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, 32AB81B13E88A7678E1CE06402A1F70B" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/adView"
-        android:background="@drawable/background_battletags"
-        android:orientation="vertical" >
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

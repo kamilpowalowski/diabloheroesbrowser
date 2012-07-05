@@ -1,71 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_battletags"
+    android:orientation="vertical"
+    android:paddingTop="35dp" >
 
-    <com.google.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="a14ff429cd38408"
-        ads:loadAdOnCreate="true"
-        ads:testDevices="TEST_EMULATOR, 32AB81B13E88A7678E1CE06402A1F70B" />
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 
     <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <AutoCompleteTextView
+        android:id="@+id/battletag_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_red"
+        android:ems="10"
+        android:hint="@string/battletag_textview_text"
+        android:nextFocusLeft="@id/battletag_textview"
+        android:nextFocusUp="@id/battletag_textview"
+        android:paddingBottom="5dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:singleLine="true"
+        android:textColor="@color/diablo_orange"
+        android:textColorHint="@color/diablo_orange_dark" />
+
+    <Button
+        android:id="@+id/battletag_find_button"
+        style="@style/DiabloButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:text="@string/battletag_find_button_text"/>
+
+    <ListView
+        android:id="@+id/battletags_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/adView"
-        android:background="@drawable/background_battletags"
-        android:orientation="vertical"
-        android:paddingTop="35dp" >
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/listview_background"
+        android:cacheColorHint="#00000000"
+        android:descendantFocusability="blocksDescendants" >
 
-        <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+        <requestFocus />
+    </ListView>
 
-        <LinearLayout
-            android:layout_width="0px"
-            android:layout_height="0px"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
-
-        <AutoCompleteTextView
-            android:id="@+id/battletag_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/textview_red"
-            android:ems="10"
-            android:hint="@string/battletag_textview_text"
-            android:nextFocusLeft="@id/battletag_textview"
-            android:nextFocusUp="@id/battletag_textview"
-            android:paddingBottom="5dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:singleLine="true"
-            android:textColor="@color/diablo_orange"
-            android:textColorHint="@color/diablo_orange_dark" />
-
-        <Button
-            android:id="@+id/battletag_find_button"
-            style="@style/DiabloButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:text="@string/battletag_find_button_text" />
-
-        <ListView
-            android:id="@+id/battletags_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/listview_background"
-            android:cacheColorHint="#00000000"
-            android:descendantFocusability="blocksDescendants" >
-
-            <requestFocus />
-        </ListView>
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
