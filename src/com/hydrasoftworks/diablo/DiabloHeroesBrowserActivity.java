@@ -12,6 +12,7 @@ import java.util.List;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -34,15 +35,15 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hydrasoftworks.diablo.HeroesFragment.HeroDataDownload;
 import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
-import com.hydrasoftworks.diablo.model.Hero;
 
 public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 	private static final String TAG = DiabloHeroesBrowserActivity.class
 			.getSimpleName();
 
+	private static final String PREFS_NAME = "DiabloBrowserPreferences";
+	private static final String NUMBER_OF_USES = "number_of_uses";
 	private BattleTagsDataSource dataSource;
 	private ListView listView;
 
@@ -95,6 +96,15 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 					}
 				});
+		
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		int numberOfUses = settings.getInt(NUMBER_OF_USES, 0) + 1;
+		if(numberOfUses == 3) {
+			//TODO
+		}
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(NUMBER_OF_USES, numberOfUses);
+		editor.commit();
 	}
 
 	@Override
