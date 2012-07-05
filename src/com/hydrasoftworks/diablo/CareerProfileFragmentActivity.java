@@ -47,7 +47,7 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 		viewPager.setAdapter(mTabsAdapter);
 		viewPager.setOffscreenPageLimit(4);
 
-		bar.setTitle(profile.getBattleTag().getBattleTag());
+		bar.setTitle(profile.getBattleTag().getBattleTagText());
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setSelectedNavigationItem(getIntent().getIntExtra(ACTIVE_TAB, 0));
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

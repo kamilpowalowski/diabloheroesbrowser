@@ -20,8 +20,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE " + BattleTag.TABLE_NAME + " (" +
 				BattleTag.BATTLETAG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "	+
-				BattleTag.BATTLETAG  + " TEXT UNIQUE NOT NULL, " +
-				BattleTag.VALUE + " INT);");
+				BattleTag.BATTLETAG  + " TEXT NOT NULL, " +
+				BattleTag.VALUE + " INT, " +
+				BattleTag.SERVER + " TEXT NOT NULL);");
 
 	}
 

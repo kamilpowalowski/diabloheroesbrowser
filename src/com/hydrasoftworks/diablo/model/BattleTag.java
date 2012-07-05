@@ -4,25 +4,27 @@ public class BattleTag implements Comparable<BattleTag> {
 	public static final String TABLE_NAME = "battletags";
 	public static final String BATTLETAG = "battletag";
 	public static final String VALUE = "value";
+	public static final String SERVER = "server";
 	public static final String BATTLETAG_ID = "_id";
 
 	private long id;
-	private String battleTag;
+	private String battleTagText;
 	private int value;
+	private String server;
 
 	/**
-	 * @return the battleTag
+	 * @return the battleTagText
 	 */
-	public String getBattleTag() {
-		return battleTag;
+	public String getBattleTagText() {
+		return battleTagText;
 	}
 
 	/**
-	 * @param battleTag
-	 *            the battleTag to set
+	 * @param battleTagText
+	 *            the battleTagText to set
 	 */
-	public void setBattleTag(String battleTag) {
-		this.battleTag = battleTag;
+	public void setBattleTagText(String battleTag) {
+		this.battleTagText = battleTag;
 	}
 
 	/**
@@ -42,7 +44,7 @@ public class BattleTag implements Comparable<BattleTag> {
 
 	@Override
 	public String toString() {
-		return getBattleTag();
+		return getBattleTagText();
 	}
 
 	/**
@@ -62,7 +64,22 @@ public class BattleTag implements Comparable<BattleTag> {
 
 	@Override
 	public int compareTo(BattleTag another) {
-		return new Integer(getValue())
-				.compareTo(new Integer(another.getValue()));
+		return Integer.valueOf(getValue()).compareTo(
+				Integer.valueOf(another.getValue()));
+	}
+
+	/**
+	 * @return the server
+	 */
+	public String getServer() {
+		return server;
+	}
+
+	/**
+	 * @param server
+	 *            the server to set
+	 */
+	public void setServer(String server) {
+		this.server = server;
 	}
 }

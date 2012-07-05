@@ -17,7 +17,7 @@ public class BattleTagsDataSource {
 	private DatabaseHelper dbHelper;
 
 	private String[] allColumns = { BattleTag.BATTLETAG_ID,
-			BattleTag.BATTLETAG, BattleTag.VALUE };
+			BattleTag.BATTLETAG, BattleTag.VALUE, BattleTag.SERVER };
 
 	public BattleTagsDataSource(Context context) {
 		dbHelper = new DatabaseHelper(context);
@@ -31,25 +31,25 @@ public class BattleTagsDataSource {
 		dbHelper.close();
 	}
 
-	public BattleTag createOrGetBattleTag(String text) {
-		BattleTag tag = findBattleTag(text);
+	public BattleTag createOrGetBattleTag(String text, String server) {
+		BattleTag tag = findBattleTag(text, server);
 		if (tag == null)
-			tag = createBattleTag(text);
+			tag = createBattleTag(text, server);
 		else
 			updateBattleTag(tag);
 		return tag;
 	}
 
-	private BattleTag createBattleTag(String text) {
+	private BattleTag createBattleTag(String text, String server) {
 
 		ContentValues values = new ContentValues();
 		values.put(BattleTag.BATTLETAG, text);
 		values.put(BattleTag.VALUE, 1);
-		long insertId = database.insert(BattleTag.TABLE_NAME, null,
-				values);
-		Cursor cursor = database.query(BattleTag.TABLE_NAME,
-				allColumns, BattleTag.BATTLETAG_ID + " = " + insertId, null,
-				null, null, null);
+		values.put(BattleTag.SERVER, server);
+		long insertId = database.insert(BattleTag.TABLE_NAME, null, values);
+		Cursor cursor = database.query(BattleTag.TABLE_NAME, allColumns,
+				BattleTag.BATTLETAG_ID + " = " + insertId, null, null, null,
+				null);
 		cursor.moveToFirst();
 		BattleTag tag = cursorToBattleTag(cursor);
 		cursor.close();
@@ -60,30 +60,32 @@ public class BattleTagsDataSource {
 	private void updateBattleTag(BattleTag tag) {
 		ContentValues values = new ContentValues();
 		values.put(BattleTag.BATTLETAG_ID, tag.getId());
-		values.put(BattleTag.BATTLETAG, tag.getBattleTag());
+		values.put(BattleTag.BATTLETAG, tag.getBattleTagText());
 		values.put(BattleTag.VALUE, tag.getValue() + 1);
-		database.update(BattleTag.TABLE_NAME, values,
-				BattleTag.BATTLETAG_ID + " = " + tag.getId(), null);
+		values.put(BattleTag.SERVER, tag.getServer());
+		database.update(BattleTag.TABLE_NAME, values, BattleTag.BATTLETAG_ID
+				+ " = " + tag.getId(), null);
 	}
 
 	private BattleTag cursorToBattleTag(Cursor cursor) {
 		BattleTag tag = new BattleTag();
 		tag.setId(cursor.getLong(0));
-		tag.setBattleTag(cursor.getString(1));
+		tag.setBattleTagText(cursor.getString(1));
 		tag.setValue(cursor.getInt(2));
+		tag.setServer(cursor.getString(3));
 		return tag;
 	}
 
 	public void deleteBattleTag(BattleTag tag) {
 		long id = tag.getId();
-		database.delete(BattleTag.TABLE_NAME, BattleTag.BATTLETAG_ID
-				+ " = " + id, null);
+		database.delete(BattleTag.TABLE_NAME, BattleTag.BATTLETAG_ID + " = "
+				+ id, null);
 	}
 
-	private BattleTag findBattleTag(String name) {
-		Cursor cursor = database.query(BattleTag.TABLE_NAME,
-				allColumns, BattleTag.BATTLETAG + " = '" + name + "'", null, null,
-				null, null);
+	private BattleTag findBattleTag(String name, String server) {
+		Cursor cursor = database.query(BattleTag.TABLE_NAME, allColumns,
+				BattleTag.BATTLETAG + " = '" + name + "' AND " + BattleTag.SERVER
+						+ " = '" + server + "'", null, null, null, null);
 		BattleTag tag = null;
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0)
@@ -95,8 +97,8 @@ public class BattleTagsDataSource {
 	public List<BattleTag> getAllBattleTag() {
 		List<BattleTag> tags = new ArrayList<BattleTag>();
 
-		Cursor cursor = database.query(BattleTag.TABLE_NAME,
-				allColumns, null, null, null, null, null);
+		Cursor cursor = database.query(BattleTag.TABLE_NAME, allColumns, null,
+				null, null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {

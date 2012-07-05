@@ -30,14 +30,27 @@
         android:textColor="@color/diablo_orange"
         android:textColorHint="@color/diablo_orange_dark" />
 
-    <Button
-        android:id="@+id/battletag_find_button"
-        style="@style/DiabloButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"
-        android:text="@string/battletag_find_button_text"/>
+        android:orientation="horizontal" >
+
+        <com.actionbarsherlock.internal.widget.IcsSpinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/battletag_find_button"
+            style="@style/DiabloButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:text="@string/battletag_find_button_text" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/battletags_listview"

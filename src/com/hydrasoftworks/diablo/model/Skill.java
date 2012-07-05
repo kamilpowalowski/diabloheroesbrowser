@@ -6,8 +6,7 @@ import java.net.URL;
 import com.google.gson.annotations.SerializedName;
 
 public class Skill {
-	private static final String SKILL_URL = CareerProfile.HOST
-			+ "d3/en/tooltip/";
+	private static final String SKILL_URL = "d3/en/tooltip/";
 	private static final String IMAGE_LINK = "http://eu.media.blizzard.com/d3/icons/skills/64/";
 	public static final String ACTIVE_SKILL = "active";
 	public static final String PASSIVE_SKILL = "passive";
@@ -32,12 +31,12 @@ public class Skill {
 
 	public String createTooltipLink() {
 		if (getSkillInfo() != null) {
-			return SKILL_URL
+			return CareerProfile.getActiveProfile().getHost() + SKILL_URL
 					+ getSkillInfo().tooltipParams
 					+ (getRune() != null ? "?runeType=" + getRune().getType()
 							: "");
 		} else
-			return SKILL_URL + tooltipParams;
+			return CareerProfile.getActiveProfile().getHost() + SKILL_URL + tooltipParams;
 	}
 
 	/**

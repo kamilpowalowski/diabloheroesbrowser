@@ -16,6 +16,12 @@
         <item name="android:actionBarTabTextStyle">@style/Widget.Diablo.ActionBar.TabText</item>
         <item name="actionBarItemBackground">@drawable/ad_selectable_background</item>
         <item name="android:actionBarItemBackground">@drawable/ad_selectable_background</item>
+        <item name="actionDropDownStyle">@style/Widget.Diablo.Spinner.DropDown.ActionBar</item>
+        <item name="android:actionDropDownStyle">@style/Widget.Diablo.Spinner.DropDown.ActionBar</item>
+        <item name="spinnerDropDownItemStyle">@style/Widget.Diablo.DropDownItem.Spinner</item>
+        <item name="android:spinnerDropDownItemStyle">@style/Widget.Diablo.DropDownItem.Spinner</item>
+        <item name="spinnerItemStyle">@style/Widget.Diablo.TextView.SpinnerItem</item>
+        <item name="android:spinnerItemStyle">@style/Widget.Diablo.TextView.SpinnerItem</item>
     </style>
 
     <style name="Widget.Diablo.ActionBar" parent="Widget.Sherlock.ActionBar">
@@ -43,5 +49,28 @@
         <item name="android:textSize">10dp</item>
         <item name="textSize">10dp</item>
     </style>
+    
+    <style name="Widget.Diablo.DropDownItem.Spinner" parent="Widget.Sherlock.DropDownItem.Spinner">
+        <item name="android:textAppearance">@style/TextAppearance.Diablo.Widget.DropDownItem</item>
+    </style>
 
+    <style name="TextAppearance.Diablo.Widget.DropDownItem" parent="TextAppearance.Sherlock.Widget.DropDownItem">
+        <item name="textColor">@color/diablo_orange</item>
+        <item name="android:textColor">@color/diablo_orange</item>
+    </style>
+    
+    <style name="Widget.Diablo.TextView.SpinnerItem" parent="Widget.Sherlock.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/TextAppearance.Diablo.Widget.TextView.SpinnerItem</item>
+    </style>
+    
+    <style name="TextAppearance.Diablo.Widget.TextView.SpinnerItem" parent="TextAppearance.Sherlock.Widget.TextView.SpinnerItem">
+        <item name="textColor">@color/diablo_orange</item>
+        <item name="android:textColor">@color/diablo_orange</item>
+    </style>
+    
+    <style name="Widget.Diablo.Spinner.DropDown.ActionBar" parent="Widget.Sherlock.Spinner.DropDown.ActionBar">
+        <item name="android:dropDownSelector">@drawable/list_selector_holo_dark</item>
+        <item name="background">@drawable/spinner_holo_dark</item>
+        <item name="android:background">@drawable/spinner_holo_dark</item>
+    </style>
 </resources>

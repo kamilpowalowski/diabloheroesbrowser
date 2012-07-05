@@ -27,21 +27,28 @@
     <string name="progression_level_nightmare">Nightmare</string>
     <string name="progression_level_hell">Hell</string>
     <string name="progression_level_inferno">Inferno</string>
-    <string name="kills">        <![CDATA[<b>%d</b><br>Monsters kills]]>
-    </string>
-    <string name="elite_kills">        <![CDATA[<b>%d</b><br>Elite kills]]>
-    </string>
-    <string name="hardcore_kills">        <![CDATA[<b>%d</b><br>Hardcore<br>monsters kills]]>
-    </string>
+    <string name="kills"><![CDATA[<b>%d</b><br>Monsters kills]]></string>
+    <string name="elite_kills"><![CDATA[<b>%d</b><br>Elite kills]]></string>
+    <string name="hardcore_kills"><![CDATA[<b>%d</b><br>Hardcore<br>monsters kills]]></string>
     <string name="attributes">Attributes</string>
-    <string name="attributes_description">        <![CDATA[Strength<br>Dexterity<br>Intelligence<br>Vitality<br>Armor<br>Life<br>Hero Damage<br><br>Damage Increased<br>Damage Reduction<br>Critical Hit Chance]]>
-    </string>
+    <string name="attributes_description"><![CDATA[Strength<br>Dexterity<br>Intelligence<br>Vitality<br>Armor<br>Life<br>Hero Damage<br><br>Damage Increased<br>Damage Reduction<br>Critical Hit Chance]]></string>
     <string name="defensive">Defensive</string>
-    <string name="defensive_description">        <![CDATA[Cold Reduction<br>Fire Reduction<br>Lightning Reduction<br>Poison Reduction<br>Arcane Reduction]]>
-    </string>
+    <string name="defensive_description"><![CDATA[Cold Reduction<br>Fire Reduction<br>Lightning Reduction<br>Poison Reduction<br>Arcane Reduction]]></string>
     <string name="last_finished_quest">Last finished quest</string>
     <string name="fallen_info">Killed by %1$s\nin %2$s</string>
     <string name="tooltip_download_error">Couldn\'t download info.</string>
     <string name="downloading_data">Downloading data&#8230;</string>
+
+    <string-array name="servers_name">
+        <item>America</item>
+        <item>Europe</item>
+        <item>Asia</item>
+    </string-array>
+    
+        <string-array name="servers_code">
+        <item>us</item>
+        <item>eu</item>
+        <item>TODO</item>
+    </string-array>
 
 </resources>

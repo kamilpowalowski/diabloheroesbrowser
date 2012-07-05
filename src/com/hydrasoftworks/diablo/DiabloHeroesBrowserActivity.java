@@ -31,13 +31,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.internal.widget.IcsSpinner;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hydrasoftworks.diablo.HeroesFragment.HeroDataDownload;
 import com.hydrasoftworks.diablo.model.BattleTag;
 import com.hydrasoftworks.diablo.model.CareerProfile;
-import com.hydrasoftworks.diablo.model.Hero;
 
 public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 	private static final String TAG = DiabloHeroesBrowserActivity.class
@@ -69,12 +68,22 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				BattleTag tag = (BattleTag) parent.getAdapter().getItem(position);
+				BattleTag tag = (BattleTag) parent.getAdapter().getItem(
+						position);
 				downloadBattleTagData(tag);
 
 			}
-		
+
 		});
+
+		
+		final IcsSpinner spinner = (IcsSpinner) findViewById(R.id.spinner);
+		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
+				.createFromResource(this, R.array.servers_name,
+						R.layout.sherlock_spinner_item);
+		spinnerAdapter
+				.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+		spinner.setAdapter(spinnerAdapter);
 
 		((Button) findViewById(R.id.battletag_find_button))
 				.setOnClickListener(new OnClickListener() {
@@ -83,8 +92,11 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 					public void onClick(View v) {
 						String tagText = textView.getText().toString();
 						if (tagText.matches("[^ $&#!%\t]{3,12}#[0-9]{4}")) {
-							BattleTag tag = dataSource
-									.createOrGetBattleTag(tagText);
+							BattleTag tag = dataSource.createOrGetBattleTag(
+									tagText,
+									getResources().getStringArray(
+											R.array.servers_code)[spinner
+											.getSelectedItemPosition()]);
 							downloadBattleTagData(tag);
 						} else {
 							InfoDialogFragment.newInstance(
@@ -130,7 +142,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			AsyncTask<BattleTag, Integer, CareerProfile> {
 
 		private DialogFragment dialog;
-		
+
 		@Override
 		protected void onPreExecute() {
 			List<BattleTag> tags = dataSource.getAllBattleTag();
@@ -148,8 +160,9 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		@Override
 		protected CareerProfile doInBackground(BattleTag... params) {
 			BattleTag tag = params[0];
-			if (CareerProfile.hasDownloadedProfile(tag.getBattleTag())) {
-				return CareerProfile.getDownloadedProfile(tag.getBattleTag());
+			if (CareerProfile.hasDownloadedProfile(tag.getBattleTagText())) {
+				return CareerProfile.getDownloadedProfile(tag
+						.getBattleTagText());
 			}
 
 			// StringBuilder sb = new StringBuilder();
@@ -194,15 +207,15 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 				Intent intent = new Intent(getApplicationContext(),
 						CareerProfileFragmentActivity.class);
 				intent.putExtra(BattleTag.BATTLETAG, result.getBattleTag()
-						.getBattleTag());
-				
+						.getBattleTagText());
+
 				startActivity(intent);
 			}
 		}
 
 	}
 
-	class BattleTagAdapter extends ArrayAdapter<BattleTag> {
+	class BattleTagAdapter extends ArrayAdapter<BattleTag> { //TODO: Show region on list
 
 		public BattleTagAdapter(Context context, int textViewResourceId,
 				BattleTag[] objects) {
@@ -224,7 +237,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			final BattleTag bt = getItem(position);
 			TextView textView = (TextView) row
 					.findViewById(R.id.battletag_text);
-			textView.setText(bt.getBattleTag());
+			textView.setText(bt.getBattleTagText());
 			Button deleteButton = (Button) row
 					.findViewById(R.id.delete_entry_button);
 

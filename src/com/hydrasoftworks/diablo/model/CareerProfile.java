@@ -10,7 +10,7 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class CareerProfile {
-	public static final String HOST = "http://eu.battle.net/";
+	private static final String HOST = "http://{region}.battle.net/";
 	private static final String CAREER_PROFILE_URL = HOST + "api/d3/account/";
 	private static HashMap<String, CareerProfile> downloadedProfiles = new HashMap<String, CareerProfile>();
 	private static CareerProfile activeProfile;
@@ -28,9 +28,10 @@ public class CareerProfile {
 	private HashMap<Integer, Hero> downloadedHeroes = new HashMap<Integer, Hero>();
 	private Hero activeHero;
 
+	
 	public static URL createUrl(BattleTag tag) throws MalformedURLException {
 		return new URL(CAREER_PROFILE_URL
-				+ tag.getBattleTag().replace("#", "-"));
+				+ tag.getBattleTagText().replace("#", "-"));
 	}
 
 	public static CareerProfile getDownloadedProfile(String tag) {
@@ -45,10 +46,14 @@ public class CareerProfile {
 	public static boolean hasDownloadedProfile(String tag) {
 		return CareerProfile.downloadedProfiles.containsKey(tag);
 	}
+	
+	public String getHost() {
+		return HOST.replace("{region}", battleTag.getServer());
+	}
 
 	public void addToDownloadedProfiles(BattleTag battleTag) {
 		this.battleTag = battleTag;
-		CareerProfile.downloadedProfiles.put(battleTag.getBattleTag(), this);
+		CareerProfile.downloadedProfiles.put(battleTag.getBattleTagText(), this);
 	}
 
 	public static class Kills {
