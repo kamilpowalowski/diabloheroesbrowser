@@ -114,7 +114,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		int numberOfUses = settings.getInt(NUMBER_OF_USES, 0) + 1;
 		if(numberOfUses == 3) {
-			//TODO
+			//TODO: Show info about app
 		}
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(NUMBER_OF_USES, numberOfUses);
