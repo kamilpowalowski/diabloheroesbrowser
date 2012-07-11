@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -102,7 +103,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 											.getSelectedItemPosition()]);
 							downloadBattleTagData(tag);
 						} else {
-							InfoDialogFragment.newInstance(
+							WarningDialogFragment.newInstance(
 									R.string.battletag_wrong).show(
 									getSupportFragmentManager(),
 									"dialogWrongBattleTag");
@@ -113,8 +114,9 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		int numberOfUses = settings.getInt(NUMBER_OF_USES, 0) + 1;
-		if (numberOfUses == 3) {
-			// TODO: Show info about app
+		if (numberOfUses == 2) {
+			InfoDialogFragment.newInstance(R.string.info)
+			.show(getSupportFragmentManager(), "dialogInfo");
 		}
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(NUMBER_OF_USES, numberOfUses);
@@ -135,7 +137,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 	private void downloadBattleTagData(BattleTag tag) {
 		if (!testConnection()) {
-			InfoDialogFragment.newInstance(R.string.internt_connection_error)
+			WarningDialogFragment.newInstance(R.string.internt_connection_error)
 					.show(getSupportFragmentManager(), "dialogNoInternet");
 		} else {
 			new CareerProfileDataDownload().execute(tag);
@@ -190,19 +192,19 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			// in.close();
 			// } catch (MalformedURLException e) {
 			// Log.e(TAG, e.getMessage());
-			// InfoDialogFragment.newInstance(R.string.wrong_url).show(
+			// WarningDialogFragment.newInstance(R.string.wrong_url).show(
 			// getSupportFragmentManager(), "dialogWrongUrl");
 			// return null;
 			// } catch (IOException e) {
 			// Log.e(TAG, e.getMessage());
-			// InfoDialogFragment.newInstance(R.string.no_career_profile)
+			// WarningDialogFragment.newInstance(R.string.no_career_profile)
 			// .show(getSupportFragmentManager(), "dialogNoProfile");
 			// return null;
 			// }
 			// String result = sb.toString();
 
 			String result = getTextFromInputStream(getResources()
-					.openRawResource(R.raw.career_profile_v2)); // TODO: remove
+					.openRawResource(R.raw.career_profile_v2)); // TODO: remove when ready
 
 			Gson gson = new GsonBuilder().setFieldNamingPolicy(
 					FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
@@ -296,10 +298,10 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		return writer.toString();
 	}
 
-	public static class InfoDialogFragment extends DialogFragment {
+	public static class WarningDialogFragment extends DialogFragment {
 
-		public static InfoDialogFragment newInstance(int title) {
-			InfoDialogFragment frag = new InfoDialogFragment();
+		public static WarningDialogFragment newInstance(int title) {
+			WarningDialogFragment frag = new WarningDialogFragment();
 			Bundle args = new Bundle();
 			args.putInt("title", title);
 			frag.setArguments(args);
@@ -313,7 +315,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			Context mContext = getActivity();
 			final Dialog dialog = new Dialog(mContext);
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialog.setContentView(R.layout.custom_diablo_dialog);
+			dialog.setContentView(R.layout.warning_dialog);
 
 			((TextView) dialog.findViewById(R.id.text)).setText(title);
 			Button button = (Button) dialog.findViewById(R.id.button);
@@ -351,6 +353,43 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			dialog.setContentView(R.layout.download_dialog);
 
 			((TextView) dialog.findViewById(R.id.text)).setText(title);
+			return dialog;
+		}
+	}
+	
+	public static class InfoDialogFragment extends DialogFragment {
+
+		public static InfoDialogFragment newInstance(int title) {
+			InfoDialogFragment frag = new InfoDialogFragment();
+			Bundle args = new Bundle();
+			args.putInt("title", title);
+			frag.setArguments(args);
+			return frag;
+		}
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			int title = getArguments().getInt("title");
+
+			Context mContext = getActivity();
+			final Dialog dialog = new Dialog(mContext);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialog.setContentView(R.layout.info_dialog);
+
+			TextView tv = (TextView) dialog.findViewById(R.id.text);
+			tv.setText(Html.fromHtml(getString(title)));
+			tv.setMovementMethod(LinkMovementMethod.getInstance());
+			Button button = (Button) dialog.findViewById(R.id.button);
+			button.setText(R.string.alert_dialog_ok);
+			button.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+
+				}
+			});
+
 			return dialog;
 		}
 	}

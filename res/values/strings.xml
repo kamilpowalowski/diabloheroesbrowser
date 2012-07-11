@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Diablo III Browser</string>
+    <string name="info"><![CDATA[Dear user.<br>This application is free and Open Source.<br><br>Everybody could help making this app better.<br>For more info visit <a href=\'https://github.com/EmilYo/diabloheroesbrowser/wiki\'>official site</a>.]]></string>
     <string name="battletag_textview_text">enter a BattleTag (tag#0000)</string>
     <string name="battletag_find_button_text">SHOW PLAYER</string>
     <string name="battletag_wrong">BattleTag is wrong</string>

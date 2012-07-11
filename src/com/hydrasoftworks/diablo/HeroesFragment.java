@@ -81,14 +81,14 @@ public class HeroesFragment extends SherlockFragment {
 //				in.close();
 //			} catch (MalformedURLException e) {
 //				Log.e(TAG, e.getMessage());
-//				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
+//				DiabloHeroesBrowserActivity.WarningDialogFragment.newInstance(
 //						R.string.wrong_url).show(
 //						getActivity().getSupportFragmentManager(),
 //						"dialogWrongUrl");
 //				return null;
 //			} catch (IOException e) {
 //				Log.e(TAG, e.getMessage());
-//				DiabloHeroesBrowserActivity.InfoDialogFragment.newInstance(
+//				DiabloHeroesBrowserActivity.WarningDialogFragment.newInstance(
 //						R.string.no_hero).show(
 //						getActivity().getSupportFragmentManager(),
 //						"dialogNoHero");
