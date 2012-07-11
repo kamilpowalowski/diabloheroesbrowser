@@ -18,6 +18,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,7 +80,6 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 		});
 
-		
 		final IcsSpinner spinner = (IcsSpinner) findViewById(R.id.spinner);
 		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
 				.createFromResource(this, R.array.servers_name,
@@ -110,11 +110,11 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 					}
 				});
-		
+
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		int numberOfUses = settings.getInt(NUMBER_OF_USES, 0) + 1;
-		if(numberOfUses == 3) {
-			//TODO: Show info about app
+		if (numberOfUses == 3) {
+			// TODO: Show info about app
 		}
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(NUMBER_OF_USES, numberOfUses);
@@ -227,7 +227,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 	}
 
-	class BattleTagAdapter extends ArrayAdapter<BattleTag> { //TODO: Show region on list
+	class BattleTagAdapter extends ArrayAdapter<BattleTag> {
 
 		public BattleTagAdapter(Context context, int textViewResourceId,
 				BattleTag[] objects) {
@@ -249,7 +249,9 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			final BattleTag bt = getItem(position);
 			TextView textView = (TextView) row
 					.findViewById(R.id.battletag_text);
-			textView.setText(bt.getBattleTagText());
+			textView.setText(Html.fromHtml(bt.getBattleTagText()
+					+ "&nbsp;<font color='#a79775'><small>(" + bt.getServer()
+					+ ")</small></font>"));
 			Button deleteButton = (Button) row
 					.findViewById(R.id.delete_entry_button);
 

@@ -48,7 +48,7 @@ public class CareerProfile {
 	}
 	
 	public String getHost() {
-		return HOST.replace("{region}", battleTag.getServer());
+		return HOST.replace("{region}", getBattleTag().getServer());
 	}
 
 	public void addToDownloadedProfiles(BattleTag battleTag) {

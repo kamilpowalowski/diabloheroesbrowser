@@ -40,7 +40,7 @@
     <string name="downloading_data">Downloading data&#8230;</string>
 
     <string-array name="servers_name">
-        <item>America</item>
+        <item>Americas</item>
         <item>Europe</item>
         <item>Asia</item>
     </string-array>
