@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hydrasoftworks.diablo"
     android:versionCode="1"
-    android:versionName="0.9" >
+    android:versionName="0.9.0" >
 
     <uses-sdk
         android:minSdkVersion="8"

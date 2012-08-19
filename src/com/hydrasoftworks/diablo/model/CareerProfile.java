@@ -2,8 +2,6 @@ package com.hydrasoftworks.diablo.model;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,12 +9,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class CareerProfile {
 	private static final String HOST = "http://{region}.battle.net/";
-	private static final String CAREER_PROFILE_URL = HOST + "api/d3/account/";
+	private static final String CAREER_PROFILE_URL = HOST + "api/d3/profile/";
 	private static HashMap<String, CareerProfile> downloadedProfiles = new HashMap<String, CareerProfile>();
 	private static CareerProfile activeProfile;
 
+	@SerializedName("battleTagObject")
 	private BattleTag battleTag;
 	private int lastHeroPlayed;
+	@SerializedName("last-updated")
 	private int lastUpdated;
 	private List<Artisan> artisans;
 	private List<Artisan> hardcoreArtisans;
@@ -24,18 +24,18 @@ public class CareerProfile {
 	private List<Hero> fallenHeroes;
 	private Kills kills;
 	private TimePlayed timePlayed;
-	private List<Progression> progression;
+	private HashMap<String, HashMap<String, Act>> progression;
 	private HashMap<Integer, Hero> downloadedHeroes = new HashMap<Integer, Hero>();
 	private Hero activeHero;
 
-	
 	public static URL createUrl(BattleTag tag) throws MalformedURLException {
-		return new URL(CAREER_PROFILE_URL
-				+ tag.getBattleTagText().replace("#", "-"));
+		return new URL(CAREER_PROFILE_URL.replace("{region}", tag.getServer())
+				+ tag.getBattleTagText().replace("#", "-") + "/");
 	}
 
-	public static CareerProfile getDownloadedProfile(String tag) {
-		CareerProfile.activeProfile = CareerProfile.downloadedProfiles.get(tag);
+	public static CareerProfile getDownloadedProfile(BattleTag battleTag) {
+		CareerProfile.activeProfile = CareerProfile.downloadedProfiles
+				.get(battleTag.getBattleTagText() + battleTag.getServer());
 		return CareerProfile.activeProfile;
 	}
 
@@ -43,17 +43,19 @@ public class CareerProfile {
 		return CareerProfile.activeProfile;
 	}
 
-	public static boolean hasDownloadedProfile(String tag) {
-		return CareerProfile.downloadedProfiles.containsKey(tag);
+	public static boolean hasDownloadedProfile(BattleTag battleTag) {
+		return CareerProfile.downloadedProfiles.containsKey(battleTag
+				.getBattleTagText() + battleTag.getServer());
 	}
-	
+
 	public String getHost() {
 		return HOST.replace("{region}", getBattleTag().getServer());
 	}
 
 	public void addToDownloadedProfiles(BattleTag battleTag) {
 		this.battleTag = battleTag;
-		CareerProfile.downloadedProfiles.put(battleTag.getBattleTagText(), this);
+		CareerProfile.downloadedProfiles.put(battleTag.getBattleTagText()
+				+ battleTag.getServer(), this);
 	}
 
 	public static class Kills {
@@ -92,56 +94,17 @@ public class CareerProfile {
 		private double wizard;
 	}
 
-	public static class Progression implements Comparable<Progression> {
+	public static class Progression {
 		public static final String[] LEVELS = { Progression.NORMAL,
 				Progression.NIGHTMARE, Progression.HELL, Progression.INFERNO };
 		public static final String NORMAL = "normal";
 		public static final String NIGHTMARE = "nightmare";
 		public static final String HELL = "hell";
 		public static final String INFERNO = "inferno";
-		private int act;
-		private String difficulty;
-
-		/**
-		 * @return the act
-		 */
-		public int getAct() {
-			return act;
-		}
-
-		/**
-		 * @return the difficulty
-		 */
-		public String getDifficulty() {
-			return difficulty;
-		}
-
-		@Override
-		public int compareTo(Progression another) {
-
-			int thisValue = act;
-			int anotherValue = another.act;
-			for (int i = 0; i < Progression.LEVELS.length; i++) {
-				if (difficulty.equals(Progression.LEVELS[i]))
-					thisValue += 10 * i;
-				if (another.difficulty.equals(Progression.LEVELS[i]))
-					anotherValue += 10 * i;
-			}
-
-			return Integer.valueOf(thisValue).compareTo(
-					Integer.valueOf(anotherValue));
-		}
 	}
 
 	public BattleTag getBattleTag() {
 		return battleTag;
-	}
-
-	/**
-	 * @return the progression
-	 */
-	public List<Progression> getProgression() {
-		return progression;
 	}
 
 	/**
@@ -198,15 +161,24 @@ public class CareerProfile {
 	}
 
 	public int getProgressValue() {
-		Collections.sort(getProgression(), Collections.reverseOrder());
-		Progression progression = getProgression().get(0);
-		int progressionValue = progression.getAct();
+		int value = 0;
 		for (int i = 0; i < Progression.LEVELS.length; i++) {
-			if (progression.getDifficulty().equals(Progression.LEVELS[i])) {
-				progressionValue += i * Progression.LEVELS.length;
+			HashMap<String, Act> acts = progression.get(Progression.LEVELS[i]);
+			for (int j = 0; j < Act.ACTS.length; j++) {
+				Act act = acts.get(Act.ACTS[j]);
+				if (act.isCompleted())
+					value++;
+				else
+					return value;
 			}
 		}
-		return progressionValue;
+		return value;
+	}
+
+	public static CareerProfile getDownloadedProfile(String tag, String region) {
+		CareerProfile.activeProfile = CareerProfile.downloadedProfiles
+				.get(tag + region);
+		return CareerProfile.activeProfile;
 	}
 
 }

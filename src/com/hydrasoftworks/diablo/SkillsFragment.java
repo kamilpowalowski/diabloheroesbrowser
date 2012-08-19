@@ -50,7 +50,7 @@ public class SkillsFragment extends SherlockFragment {
 			SkillView skillView = (SkillView) view
 					.findViewById(skillsViewsIds[i]);
 			final Skill skill = activeSkills.get(i);
-			if (skill != null) {
+			if (skill.getSkillInfo() != null) {
 				skillView.setSkillName(skill.getSkillInfo().getName());
 				if (skill.getRune() != null) {
 					skillView.setRuneImage(getResources().getDrawable(
@@ -87,8 +87,8 @@ public class SkillsFragment extends SherlockFragment {
 			PassiveSkillView skillView = (PassiveSkillView) view
 					.findViewById(passvieSkillsViewsIds[i]);
 			final Skill skill = passiveSkills.get(i);
-			if (skill != null) {
-				skillView.setSkillName(skill.getName());
+			if (skill.getSkillInfo() != null) {
+				skillView.setSkillName(skill.getSkillInfo().getName());
 
 				skillView.setOnClickListener(new OnClickListener() {
 
@@ -104,7 +104,7 @@ public class SkillsFragment extends SherlockFragment {
 				});
 
 				try {
-					new SkillImageLoad(skillView).execute(skill
+					new SkillImageLoad(skillView).execute(skill.getSkillInfo()
 							.createImageLink());
 				} catch (MalformedURLException e) {
 					Log.d(TAG, e.getMessage());

@@ -25,7 +25,8 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		CareerProfile profile = CareerProfile.getDownloadedProfile(getIntent()
-				.getExtras().getString(BattleTag.BATTLETAG));
+				.getExtras().getString(BattleTag.BATTLETAG), getIntent()
+				.getExtras().getString(BattleTag.SERVER));
 		setContentView(R.layout.career_profile_fragment_activity);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 

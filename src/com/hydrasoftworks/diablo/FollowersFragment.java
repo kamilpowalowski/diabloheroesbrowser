@@ -52,9 +52,9 @@ public class FollowersFragment extends SherlockFragment {
 				.execute();
 		new EquipmentLoad(follower, "leftFinger", fiv, R.id.leftFinger)
 				.execute();
-
-		creatSkillInfo(view, follower, R.id.templar_skills);
-
+		if (follower != null) {
+			creatSkillInfo(view, follower, R.id.templar_skills);
+		}
 		fiv = (FollowerInfoView) view.findViewById(R.id.scoundrel_view);
 		follower = hero.getFollower(Follower.SCOUNDREL);
 		new EquipmentLoad(follower, "neck", fiv, R.id.neck).execute();
@@ -65,9 +65,9 @@ public class FollowersFragment extends SherlockFragment {
 				.execute();
 		new EquipmentLoad(follower, "leftFinger", fiv, R.id.leftFinger)
 				.execute();
-
-		creatSkillInfo(view, follower, R.id.scoundrel_skills);
-		
+		if (follower != null) {
+			creatSkillInfo(view, follower, R.id.scoundrel_skills);
+		}
 		fiv = (FollowerInfoView) view.findViewById(R.id.enchantress_view);
 		follower = hero.getFollower(Follower.ENCHANTRESS);
 		new EquipmentLoad(follower, "neck", fiv, R.id.neck).execute();
@@ -79,14 +79,15 @@ public class FollowersFragment extends SherlockFragment {
 		new EquipmentLoad(follower, "leftFinger", fiv, R.id.leftFinger)
 				.execute();
 
-		creatSkillInfo(view, follower, R.id.enchantress_skills);
-		
+		if (follower != null) {
+			creatSkillInfo(view, follower, R.id.enchantress_skills);
+		}
+
 		return view;
 	}
-	
+
 	private void creatSkillInfo(View view, Follower follower, int layoutId) {
-		LinearLayout layout = (LinearLayout) view
-				.findViewById(layoutId);
+		LinearLayout layout = (LinearLayout) view.findViewById(layoutId);
 		LinearLayout firstLine = new LinearLayout(getActivity());
 		firstLine.setOrientation(LinearLayout.HORIZONTAL);
 		layout.addView(firstLine);
@@ -95,8 +96,11 @@ public class FollowersFragment extends SherlockFragment {
 		layout.addView(secondLine);
 
 		for (final Skill skill : follower.getSkills()) {
+			if(skill.getSkillInfo() == null) {
+				continue;
+			}
 			TextView tv = new TextView(getActivity());
-			tv.setText(skill.getName());
+			tv.setText(skill.getSkillInfo().getName());
 			tv.setPadding(10, 5, 10, 5);
 			tv.setGravity(Gravity.CENTER_VERTICAL);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -105,7 +109,7 @@ public class FollowersFragment extends SherlockFragment {
 			params.setMargins(5, 0, 0, 0);
 			tv.setLayoutParams(params);
 			tv.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(),
@@ -113,7 +117,7 @@ public class FollowersFragment extends SherlockFragment {
 					intent.putExtra(TooltipWebViewActivity.URL,
 							skill.createTooltipLink());
 					startActivity(intent);
-					
+
 				}
 			});
 			if (firstLine.getChildCount() < 2)
@@ -121,7 +125,8 @@ public class FollowersFragment extends SherlockFragment {
 			else
 				secondLine.addView(tv);
 			try {
-				new SkillImageLoad(tv).execute(skill.createImageLink());
+				new SkillImageLoad(tv).execute(skill.getSkillInfo()
+						.createImageLink());
 			} catch (MalformedURLException e) {
 				Log.d(TAG, "Can't found skill image");
 			}

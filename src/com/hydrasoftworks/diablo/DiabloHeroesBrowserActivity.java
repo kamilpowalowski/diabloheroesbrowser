@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import android.app.Dialog;
@@ -115,8 +117,8 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		int numberOfUses = settings.getInt(NUMBER_OF_USES, 0) + 1;
 		if (numberOfUses == 2) {
-			InfoDialogFragment.newInstance(R.string.info)
-			.show(getSupportFragmentManager(), "dialogInfo");
+			InfoDialogFragment.newInstance(R.string.info).show(
+					getSupportFragmentManager(), "dialogInfo");
 		}
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(NUMBER_OF_USES, numberOfUses);
@@ -137,8 +139,9 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 	private void downloadBattleTagData(BattleTag tag) {
 		if (!testConnection()) {
-			WarningDialogFragment.newInstance(R.string.internt_connection_error)
-					.show(getSupportFragmentManager(), "dialogNoInternet");
+			WarningDialogFragment
+					.newInstance(R.string.internt_connection_error).show(
+							getSupportFragmentManager(), "dialogNoInternet");
 		} else {
 			new CareerProfileDataDownload().execute(tag);
 		}
@@ -174,40 +177,40 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 		@Override
 		protected CareerProfile doInBackground(BattleTag... params) {
 			BattleTag tag = params[0];
-			if (CareerProfile.hasDownloadedProfile(tag.getBattleTagText())) {
-				return CareerProfile.getDownloadedProfile(tag
-						.getBattleTagText());
+			if (CareerProfile.hasDownloadedProfile(tag)) {
+				return CareerProfile.getDownloadedProfile(tag);
 			}
 
-			// StringBuilder sb = new StringBuilder();
-			// try {
-			// URL url = CareerProfile.createUrl(tag);
-			// BufferedReader in = new BufferedReader(new InputStreamReader(
-			// url.openStream()));
-			// String inputLine;
-			//
-			// while ((inputLine = in.readLine()) != null)
-			// sb.append(inputLine);
-			//
-			// in.close();
-			// } catch (MalformedURLException e) {
-			// Log.e(TAG, e.getMessage());
-			// WarningDialogFragment.newInstance(R.string.wrong_url).show(
-			// getSupportFragmentManager(), "dialogWrongUrl");
-			// return null;
-			// } catch (IOException e) {
-			// Log.e(TAG, e.getMessage());
-			// WarningDialogFragment.newInstance(R.string.no_career_profile)
-			// .show(getSupportFragmentManager(), "dialogNoProfile");
-			// return null;
-			// }
-			// String result = sb.toString();
+			StringBuilder sb = new StringBuilder();
+			try {
+				URL url = CareerProfile.createUrl(tag);
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						url.openStream()));
+				String inputLine;
 
-			String result = getTextFromInputStream(getResources()
-					.openRawResource(R.raw.career_profile_v2)); // TODO: remove when ready
+				while ((inputLine = in.readLine()) != null)
+					sb.append(inputLine);
+
+				in.close();
+			} catch (MalformedURLException e) {
+				Log.e(TAG, e.getMessage());
+				WarningDialogFragment.newInstance(R.string.wrong_url).show(
+						getSupportFragmentManager(), "dialogWrongUrl");
+				return null;
+			} catch (IOException e) {
+				Log.e(TAG, e.getMessage());
+				WarningDialogFragment.newInstance(R.string.no_career_profile)
+						.show(getSupportFragmentManager(), "dialogNoProfile");
+				return null;
+			}
+			String result = sb.toString();
+
+			// String result = getTextFromInputStream(getResources()
+			// .openRawResource(R.raw.career_profile_v2)); // TODO: remove when
+			// ready
 
 			Gson gson = new GsonBuilder().setFieldNamingPolicy(
-					FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
+					FieldNamingPolicy.IDENTITY).create();
 			CareerProfile profil = gson.fromJson(result, CareerProfile.class);
 			profil.addToDownloadedProfiles(tag);
 			return profil;
@@ -222,6 +225,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 						CareerProfileFragmentActivity.class);
 				intent.putExtra(BattleTag.BATTLETAG, result.getBattleTag()
 						.getBattleTagText());
+				intent.putExtra(BattleTag.SERVER, result.getBattleTag().getServer());
 
 				startActivity(intent);
 			}
@@ -356,7 +360,7 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			return dialog;
 		}
 	}
-	
+
 	public static class InfoDialogFragment extends DialogFragment {
 
 		public static InfoDialogFragment newInstance(int title) {

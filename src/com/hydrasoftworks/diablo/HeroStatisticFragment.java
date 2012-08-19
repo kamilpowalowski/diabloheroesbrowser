@@ -22,17 +22,26 @@ public class HeroStatisticFragment extends SherlockFragment {
 		Hero hero = CareerProfile.getActiveProfile().getActiveHero();
 		Stats stats = hero.getStats();
 
-		View view = inflater.inflate(R.layout.hero_statistic_fragment, container,
-				false);
+		View view = inflater.inflate(R.layout.hero_statistic_fragment,
+				container, false);
 		((TextView) view.findViewById(R.id.attributes_description))
 				.setText(Html
 						.fromHtml(getString(R.string.attributes_description)));
 
-		String[] attr = { "" + stats.getStrength(), "" + stats.getDexterity(),
-				"" + stats.getIntelligence(), "" + stats.getVitality(),
-				"" + stats.getArmor(), "" + stats.getLife(),
-				"" + stats.getDamage(), "", "" + stats.getDamageIncrease(),
-				"" + stats.getDamageReduction(), "" + stats.getCritChance() };
+		String[] attr = {
+				"" + stats.getStrength(),
+				"" + stats.getDexterity(),
+				"" + stats.getIntelligence(),
+				"" + stats.getVitality(),
+				"" + stats.getArmor(),
+				"" + stats.getLife(),
+				"" + stats.getDamage(),
+				"",
+				"" + (double) Math.round(stats.getDamageIncrease() * 10000)
+						/ 10000,
+				"" + (double) Math.round(stats.getDamageReduction() * 10000)
+						/ 10000,
+				"" + (double) Math.round(stats.getCritChance() * 10000) / 10000 };
 		((TextView) view.findViewById(R.id.attributes_values)).setText(Html
 				.fromHtml(StringUtils.join(attr, "<br>")));
 
@@ -42,7 +51,7 @@ public class HeroStatisticFragment extends SherlockFragment {
 				"" + stats.getFireResist(), "" + stats.getLightningResist(),
 				"" + stats.getPoisonResist(), "" + stats.getArcaneResist() };
 		((TextView) view.findViewById(R.id.defensive_values)).setText(Html
-				.fromHtml(StringUtils.join(defens, "%<br>") + "%"));
+				.fromHtml(StringUtils.join(defens, "<br>")));
 		return view;
 	}
 }

@@ -32,7 +32,7 @@
     <string name="elite_kills"><![CDATA[<b>%d</b><br>Elite kills]]></string>
     <string name="hardcore_kills"><![CDATA[<b>%d</b><br>Hardcore<br>monsters kills]]></string>
     <string name="attributes">Attributes</string>
-    <string name="attributes_description"><![CDATA[Strength<br>Dexterity<br>Intelligence<br>Vitality<br>Armor<br>Life<br>Hero Damage<br><br>Damage Increased<br>Damage Reduction<br>Critical Hit Chance]]></string>
+    <string name="attributes_description"><![CDATA[Strength<br>Dexterity<br>Intelligence<br>Vitality<br>Armor<br>Life<br>Damage<br><br>Damage Increased<br>Damage Reduction<br>Critical Hit Chance]]></string>
     <string name="defensive">Defensive</string>
     <string name="defensive_description"><![CDATA[Cold Reduction<br>Fire Reduction<br>Lightning Reduction<br>Poison Reduction<br>Arcane Reduction]]></string>
     <string name="last_finished_quest">Last finished quest</string>

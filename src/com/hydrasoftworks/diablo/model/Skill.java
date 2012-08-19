@@ -15,35 +15,10 @@ public class Skill {
 	private SkillInfo skillInfo;
 	private Rune rune;
 
-	private String slug;
-	private String name;
-	private String icon;
-	@SerializedName("tooltipParams")
-	private String tooltipParams;
-	private String description;
-	private String flavor;
-	@SerializedName("simpleDescription")
-	private String simpleDescription;
-
-	public URL createImageLink() throws MalformedURLException {
-		return new URL(IMAGE_LINK + icon + ".png");
-	}
-
 	public String createTooltipLink() {
-		if (getSkillInfo() != null) {
-			return CareerProfile.getActiveProfile().getHost() + SKILL_URL
-					+ getSkillInfo().tooltipParams
-					+ (getRune() != null ? "?runeType=" + getRune().getType()
-							: "");
-		} else
-			return CareerProfile.getActiveProfile().getHost() + SKILL_URL + tooltipParams;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+		return CareerProfile.getActiveProfile().getHost() + SKILL_URL
+				+ getSkillInfo().tooltipUrl
+				+ (getRune() != null ? "?runeType=" + getRune().getType() : "");
 	}
 
 	public static class SkillInfo {
@@ -51,10 +26,8 @@ public class Skill {
 		private String slug;
 		private String name;
 		private String icon;
-		@SerializedName("tooltipParams")
-		private String tooltipParams;
+		private String tooltipUrl;
 		private String description;
-		@SerializedName("simpleDescription")
 		private String simpleDescription;
 
 		public URL createImageLink() throws MalformedURLException {

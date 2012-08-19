@@ -44,18 +44,18 @@ public class HeroProgressionFragment extends SherlockFragment {
 			view.findViewById(R.id.quest_layout).setVisibility(View.GONE);
 			view.findViewById(R.id.progression_labels).setVisibility(View.GONE);
 
-			TextView kills = (TextView) view.findViewById(R.id.kills);
-			kills.setVisibility(View.VISIBLE);
-			kills.setText(Html.fromHtml(getString(R.string.kills, hero
-					.getKills().getMonsters())));
+			//TextView kills = (TextView) view.findViewById(R.id.kills);
+			//kills.setVisibility(View.VISIBLE);
+			//kills.setText(Html.fromHtml(getString(R.string.kills, hero
+			//		.getKills().getMonsters())));
 
 			view.findViewById(R.id.fallen_layout).setVisibility(View.VISIBLE);
-			TextView fallenInfo = (TextView) view
-					.findViewById(R.id.fallen_info);
-			fallenInfo
-					.setText(String.format(getString(R.string.fallen_info),
-							hero.getDeath().getKiller(), hero.getDeath()
-									.getLocation()));
+			//TextView fallenInfo = (TextView) view
+			//		.findViewById(R.id.fallen_info);
+			//fallenInfo
+			//		.setText(String.format(getString(R.string.fallen_info),
+			//				hero.getDeath().getKiller(), hero.getDeath()
+			//						.getLocation()));
 		}
 		return view;
 	}

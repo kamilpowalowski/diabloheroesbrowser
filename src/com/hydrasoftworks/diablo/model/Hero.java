@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
-import android.util.Pair;
-
 import com.google.gson.annotations.SerializedName;
 import com.hydrasoftworks.diablo.model.Act.Quest;
 import com.hydrasoftworks.diablo.model.CareerProfile.Progression;
@@ -22,13 +20,13 @@ public class Hero implements Comparable<Hero> {
 
 	private String name;
 	private int id = 0;
-	@SerializedName("heroId")
 	private int heroId = 0;
 	private int level;
 	private int gender;
 	@SerializedName("class")
 	private String heroClass;
 	private boolean hardcore;
+	@SerializedName("last-updated")
 	private int lastUpdated;
 	private HashMap<String, Item> items;
 	private Stats stats;
@@ -315,12 +313,11 @@ public class Hero implements Comparable<Hero> {
 				Act act = acts.get(Act.ACTS[j]);
 				if (act.isCompleted())
 					continue;
-				List<Quest> quests = act.getQuests();
-				for (int k = 0; k < quests.size(); k++) {
-					if (quests.get(k).isCompleted())
-						lastFinished = quests.get(k);
-					else
-						return lastFinished;
+				List<Quest> quests = act.getCompleatedQuests();
+				if(quests.size() == 0)
+					return lastFinished;
+				else {
+					lastFinished = quests.get(quests.size() -1);
 				}
 			}
 		}
