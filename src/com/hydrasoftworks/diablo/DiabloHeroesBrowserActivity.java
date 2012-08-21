@@ -205,13 +205,14 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 			}
 			String result = sb.toString();
 
-			// String result = getTextFromInputStream(getResources()
-			// .openRawResource(R.raw.career_profile_v2)); // TODO: remove when
-			// ready
-
 			Gson gson = new GsonBuilder().setFieldNamingPolicy(
 					FieldNamingPolicy.IDENTITY).create();
 			CareerProfile profil = gson.fromJson(result, CareerProfile.class);
+			if (profil.getHeroes() == null) {
+				WarningDialogFragment.newInstance(R.string.no_career_profile)
+						.show(getSupportFragmentManager(), "dialogNoProfile");
+				return null;
+			}
 			profil.addToDownloadedProfiles(tag);
 			return profil;
 		}
@@ -225,7 +226,8 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 						CareerProfileFragmentActivity.class);
 				intent.putExtra(BattleTag.BATTLETAG, result.getBattleTag()
 						.getBattleTagText());
-				intent.putExtra(BattleTag.SERVER, result.getBattleTag().getServer());
+				intent.putExtra(BattleTag.SERVER, result.getBattleTag()
+						.getServer());
 
 				startActivity(intent);
 			}

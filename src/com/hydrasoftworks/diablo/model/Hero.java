@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 import com.hydrasoftworks.diablo.model.Act.Quest;
-import com.hydrasoftworks.diablo.model.CareerProfile.Progression;
+import com.hydrasoftworks.diablo.model.CareerProfile.Progress;
 
 public class Hero implements Comparable<Hero> {
 	private static final String HERO_PROFILE_URL = "/hero/";
@@ -293,8 +293,8 @@ public class Hero implements Comparable<Hero> {
 
 	public int getProgressValue() {
 		int value = 0;
-		for (int i = 0; i < Progression.LEVELS.length; i++) {
-			HashMap<String, Act> acts = progress.get(Progression.LEVELS[i]);
+		for (int i = 0; i < Progress.LEVELS.length; i++) {
+			HashMap<String, Act> acts = progress.get(Progress.LEVELS[i]);
 			for (int j = 0; j < Act.ACTS.length; j++) {
 				if (acts.get(Act.ACTS[j]).isCompleted())
 					value++;
@@ -307,8 +307,8 @@ public class Hero implements Comparable<Hero> {
 
 	public Quest getLastFinishedQuest() {
 		Quest lastFinished = null;
-		for (int i = 0; i < Progression.LEVELS.length; i++) {
-			HashMap<String, Act> acts = progress.get(Progression.LEVELS[i]);
+		for (int i = 0; i < Progress.LEVELS.length; i++) {
+			HashMap<String, Act> acts = progress.get(Progress.LEVELS[i]);
 			for (int j = 0; j < Act.ACTS.length; j++) {
 				Act act = acts.get(Act.ACTS[j]);
 				if (act.isCompleted())

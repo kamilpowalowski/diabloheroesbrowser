@@ -17,7 +17,7 @@ public class CareerProfile {
 	private BattleTag battleTag;
 	private int lastHeroPlayed;
 	@SerializedName("last-updated")
-	private int lastUpdated;
+	private int lastUpdated; //TODO: dosn't work
 	private List<Artisan> artisans;
 	private List<Artisan> hardcoreArtisans;
 	private List<Hero> heroes;
@@ -25,6 +25,7 @@ public class CareerProfile {
 	private Kills kills;
 	private TimePlayed timePlayed;
 	private HashMap<String, HashMap<String, Act>> progression;
+	private HashMap<String, HashMap<String, Act>> hardcoreProgression;
 	private HashMap<Integer, Hero> downloadedHeroes = new HashMap<Integer, Hero>();
 	private Hero activeHero;
 
@@ -94,9 +95,9 @@ public class CareerProfile {
 		private double wizard;
 	}
 
-	public static class Progression {
-		public static final String[] LEVELS = { Progression.NORMAL,
-				Progression.NIGHTMARE, Progression.HELL, Progression.INFERNO };
+	public static class Progress {
+		public static final String[] LEVELS = { Progress.NORMAL,
+				Progress.NIGHTMARE, Progress.HELL, Progress.INFERNO };
 		public static final String NORMAL = "normal";
 		public static final String NIGHTMARE = "nightmare";
 		public static final String HELL = "hell";
@@ -162,8 +163,23 @@ public class CareerProfile {
 
 	public int getProgressValue() {
 		int value = 0;
-		for (int i = 0; i < Progression.LEVELS.length; i++) {
-			HashMap<String, Act> acts = progression.get(Progression.LEVELS[i]);
+		for (int i = 0; i < Progress.LEVELS.length; i++) {
+			HashMap<String, Act> acts = progression.get(Progress.LEVELS[i]);
+			for (int j = 0; j < Act.ACTS.length; j++) {
+				Act act = acts.get(Act.ACTS[j]);
+				if (act.isCompleted())
+					value++;
+				else
+					return value;
+			}
+		}
+		return value;
+	}
+	
+	public int getHardcoreProgressValue() {
+		int value = 0;
+		for (int i = 0; i < Progress.LEVELS.length; i++) {
+			HashMap<String, Act> acts = hardcoreProgression.get(Progress.LEVELS[i]);
 			for (int j = 0; j < Act.ACTS.length; j++) {
 				Act act = acts.get(Act.ACTS[j]);
 				if (act.isCompleted())
@@ -180,5 +196,6 @@ public class CareerProfile {
 				.get(tag + region);
 		return CareerProfile.activeProfile;
 	}
+
 
 }

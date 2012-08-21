@@ -8,7 +8,7 @@
     <string name="battletag_wrong">BattleTag is wrong</string>
     <string name="internt_connection_error">Internet connection is needed for showing profile</string>
     <string name="wrong_url">Something wrong with url you try to download</string>
-    <string name="no_career_profile">Carerr profile dosn\'t exist. Check entered BattleTag twice.</string>
+    <string name="no_career_profile">Carerr profile dosn\'t exist. Check entered BattleTag and server twice.</string>
     <string name="no_hero">There\'s an error while download hero data. Try again later.</string>
     <string name="alert_dialog_ok">OK</string>
     <string name="career_tab">Career</string>
@@ -39,6 +39,7 @@
     <string name="fallen_info">Killed by %1$s\nin %2$s</string>
     <string name="tooltip_download_error">Couldn\'t download info.</string>
     <string name="downloading_data">Downloading data&#8230;</string>
+    <string name="hardcore_progress">Hardcore progress</string>
 
     <string-array name="servers_name">
         <item>Americas</item>
@@ -49,7 +50,7 @@
         <string-array name="servers_code">
         <item>us</item>
         <item>eu</item>
-        <item>TODO</item>
+        <item>sea</item>
     </string-array>
 
 </resources>

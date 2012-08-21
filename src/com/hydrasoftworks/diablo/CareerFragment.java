@@ -25,6 +25,12 @@ public class CareerFragment extends SherlockFragment {
 				.findViewById(R.id.progression_seek_normal);
 		progressBar.setProgress(profile.getProgressValue());
 		progressBar.setEnabled(false);
+		
+		
+		progressBar = (SeekBar) view
+				.findViewById(R.id.progression_seek_hardcore);
+		progressBar.setProgress(profile.getHardcoreProgressValue());
+		progressBar.setEnabled(false);
 
 		((TextView) view.findViewById(R.id.kills)).setText(Html
 				.fromHtml(getString(R.string.kills, profile.getKills()

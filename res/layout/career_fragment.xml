@@ -57,6 +57,65 @@
             android:textColor="#77705d" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="@string/hardcore_progress"
+        android:textColor="#a30400" />
+
+    <SeekBar
+        android:id="@+id/progression_seek_hardcore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="16"
+        android:maxHeight="40dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/seekbar"
+        android:thumb="@drawable/seek_thumb"
+        android:thumbOffset="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="@string/progression_level_normal"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/progression_level_nightmare"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/progression_level_hell"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/progression_level_inferno"
+            android:textAllCaps="true"
+            android:textColor="#77705d" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
