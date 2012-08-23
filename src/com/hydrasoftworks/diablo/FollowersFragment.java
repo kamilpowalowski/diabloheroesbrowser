@@ -96,7 +96,7 @@ public class FollowersFragment extends SherlockFragment {
 		layout.addView(secondLine);
 
 		for (final Skill skill : follower.getSkills()) {
-			if(skill.getSkillInfo() == null) {
+			if (skill.getSkillInfo() == null) {
 				continue;
 			}
 			TextView tv = new TextView(getActivity());
@@ -154,25 +154,15 @@ public class FollowersFragment extends SherlockFragment {
 			try {
 				item = follower.getItem(itemName);
 
-				InputStream is = item.createImageLink(hero.getHeroClass(),
-						hero.getGender()).openStream();
+				InputStream is = item.createImageLink().openStream();
 				Drawable d = Drawable.createFromStream(is, "src");
 
 				return d;
-			} catch (Exception ex1) {
-				try {
-					InputStream is = item.createImageLink(hero.getHeroClass(),
-							(hero.getGender() + 1) % 2).openStream();
-					Drawable d = Drawable.createFromStream(is, "src");
+			} catch (Exception ex) {
+				Log.d(TAG,
+						"Error when downloading image file " + ex.getMessage());
+				return null;
 
-					return d;
-				} catch (Exception ex2) {
-					Log.d(TAG,
-							"Error when downloading image file "
-									+ ex2.getMessage());
-
-					return null;
-				}
 			}
 		}
 

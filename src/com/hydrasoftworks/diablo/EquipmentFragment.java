@@ -122,26 +122,16 @@ public class EquipmentFragment extends SherlockFragment {
 			try {
 				item = hero.getItem(itemName);
 
-				InputStream is = item.createImageLink(hero.getHeroClass(),
-						hero.getGender()).openStream();
+				InputStream is = item.createImageLink().openStream();
 				Drawable d = Drawable.createFromStream(is, "src");
 
 				return d;
-			} catch (Exception ex1) {
-				try {
+			} catch (Exception ex) {
+				Log.d(TAG,
+						"Error when downloading image file "
+								+ ex.getLocalizedMessage());
 
-					InputStream is = item.createImageLink(hero.getHeroClass(),
-							(hero.getGender() + 1) % 2).openStream();
-					Drawable d = Drawable.createFromStream(is, "src");
-
-					return d;
-				} catch (Exception ex2) {
-					Log.d(TAG,
-							"Error when downloading image file "
-									+ ex2.getLocalizedMessage());
-
-					return null;
-				}
+				return null;
 			}
 		}
 

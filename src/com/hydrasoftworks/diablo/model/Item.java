@@ -15,11 +15,9 @@ public class Item {
 	@SerializedName("tooltipParams")
 	private String tooltipParams;
 
-	public URL createImageLink(String heroClass, int gender)
+	public URL createImageLink()
 			throws MalformedURLException {
-		return new URL(Item.IMAGE_LINK + icon + "_"
-				+ heroClass.replace("-", "") + "_"
-				+ (gender == 0 ? "male" : "female") + ".png");
+		return new URL(Item.IMAGE_LINK + icon + ".png");
 	}
 
 	public String createTooltipLink() {

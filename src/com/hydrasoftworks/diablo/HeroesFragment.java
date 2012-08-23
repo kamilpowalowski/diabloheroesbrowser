@@ -116,7 +116,10 @@ public class HeroesFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Hero result) {
 			super.onPostExecute(result);
-			dialog.dismiss();
+			try {
+				dialog.dismiss();
+			} catch (NullPointerException ex) {
+			}
 			if (result != null) {
 				Intent intent = getActivity().getIntent().setClass(
 						getActivity(), HeroFragmentActivity.class);
