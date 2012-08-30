@@ -44,13 +44,15 @@
     <string-array name="servers_name">
         <item>Americas</item>
         <item>Europe</item>
+        <item>Korea</item>
         <item>Asia</item>
     </string-array>
     
         <string-array name="servers_code">
         <item>us</item>
         <item>eu</item>
-        <item>sea</item>
+        <item>kr</item>
+        <item>tw</item>
     </string-array>
 
 </resources>
