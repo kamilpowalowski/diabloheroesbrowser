@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,10 +24,13 @@ import android.support.v4.app.DialogFragment;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -91,6 +95,15 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 				.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
 		spinner.setAdapter(spinnerAdapter);
 
+		spinner.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+			    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+				return false;
+			}
+		});
 		((Button) findViewById(R.id.battletag_find_button))
 				.setOnClickListener(new OnClickListener() {
 
