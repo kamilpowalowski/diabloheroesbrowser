@@ -10,7 +10,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -31,12 +34,16 @@ public class TooltipWebViewActivity extends SherlockActivity {
 		String url = getIntent().getStringExtra(URL);
 
 		webView = (WebView) findViewById(R.id.web_view);
-		webView.getSettings().setJavaScriptEnabled(true);
+		// webView.getSettings().setJavaScriptEnabled(true);
 		webView.setWebViewClient(new Callback());
-		//webView.setPadding(0, 0, 0, 0);
-		webView.setInitialScale(getScale());
-		webView.setBackgroundColor(getResources().getColor(android.R.color.black));
-		
+		LayoutParams params = webView.getLayoutParams();
+		Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+				.getDefaultDisplay();
+		params.height = (int) (0.65 * display.getHeight());
+		webView.setLayoutParams(params); // NOTE: Temporary fix
+
+		webView.setBackgroundColor(getResources().getColor(
+				android.R.color.black));
 		try {
 			new PageLoad().execute(new URL(url));
 		} catch (MalformedURLException e) {
@@ -51,16 +58,17 @@ public class TooltipWebViewActivity extends SherlockActivity {
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			return (false);
 		}
+		
 
 	}
-	
-	private int getScale(){
-	    Display display = ((WindowManager)
-	    		getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay(); 
-	    int width = display.getWidth(); 
-	    Double val = Double.valueOf(width)/Double.valueOf(400);
-	    val = val * 100d;
-	    return val.intValue();
+
+	private int getScale() {
+		Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+				.getDefaultDisplay();
+		int width = display.getWidth();
+		Double val = Double.valueOf(width) / Double.valueOf(400);
+		val = val * 100d;
+		return val.intValue();
 	}
 
 	private class PageLoad extends AsyncTask<java.net.URL, Void, String> {
@@ -85,8 +93,10 @@ public class TooltipWebViewActivity extends SherlockActivity {
 
 		@Override
 		protected void onPostExecute(String result) {
-			String html = "<html>"
-					+ "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + URL_CSS + "\" />"
+			final String html = "<html>"
+					+ "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+					+ URL_CSS
+					+ "\" />"
 					+ "<style type=\"text/css\">"
 					+ ".ui-tooltip { background: black; padding: 1px; border: 1px solid #322a20; opacity: 0.95; max-width: 355px;"
 					+ "-moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;"
@@ -97,9 +107,10 @@ public class TooltipWebViewActivity extends SherlockActivity {
 					+ ".ui-tooltip .subheader { font-size: 18px; color: #F3E6D0; font-weight: normal; margin-bottom: 4px; } "
 					+ "</style>" + "<body><div class=\"ui-tooltip\">" + result
 					+ "</div></body></html>";
-			webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
-			//webView.loadData(html, "text/html", "utf-8");
-		}
 
+			webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
+			webView.setInitialScale(getScale());
+
+		}
 	}
 }

@@ -13,8 +13,8 @@ public class CareerProfile {
 	private static HashMap<String, CareerProfile> downloadedProfiles = new HashMap<String, CareerProfile>();
 	private static CareerProfile activeProfile;
 
-	@SerializedName("battleTagObject")
-	private BattleTag battleTag;
+	private BattleTag playerBattleTag;
+	private String battleTag;
 	private int lastHeroPlayed;
 	@SerializedName("last-updated")
 	private int lastUpdated; //TODO: dosn't work
@@ -54,7 +54,7 @@ public class CareerProfile {
 	}
 
 	public void addToDownloadedProfiles(BattleTag battleTag) {
-		this.battleTag = battleTag;
+		this.playerBattleTag = battleTag;
 		CareerProfile.downloadedProfiles.put(battleTag.getBattleTagText()
 				+ battleTag.getServer(), this);
 	}
@@ -105,7 +105,7 @@ public class CareerProfile {
 	}
 
 	public BattleTag getBattleTag() {
-		return battleTag;
+		return playerBattleTag;
 	}
 
 	/**
@@ -195,6 +195,10 @@ public class CareerProfile {
 		CareerProfile.activeProfile = CareerProfile.downloadedProfiles
 				.get(tag + region);
 		return CareerProfile.activeProfile;
+	}
+
+	public String getBattleTagText() {
+		return battleTag;
 	}
 
 

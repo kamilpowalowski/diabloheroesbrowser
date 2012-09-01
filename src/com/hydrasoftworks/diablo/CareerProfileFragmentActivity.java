@@ -36,14 +36,14 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.career_tab),
 				CareerFragment.class, null);
 
-		mTabsAdapter.addTab(bar.newTab().setText(R.string.artisans_tab),
-				ArtisansFragment.class, null);
-
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.heroes_tab),
 				HeroesFragment.class, null);
 
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.fallen_heroes_tab),
 				FallenHeroesFragment.class, null);
+		
+		mTabsAdapter.addTab(bar.newTab().setText(R.string.artisans_tab),
+				ArtisansFragment.class, null);
 
 		viewPager.setAdapter(mTabsAdapter);
 		viewPager.setOffscreenPageLimit(4);

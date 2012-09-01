@@ -226,7 +226,9 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 						.show(getSupportFragmentManager(), "dialogNoProfile");
 				return null;
 			}
+			tag.setBattleTagText(profil.getBattleTagText());
 			profil.addToDownloadedProfiles(tag);
+			dataSource.createOrGetBattleTag(tag.getBattleTagText(), tag.getServer());
 			return profil;
 		}
 

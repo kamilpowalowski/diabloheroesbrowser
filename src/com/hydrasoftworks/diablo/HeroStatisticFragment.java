@@ -1,5 +1,7 @@
 package com.hydrasoftworks.diablo;
 
+import java.text.DecimalFormat;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Bundle;
@@ -28,20 +30,13 @@ public class HeroStatisticFragment extends SherlockFragment {
 				.setText(Html
 						.fromHtml(getString(R.string.attributes_description)));
 
-		String[] attr = {
-				"" + stats.getStrength(),
-				"" + stats.getDexterity(),
-				"" + stats.getIntelligence(),
-				"" + stats.getVitality(),
-				"" + stats.getArmor(),
-				"" + stats.getLife(),
-				"" + stats.getDamage(),
-				"",
-				"" + (double) Math.round(stats.getDamageIncrease() * 10000)
-						/ 10000,
-				"" + (double) Math.round(stats.getDamageReduction() * 10000)
-						/ 10000,
-				"" + (double) Math.round(stats.getCritChance() * 10000) / 10000 };
+		String[] attr = { "" + stats.getStrength(), "" + stats.getDexterity(),
+				"" + stats.getIntelligence(), "" + stats.getVitality(),
+				"" + stats.getArmor(), "" + stats.getLife(),
+				"" + stats.getDamage(), "",
+				"" + roundTwoDecimals(stats.getDamageIncrease() * 100) + "%",
+				"" + roundTwoDecimals(stats.getDamageReduction() * 100) + "%",
+				"" + roundTwoDecimals(stats.getCritChance() * 100) + "%" };
 		((TextView) view.findViewById(R.id.attributes_values)).setText(Html
 				.fromHtml(StringUtils.join(attr, "<br>")));
 
@@ -53,5 +48,10 @@ public class HeroStatisticFragment extends SherlockFragment {
 		((TextView) view.findViewById(R.id.defensive_values)).setText(Html
 				.fromHtml(StringUtils.join(defens, "<br>")));
 		return view;
+	}
+
+	double roundTwoDecimals(double d) {
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		return Double.valueOf(twoDForm.format(d));
 	}
 }

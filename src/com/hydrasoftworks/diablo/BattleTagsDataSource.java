@@ -35,8 +35,10 @@ public class BattleTagsDataSource {
 		BattleTag tag = findBattleTag(text, server);
 		if (tag == null)
 			tag = createBattleTag(text, server);
-		else
+		else {
+			tag.setBattleTagText(text);
 			updateBattleTag(tag);
+		}
 		return tag;
 	}
 
@@ -84,7 +86,7 @@ public class BattleTagsDataSource {
 
 	private BattleTag findBattleTag(String name, String server) {
 		Cursor cursor = database.query(BattleTag.TABLE_NAME, allColumns,
-				BattleTag.BATTLETAG + " = '" + name + "' AND " + BattleTag.SERVER
+				BattleTag.BATTLETAG + " = '" + name + "' COLLATE NOCASE AND " + BattleTag.SERVER
 						+ " = '" + server + "'", null, null, null, null);
 		BattleTag tag = null;
 		cursor.moveToFirst();
