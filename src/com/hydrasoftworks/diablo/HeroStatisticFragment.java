@@ -50,8 +50,8 @@ public class HeroStatisticFragment extends SherlockFragment {
 		return view;
 	}
 
-	double roundTwoDecimals(double d) {
+	private String roundTwoDecimals(double d) {
 		DecimalFormat twoDForm = new DecimalFormat("#.##");
-		return Double.valueOf(twoDForm.format(d));
+		return twoDForm.format(d);
 	}
 }

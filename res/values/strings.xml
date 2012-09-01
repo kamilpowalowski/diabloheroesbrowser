@@ -12,7 +12,7 @@
     <string name="no_hero">There\'s an error while download hero data. Try again later.</string>
     <string name="alert_dialog_ok">OK</string>
     <string name="career_tab">Career</string>
-    <string name="artisans_tab">Atrisans</string>
+    <string name="artisans_tab">Artisans</string>
     <string name="heroes_tab">Heroes</string>
     <string name="fallen_heroes_tab">Fallen heroes</string>
     <string name="equipment_tab">Equipment</string>
