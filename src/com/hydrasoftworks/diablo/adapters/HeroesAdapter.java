@@ -4,6 +4,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +70,10 @@ public class HeroesAdapter extends ArrayAdapter<Hero> {
 		TextView heroName = (TextView) row.findViewById(R.id.hero_name);
 		heroName.setText(hero.getName());
 		TextView heroClass = (TextView) row.findViewById(R.id.hero_class);
-		heroClass.setText(hero.getLevel() + " "
-				+ WordUtils.capitalize(hero.getHeroClass().replace("-", " ")));
+		heroClass.setText(Html.fromHtml(hero.getLevel()
+				+ (hero.getParagonLevel() > 0 ? "<font color='#A99FFF'>("
+						+ hero.getParagonLevel() + ")</font>" : "") + " "
+				+ WordUtils.capitalize(hero.getHeroClass().replace("-", " "))));
 		if (hero.isHardcore()) {
 			heroClass.setTextColor(Color.RED);
 			heroImage.setBackgroundResource(R.drawable.imageview_red_shape);

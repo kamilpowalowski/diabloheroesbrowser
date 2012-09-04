@@ -10,7 +10,7 @@ import com.hydrasoftworks.diablo.model.Act.Quest;
 import com.hydrasoftworks.diablo.model.CareerProfile.Progress;
 
 public class Hero implements Comparable<Hero> {
-	private static final String HERO_PROFILE_URL = "/hero/";
+	private static final String HERO_PROFILE_URL = "hero/";
 	public static final String HERO_ID = "hero_id";
 	public static final String CLASS_BARBARIAN = "barbarian";
 	public static final String CLASS_DEMON_HUNTER = "demon-hunter";
@@ -22,6 +22,7 @@ public class Hero implements Comparable<Hero> {
 	private int id = 0;
 	private int heroId = 0;
 	private int level;
+	private int paragonLevel;
 	private int gender;
 	@SerializedName("class")
 	private String heroClass;
@@ -175,12 +176,14 @@ public class Hero implements Comparable<Hero> {
 	public static class Kills {
 		private int monsters;
 		private int elites;
+
 		/**
 		 * @return the monsters
 		 */
 		public int getMonsters() {
 			return monsters;
 		}
+
 		/**
 		 * @return the elites
 		 */
@@ -193,12 +196,14 @@ public class Hero implements Comparable<Hero> {
 		private String location;
 		private String killer;
 		private int time;
+
 		/**
 		 * @return the location
 		 */
 		public String getLocation() {
 			return location;
 		}
+
 		/**
 		 * @return the killer
 		 */
@@ -292,12 +297,12 @@ public class Hero implements Comparable<Hero> {
 	}
 
 	public int getProgressValue() {
-		int value = 0;
-		for (int i = 0; i < Progress.LEVELS.length; i++) {
+		int value = Progress.LEVELS.length * Act.ACTS.length;
+		for (int i = Progress.LEVELS.length - 1; i >= 0; i--) {
 			HashMap<String, Act> acts = progress.get(Progress.LEVELS[i]);
-			for (int j = 0; j < Act.ACTS.length; j++) {
-				if (acts.get(Act.ACTS[j]).isCompleted())
-					value++;
+			for (int j = Act.ACTS.length - 1; j >= 0; j--) {
+				if (!acts.get(Act.ACTS[j]).isCompleted())
+					value--;
 				else
 					return value;
 			}
@@ -306,22 +311,16 @@ public class Hero implements Comparable<Hero> {
 	}
 
 	public Quest getLastFinishedQuest() {
-		Quest lastFinished = null;
-		for (int i = 0; i < Progress.LEVELS.length; i++) {
+		for (int i = Progress.LEVELS.length - 1; i >= 0; i--) {
 			HashMap<String, Act> acts = progress.get(Progress.LEVELS[i]);
-			for (int j = 0; j < Act.ACTS.length; j++) {
+			for (int j = Act.ACTS.length - 1; j >= 0; j--) {
 				Act act = acts.get(Act.ACTS[j]);
-				if (act.isCompleted())
-					continue;
-				List<Quest> quests = act.getCompleatedQuests();
-				if(quests.size() == 0)
-					return lastFinished;
-				else {
-					lastFinished = quests.get(quests.size() -1);
-				}
+				List<Quest> quests = act.getCompletedQuests();
+				if (quests.size() != 0)
+					return quests.get(quests.size() - 1);
 			}
 		}
-		return lastFinished;
+		return null;
 	}
 
 	/**
@@ -336,5 +335,12 @@ public class Hero implements Comparable<Hero> {
 	 */
 	public int getLastUpdated() {
 		return lastUpdated;
+	}
+
+	/**
+	 * @return the paragonLevel
+	 */
+	public int getParagonLevel() {
+		return paragonLevel;
 	}
 }

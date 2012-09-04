@@ -162,13 +162,12 @@ public class CareerProfile {
 	}
 
 	public int getProgressValue() {
-		int value = 0;
-		for (int i = 0; i < Progress.LEVELS.length; i++) {
+		int value = Progress.LEVELS.length * Act.ACTS.length;
+		for (int i = Progress.LEVELS.length -1; i >= 0 ; i--) {
 			HashMap<String, Act> acts = progression.get(Progress.LEVELS[i]);
-			for (int j = 0; j < Act.ACTS.length; j++) {
-				Act act = acts.get(Act.ACTS[j]);
-				if (act.isCompleted())
-					value++;
+			for (int j = Act.ACTS.length -1; j >= 0 ; j--) {
+				if (!acts.get(Act.ACTS[j]).isCompleted())
+					value--;
 				else
 					return value;
 			}
@@ -177,13 +176,12 @@ public class CareerProfile {
 	}
 	
 	public int getHardcoreProgressValue() {
-		int value = 0;
-		for (int i = 0; i < Progress.LEVELS.length; i++) {
+		int value = Progress.LEVELS.length * Act.ACTS.length;
+		for (int i = Progress.LEVELS.length -1; i >= 0 ; i--) {
 			HashMap<String, Act> acts = hardcoreProgression.get(Progress.LEVELS[i]);
-			for (int j = 0; j < Act.ACTS.length; j++) {
-				Act act = acts.get(Act.ACTS[j]);
-				if (act.isCompleted())
-					value++;
+			for (int j = Act.ACTS.length -1; j >= 0 ; j--) {
+				if (!acts.get(Act.ACTS[j]).isCompleted())
+					value--;
 				else
 					return value;
 			}

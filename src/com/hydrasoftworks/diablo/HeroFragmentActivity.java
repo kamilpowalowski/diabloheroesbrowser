@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -31,16 +32,21 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		TabsAdapter mTabsAdapter = new TabsAdapter(this, viewPager);
 		ActionBar bar = getSupportActionBar();
 
-		bar.setTitle(hero.getName() + " (" + hero.getLevel() + " "
+		bar.setTitle(Html.fromHtml(hero.getName()
+				+ " ("
+				+ hero.getLevel()
+				+ (hero.getParagonLevel() > 0 ? "<font color='#A99FFF'>("
+						+ hero.getParagonLevel() + ")</font>" : "") + " "
 				+ WordUtils.capitalize(hero.getHeroClass().replace("-", " "))
-				+ ")");
+				+ ")"));
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setHomeButtonEnabled(true);
 		bar.setDisplayHomeAsUpEnabled(true);
 
-		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_progression_tab),
+		mTabsAdapter.addTab(
+				bar.newTab().setText(R.string.hero_progression_tab),
 				HeroProgressionFragment.class, null);
-		
+
 		mTabsAdapter.addTab(bar.newTab().setText(R.string.hero_general_tab),
 				HeroStatisticFragment.class, null);
 

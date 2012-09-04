@@ -109,8 +109,8 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 					@Override
 					public void onClick(View v) {
-						String tagText = textView.getText().toString();
-						if (tagText.matches("[^ $&#!%\t]{3,12}#[0-9]{4}")) {
+						String tagText = textView.getText().toString().replaceAll("[ $&!%\t]", "");
+						if (tagText.matches(".*#[0-9]{4}")) {
 							BattleTag tag = dataSource.createOrGetBattleTag(
 									tagText,
 									getResources().getStringArray(
@@ -293,30 +293,6 @@ public class DiabloHeroesBrowserActivity extends SherlockFragmentActivity {
 
 			return row;
 		}
-	}
-
-	// TODO: remove this method when ready
-	public static String getTextFromInputStream(InputStream is) {
-		Writer writer = new StringWriter();
-		char[] buffer = new char[1024];
-		try {
-			Reader reader = new BufferedReader(new InputStreamReader(is,
-					"UTF-8"));
-			int n;
-			while ((n = reader.read(buffer)) != -1) {
-				writer.write(buffer, 0, n);
-			}
-
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				Log.e(TAG, e.getMessage());
-			}
-		}
-		return writer.toString();
 	}
 
 	public static class WarningDialogFragment extends DialogFragment {

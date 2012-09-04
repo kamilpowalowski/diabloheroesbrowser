@@ -27,7 +27,7 @@ public class Act {
 	/**
 	 * @return the quests
 	 */
-	public List<Quest> getCompleatedQuests() {
+	public List<Quest> getCompletedQuests() {
 		return completedQuests;
 	}
 

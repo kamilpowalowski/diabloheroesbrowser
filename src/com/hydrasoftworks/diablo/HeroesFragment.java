@@ -77,6 +77,7 @@ public class HeroesFragment extends SherlockFragment {
 			StringBuilder sb = new StringBuilder();
 			try {
 				URL url = hero.createUrl(profil.getBattleTag());
+				Log.d(TAG, url.toString());
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						url.openStream()));
 				String inputLine;
