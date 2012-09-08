@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/ui_divider"
             android:paddingTop="10dp"
-            android:text="@string/defensive"
+            android:text="@string/offense"
             android:textAllCaps="true"
             android:textColor="@color/standard_text" />
 
@@ -57,14 +57,128 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/defensive_description"
+                android:id="@+id/offense_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/standard_text" />
 
             <TextView
-                android:id="@+id/defensive_values"
+                android:id="@+id/offense_values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+        </LinearLayout>
+        
+       <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/ui_divider"
+            android:paddingTop="10dp"
+            android:text="@string/defense"
+            android:textAllCaps="true"
+            android:textColor="@color/standard_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/defense_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+
+            <TextView
+                android:id="@+id/defense_values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/ui_divider"
+            android:paddingTop="10dp"
+            android:text="@string/life"
+            android:textAllCaps="true"
+            android:textColor="@color/standard_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/life_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+
+            <TextView
+                android:id="@+id/life_values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/ui_divider"
+            android:paddingTop="10dp"
+            android:text="@string/resource"
+            android:textAllCaps="true"
+            android:textColor="@color/standard_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/resource_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+
+            <TextView
+                android:id="@+id/resource_values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+        </LinearLayout>
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/ui_divider"
+            android:paddingTop="10dp"
+            android:text="@string/adventure"
+            android:textAllCaps="true"
+            android:textColor="@color/standard_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/adventure_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/standard_text" />
+
+            <TextView
+                android:id="@+id/adventure_values"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

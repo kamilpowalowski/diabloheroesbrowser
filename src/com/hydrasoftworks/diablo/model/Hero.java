@@ -43,11 +43,9 @@ public class Hero implements Comparable<Hero> {
 	}
 
 	public static class Stats {
-		@SerializedName("damageIncrease")
 		private double damageIncrease;
-		@SerializedName("damageReduction")
 		private double damageReduction;
-		@SerializedName("critChance")
+		private double attackSpeed;
 		private double critChance;
 		private int life;
 		private int strength;
@@ -55,17 +53,25 @@ public class Hero implements Comparable<Hero> {
 		private int intelligence;
 		private int vitality;
 		private int armor;
-		@SerializedName("coldResist")
+		private int physicalResist;
 		private int coldResist;
-		@SerializedName("fireResist")
 		private int fireResist;
-		@SerializedName("lightningResist")
 		private int lightningResist;
-		@SerializedName("poisonResist")
 		private int poisonResist;
-		@SerializedName("arcaneResist")
 		private int arcaneResist;
 		private double damage;
+		private double critDamage;
+		private double blockChance;
+		private double thorns;
+		private double lifeSteal;
+		private double lifePerKill;
+		private double goldFind;
+		private double magicFind;
+		private int blockAmountMin;
+		private int blockAmountMax;
+		private double lifeOnHit;
+		private int primaryResource;
+		private int secondaryResource;
 
 		/**
 		 * @return the damageIncrease
@@ -170,6 +176,104 @@ public class Hero implements Comparable<Hero> {
 		 */
 		public double getDamage() {
 			return damage;
+		}
+
+		/**
+		 * @return the critDamage
+		 */
+		public double getCritDamage() {
+			return critDamage;
+		}
+
+		/**
+		 * @return the blockChance
+		 */
+		public double getBlockChance() {
+			return blockChance;
+		}
+
+		/**
+		 * @return the thorns
+		 */
+		public double getThorns() {
+			return thorns;
+		}
+
+		/**
+		 * @return the lifeSteal
+		 */
+		public double getLifeSteal() {
+			return lifeSteal;
+		}
+
+		/**
+		 * @return the lifePerKill
+		 */
+		public double getLifePerKill() {
+			return lifePerKill;
+		}
+
+		/**
+		 * @return the goldFind
+		 */
+		public double getGoldFind() {
+			return goldFind;
+		}
+
+		/**
+		 * @return the magicFind
+		 */
+		public double getMagicFind() {
+			return magicFind;
+		}
+
+		/**
+		 * @return the blockAmountMin
+		 */
+		public int getBlockAmountMin() {
+			return blockAmountMin;
+		}
+
+		/**
+		 * @return the blockAmountMax
+		 */
+		public int getBlockAmountMax() {
+			return blockAmountMax;
+		}
+
+		/**
+		 * @return the lifeOnHit
+		 */
+		public double getLifeOnHit() {
+			return lifeOnHit;
+		}
+
+		/**
+		 * @return the primaryResource
+		 */
+		public int getPrimaryResource() {
+			return primaryResource;
+		}
+
+		/**
+		 * @return the secondaryResource
+		 */
+		public int getSecondaryResource() {
+			return secondaryResource;
+		}
+
+		/**
+		 * @return the attackSpeed
+		 */
+		public double getAttackSpeed() {
+			return attackSpeed;
+		}
+
+		/**
+		 * @return the physicalResist
+		 */
+		public int getPhysicalResist() {
+			return physicalResist;
 		}
 	}
 

@@ -24,8 +24,15 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		Hero hero = CareerProfile.getActiveProfile().getDownloadedHero(
+		Hero hero = null;
+		try {
+			hero = CareerProfile.getActiveProfile().getDownloadedHero(
 				getIntent().getIntExtra(Hero.HERO_ID, 0));
+		} 
+		catch(NullPointerException ex) {
+			startActivity(new Intent(this, DiabloHeroesBrowserActivity.class));
+			finish();
+		}
 		setContentView(R.layout.career_profile_fragment_activity);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -35,8 +42,8 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		bar.setTitle(Html.fromHtml(hero.getName()
 				+ " ("
 				+ hero.getLevel()
-				+ (hero.getParagonLevel() > 0 ? "<font color='#A99FFF'>("
-						+ hero.getParagonLevel() + ")</font>" : "") + " "
+				+ (hero.getParagonLevel() > 0 ? " <small><font color='#A99FFF'>("
+						+ hero.getParagonLevel() + ")</font></small>" : "") + " "
 				+ WordUtils.capitalize(hero.getHeroClass().replace("-", " "))
 				+ ")"));
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

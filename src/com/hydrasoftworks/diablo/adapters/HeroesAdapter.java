@@ -71,8 +71,8 @@ public class HeroesAdapter extends ArrayAdapter<Hero> {
 		heroName.setText(hero.getName());
 		TextView heroClass = (TextView) row.findViewById(R.id.hero_class);
 		heroClass.setText(Html.fromHtml(hero.getLevel()
-				+ (hero.getParagonLevel() > 0 ? "<font color='#A99FFF'>("
-						+ hero.getParagonLevel() + ")</font>" : "") + " "
+				+ (hero.getParagonLevel() > 0 ? " <small><font color='#A99FFF'>("
+						+ hero.getParagonLevel() + ")</font></small>" : "") + " "
 				+ WordUtils.capitalize(hero.getHeroClass().replace("-", " "))));
 		if (hero.isHardcore()) {
 			heroClass.setTextColor(Color.RED);
