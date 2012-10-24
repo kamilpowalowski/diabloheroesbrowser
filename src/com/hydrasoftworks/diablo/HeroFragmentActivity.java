@@ -1,5 +1,8 @@
 package com.hydrasoftworks.diablo;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.text.WordUtils;
@@ -12,6 +15,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
+import android.view.View;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -87,14 +91,14 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	public static class TabsAdapter extends FragmentStatePagerAdapter implements
+	public class TabsAdapter extends FragmentStatePagerAdapter implements
 			ActionBar.TabListener, ViewPager.OnPageChangeListener {
 		private final Context mContext;
 		private final ActionBar mActionBar;
 		private final ViewPager mViewPager;
 		private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 
-		static final class TabInfo {
+		final class TabInfo {
 			private final Class<?> clss;
 			private final Bundle args;
 
@@ -140,6 +144,7 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 
 		public void onPageSelected(int position) {
 			mActionBar.setSelectedNavigationItem(position);
+			selectInSpinnerIfPresent(position, true);
 		}
 
 		public void onPageScrollStateChanged(int state) {
@@ -159,6 +164,59 @@ public class HeroFragmentActivity extends SherlockFragmentActivity {
 
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		}
+		
+		/**
+		 * Hack that takes advantage of interface parity between ActionBarSherlock and the native interface to reach inside
+		 * the classes to manually select the appropriate tab spinner position if the overflow tab spinner is showing.
+		 * 
+		 * Related issues: https://github.com/JakeWharton/ActionBarSherlock/issues/240 and
+		 * https://android-review.googlesource.com/#/c/32492/
+		 * 
+		 * @author toulouse@crunchyroll.com
+		 */
+		private void selectInSpinnerIfPresent(int position, boolean animate) {
+		    try {
+		        View actionBarView = findViewById(R.id.abs__action_bar);
+		        if (actionBarView == null) {
+		            int id = getResources().getIdentifier("action_bar", "id", "android");
+		            actionBarView = findViewById(id);
+		        }
+
+		        Class<?> actionBarViewClass = actionBarView.getClass();
+		        Field mTabScrollViewField = actionBarViewClass.getDeclaredField("mTabScrollView");
+		        mTabScrollViewField.setAccessible(true);
+
+		        Object mTabScrollView = mTabScrollViewField.get(actionBarView);
+		        if (mTabScrollView == null) {
+		            return;
+		        }
+
+		        Field mTabSpinnerField = mTabScrollView.getClass().getDeclaredField("mTabSpinner");
+		        mTabSpinnerField.setAccessible(true);
+
+		        Object mTabSpinner = mTabSpinnerField.get(mTabScrollView);
+		        if (mTabSpinner == null) {
+		            return;
+		        }
+
+		        Method setSelectionMethod = mTabSpinner.getClass().getSuperclass().getDeclaredMethod("setSelection", Integer.TYPE, Boolean.TYPE);
+		        setSelectionMethod.invoke(mTabSpinner, position, animate);
+
+		        Method requestLayoutMethod = mTabSpinner.getClass().getSuperclass().getDeclaredMethod("requestLayout");
+		        requestLayoutMethod.invoke(mTabSpinner);
+		    } catch (IllegalArgumentException e) {
+		        e.printStackTrace();
+		    } catch (IllegalAccessException e) {
+		        e.printStackTrace();
+		    } catch (NoSuchFieldException e) {
+		        e.printStackTrace();
+		    } catch (NoSuchMethodException e) {
+		        e.printStackTrace();
+			} catch (InvocationTargetException e) {
+		        e.printStackTrace();
+		    }
+		}
 	}
+
 
 }

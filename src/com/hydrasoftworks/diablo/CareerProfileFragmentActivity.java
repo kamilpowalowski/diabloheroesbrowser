@@ -51,7 +51,6 @@ public class CareerProfileFragmentActivity extends SherlockFragmentActivity {
 		bar.setTitle(profile.getBattleTag().getBattleTagText());
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setSelectedNavigationItem(getIntent().getIntExtra(ACTIVE_TAB, 0));
-		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		bar.setHomeButtonEnabled(true);
 		bar.setDisplayHomeAsUpEnabled(true);
 
